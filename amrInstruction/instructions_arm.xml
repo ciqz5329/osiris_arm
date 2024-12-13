@@ -1,0 +1,65 @@
+<root>
+    <instruction asm="ADC" category="DataProc" extension="ARMv8" iclass="ADC" iform="ADC_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+    </instruction>
+    <instruction asm="ADCS" category="DataProc" extension="ARMv8" iclass="ADCS" iform="ADCS_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+    </instruction>
+    <instruction asm="ADD" category="DataProc" extension="ARMv8" iclass="ADD_Extended" iform="ADD_extended_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31,WSP,SP</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31,WSP,SP</operand>
+        <operand idx="3" name="Rm" type="reg" width="32">W0,W1,...,W31,ZR</operand>
+        <operand idx="4" name="extend" type="enum">
+            <option value="000">UXTB</option>
+            <option value="001">UXTH</option>
+            <option value="010">UXTW</option>
+            <option value="011">UXTX</option>
+            <option value="100">SXTB</option>
+            <option value="101">SXTH</option>
+            <option value="110">SXTW</option>
+            <option value="111">SXTX</option>
+        </operand>
+        <operand idx="5" name="amount" type="imm" width="3" range="0-4">#0,#1,#2,#3,#4</operand>
+    </instruction>
+
+    <instruction asm="ADD" category="DataProc" extension="ARMv8" iclass="ADD_immediate" iform="ADD_imm" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31,WSP,SP</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31,WSP,SP</operand>
+        <operand idx="3" name="imm" type="imm" width="12" range="0-4095"/>
+        <operand idx="4" name="shift" type="enum">
+            <option value="0">LSL #0</option>
+            <option value="1">LSL #12</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="ADD" category="DataProc" extension="ARMv8" iclass="ADD_shifted_reg" iform="ADD_shift" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="shift" type="enum">
+            <option value="00">LSL</option>
+            <option value="01">LSR</option>
+            <option value="10">ASR</option>
+        </operand>
+        <operand idx="5" name="amount" type="imm" width="6" range="0-63">#0,#1,...,#63</operand>
+    </instruction>
+
+
+    <!--    <instruction asm="ADDG" category="DataProc" extension="ARMv8.5-MEMTAG" iclass="ADDG" iform="ADDG_imm" isa-set="A64">-->
+    <!--        <operand idx="1" name="Xd" type="reg" width="64">X0,X1,...,X31,SP</operand>-->
+    <!--        <operand idx="2" name="Xn" type="reg" width="64">X0,X1,...,X31,SP</operand>-->
+    <!--        <operand idx="3" name="uimm6" type="imm" width="6" range="0-1008" step="16">#0,#16,#32,...,#1008</operand>-->
+    <!--        <operand idx="4" name="uimm4" type="imm" width="4" range="0-15">#0,#1,#2,...,#15</operand>-->
+    <!--    </instruction>-->
+
+
+
+
+
+
+
+</root>

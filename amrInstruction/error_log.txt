@@ -1,0 +1,948 @@
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0-W31, W0-W31, W0-W31, #0
+Failed: ADD W0-W31, W0-W31, W0-W31, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0, X0, W0, X0, W0, #0
+Failed: ADD W0, X0, W0, X0, W0, #0
+Failed: ADD W0-W31, W0-W31, W0-W31
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, #0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADDG X0, X0, #0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, #0, #0
+Failed: ADD W0, W0, W0, #0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADDG X0, X0, 0
+Failed: ADD W0, W0, #0, 0
+Failed: ADD W0, W0, W0, 00, #0
+Failed: ADDG X0, X0, #0, #0
+Failed: ADD W0, W0, W0, 000, #0
+Failed: ADD W0, W0, W0, 00, #0
+Failed: ADD W0, W0, #0, 0
+Failed: ADD W0, W0, #0, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-u62iostb/step2', '/tmp/pwn-asm-u62iostb/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-u62iostb/step1: Assembler messages:
+/tmp/pwn-asm-u62iostb/step1:6: Error: shift expression expected at operand 3 -- `add W0,W0,#0,0'
+
+
+Failed: ADD W0, W0, W0, 000, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-0x162l2n/step2', '/tmp/pwn-asm-0x162l2n/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-0x162l2n/step1: Assembler messages:
+/tmp/pwn-asm-0x162l2n/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,000,#0'
+
+
+Failed: ADD W0, W0, W0, 00, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-ktk72n4e/step2', '/tmp/pwn-asm-ktk72n4e/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-ktk72n4e/step1: Assembler messages:
+/tmp/pwn-asm-ktk72n4e/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,00,#0'
+
+
+Failed: ADD W0, W0, #0, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-waw__iqy/step2', '/tmp/pwn-asm-waw__iqy/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-waw__iqy/step1: Assembler messages:
+/tmp/pwn-asm-waw__iqy/step1:6: Error: shift expression expected at operand 3 -- `add W0,W0,#0,0'
+
+
+Failed: ADD W0, W0, W0, 000, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-2x7wk51f/step2', '/tmp/pwn-asm-2x7wk51f/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-2x7wk51f/step1: Assembler messages:
+/tmp/pwn-asm-2x7wk51f/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,000,#0'
+
+
+Failed: ADD W0, W0, W0, 00, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-6l2pfzfn/step2', '/tmp/pwn-asm-6l2pfzfn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-6l2pfzfn/step1: Assembler messages:
+/tmp/pwn-asm-6l2pfzfn/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,00,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-jr3fic6w/step2', '/tmp/pwn-asm-jr3fic6w/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-jr3fic6w/step1: Assembler messages:
+/tmp/pwn-asm-jr3fic6w/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-hy7c0cay/step2', '/tmp/pwn-asm-hy7c0cay/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-hy7c0cay/step1: Assembler messages:
+/tmp/pwn-asm-hy7c0cay/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-jf5q_p4u/step2', '/tmp/pwn-asm-jf5q_p4u/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-jf5q_p4u/step1: Assembler messages:
+/tmp/pwn-asm-jf5q_p4u/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-q7beg9af/step2', '/tmp/pwn-asm-q7beg9af/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-q7beg9af/step1: Assembler messages:
+/tmp/pwn-asm-q7beg9af/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,0'
+
+
+Failed: ADDG X0, X0, 0, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-3mwb2ywt/step2', '/tmp/pwn-asm-3mwb2ywt/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-3mwb2ywt/step1: Assembler messages:
+/tmp/pwn-asm-3mwb2ywt/step1:6: Error: selected processor does not support `addg X0,X0,0,0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-7kwzh_xi/step2', '/tmp/pwn-asm-7kwzh_xi/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-7kwzh_xi/step1: Assembler messages:
+/tmp/pwn-asm-7kwzh_xi/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-virknkoc/step2', '/tmp/pwn-asm-virknkoc/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-virknkoc/step1: Assembler messages:
+/tmp/pwn-asm-virknkoc/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADD W0, W0, W0, UXTB, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-bpewsx41/step2', '/tmp/pwn-asm-bpewsx41/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-bpewsx41/step1: Assembler messages:
+/tmp/pwn-asm-bpewsx41/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,0'
+
+
+Failed: ADDG X0, X0, 0, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-nklf5ruz/step2', '/tmp/pwn-asm-nklf5ruz/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-nklf5ruz/step1: Assembler messages:
+/tmp/pwn-asm-nklf5ruz/step1:6: Error: selected processor does not support `addg X0,X0,0,0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-u2dbmn9a/step2', '/tmp/pwn-asm-u2dbmn9a/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-u2dbmn9a/step1: Assembler messages:
+/tmp/pwn-asm-u2dbmn9a/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADDG X0, X0, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-iz64t2bn/step2', '/tmp/pwn-asm-iz64t2bn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-iz64t2bn/step1: Assembler messages:
+/tmp/pwn-asm-iz64t2bn/step1:6: Error: selected processor does not support `addg X0,X0,#0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rg78r5ha/step2', '/tmp/pwn-asm-rg78r5ha/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rg78r5ha/step1: Assembler messages:
+/tmp/pwn-asm-rg78r5ha/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADDG X0, X0, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-si1mwu0z/step2', '/tmp/pwn-asm-si1mwu0z/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-si1mwu0z/step1: Assembler messages:
+/tmp/pwn-asm-si1mwu0z/step1:6: Error: selected processor does not support `addg X0,X0,#0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-snmdy9xe/step2', '/tmp/pwn-asm-snmdy9xe/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-snmdy9xe/step1: Assembler messages:
+/tmp/pwn-asm-snmdy9xe/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADD W0, W0, W0, UXTB, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-oqx3h44k/step2', '/tmp/pwn-asm-oqx3h44k/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-oqx3h44k/step1: Assembler messages:
+/tmp/pwn-asm-oqx3h44k/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,0'
+
+
+Failed: ADD W0, W0, W0, LSL, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-8ucx4krr/step2', '/tmp/pwn-asm-8ucx4krr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-8ucx4krr/step1: Assembler messages:
+/tmp/pwn-asm-8ucx4krr/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,0'
+
+
+Failed: ADD W0, W0, W0, UXTB, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-5qbkw54h/step2', '/tmp/pwn-asm-5qbkw54h/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-5qbkw54h/step1: Assembler messages:
+/tmp/pwn-asm-5qbkw54h/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,0'
+
+
+Failed: ADDG X0, X1, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-tpmdpxvz/step2', '/tmp/pwn-asm-tpmdpxvz/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-tpmdpxvz/step1: Assembler messages:
+/tmp/pwn-asm-tpmdpxvz/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X1,#0'
+
+
+Failed: ADDG X0, X1, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-06bgzuxy/step2', '/tmp/pwn-asm-06bgzuxy/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-06bgzuxy/step1: Assembler messages:
+/tmp/pwn-asm-06bgzuxy/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X1,#0'
+
+
+Failed: ADD W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-ou_yec5t/step2', '/tmp/pwn-asm-ou_yec5t/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-ou_yec5t/step1: Assembler messages:
+/tmp/pwn-asm-ou_yec5t/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-oh9g156t/step2', '/tmp/pwn-asm-oh9g156t/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-oh9g156t/step1: Assembler messages:
+/tmp/pwn-asm-oh9g156t/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,#0'
+
+
+Failed: ADDG X0, X1, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-lt8esoz_/step2', '/tmp/pwn-asm-lt8esoz_/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-lt8esoz_/step1: Assembler messages:
+/tmp/pwn-asm-lt8esoz_/step1:6: Error: selected processor does not support `addg X0,X1,#0,#0'
+
+
+Failed: ADD W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-as9dsuxt/step2', '/tmp/pwn-asm-as9dsuxt/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-as9dsuxt/step1: Assembler messages:
+/tmp/pwn-asm-as9dsuxt/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,#0'
+
+
+Failed: ADDG X0, X1, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-5_hsy9ff/step2', '/tmp/pwn-asm-5_hsy9ff/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-5_hsy9ff/step1: Assembler messages:
+/tmp/pwn-asm-5_hsy9ff/step1:6: Error: selected processor does not support `addg X0,X1,#0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zcb6g4yr/step2', '/tmp/pwn-asm-zcb6g4yr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zcb6g4yr/step1: Assembler messages:
+/tmp/pwn-asm-zcb6g4yr/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-f7zacqs8/step2', '/tmp/pwn-asm-f7zacqs8/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-f7zacqs8/step1: Assembler messages:
+/tmp/pwn-asm-f7zacqs8/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,#0'
+
+
+Failed: ADD W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-i_sv60lg/step2', '/tmp/pwn-asm-i_sv60lg/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-i_sv60lg/step1: Assembler messages:
+/tmp/pwn-asm-i_sv60lg/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,#0'
+
+
+Failed: ADDG X0, X1, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-1o5so02z/step2', '/tmp/pwn-asm-1o5so02z/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-1o5so02z/step1: Assembler messages:
+/tmp/pwn-asm-1o5so02z/step1:6: Error: selected processor does not support `addg X0,X1,#0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-jivtwbe2/step2', '/tmp/pwn-asm-jivtwbe2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-jivtwbe2/step1: Assembler messages:
+/tmp/pwn-asm-jivtwbe2/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,#0'
+
+
+Failed: ADD W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-13sdyohr/step2', '/tmp/pwn-asm-13sdyohr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-13sdyohr/step1: Assembler messages:
+/tmp/pwn-asm-13sdyohr/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,#0'
+
+
+Failed: ADDG X0, X1, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-thmbgmkf/step2', '/tmp/pwn-asm-thmbgmkf/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-thmbgmkf/step1: Assembler messages:
+/tmp/pwn-asm-thmbgmkf/step1:6: Error: selected processor does not support `addg X0,X1,#0,#0'
+
+
+Failed: ADD W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-os1rec3c/step2', '/tmp/pwn-asm-os1rec3c/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-os1rec3c/step1: Assembler messages:
+/tmp/pwn-asm-os1rec3c/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,#0'
+
+
+Failed: ADDG X0, X1, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-0s6rpn0w/step2', '/tmp/pwn-asm-0s6rpn0w/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-0s6rpn0w/step1: Assembler messages:
+/tmp/pwn-asm-0s6rpn0w/step1:6: Error: selected processor does not support `addg X0,X1,#0,#0'
+
+
+Failed: ADD W0, W0, W0, LSL, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-x5z50z5w/step2', '/tmp/pwn-asm-x5z50z5w/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-x5z50z5w/step1: Assembler messages:
+/tmp/pwn-asm-x5z50z5w/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,LSL,#0'
+
+
+Failed: ADD X0, X1
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-7jc_hiwc/step2', '/tmp/pwn-asm-7jc_hiwc/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-7jc_hiwc/step1: Assembler messages:
+/tmp/pwn-asm-7jc_hiwc/step1:6: Error: comma expected between operands at operand 3 -- `add X0,X1'
+
+
+Failed: ADD W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-o1y16xvi/step2', '/tmp/pwn-asm-o1y16xvi/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-o1y16xvi/step1: Assembler messages:
+/tmp/pwn-asm-o1y16xvi/step1:6: Error: comma expected between operands at operand 3 -- `add W0,W0'
+
+
+Failed: ADD W0, W0, W0, 000, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-urh_sv62/step2', '/tmp/pwn-asm-urh_sv62/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-urh_sv62/step1: Assembler messages:
+/tmp/pwn-asm-urh_sv62/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,000,#0'
+
+
+Failed: ADD W0, W0, #0, 0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rk0ewz6t/step2', '/tmp/pwn-asm-rk0ewz6t/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rk0ewz6t/step1: Assembler messages:
+/tmp/pwn-asm-rk0ewz6t/step1:6: Error: shift expression expected at operand 3 -- `add W0,W0,#0,0'
+
+
+Failed: ADD W0, W0, W0, 00, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-daut426h/step2', '/tmp/pwn-asm-daut426h/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-daut426h/step1: Assembler messages:
+/tmp/pwn-asm-daut426h/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `add W0,W0,W0,00,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-vib410m2/step2', '/tmp/pwn-asm-vib410m2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-vib410m2/step1: Assembler messages:
+/tmp/pwn-asm-vib410m2/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-vcgr3adf/step2', '/tmp/pwn-asm-vcgr3adf/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-vcgr3adf/step1: Assembler messages:
+/tmp/pwn-asm-vcgr3adf/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-29qfx89c/step2', '/tmp/pwn-asm-29qfx89c/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-29qfx89c/step1: Assembler messages:
+/tmp/pwn-asm-29qfx89c/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-w_euftxg/step2', '/tmp/pwn-asm-w_euftxg/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-w_euftxg/step1: Assembler messages:
+/tmp/pwn-asm-w_euftxg/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-0hel8f14/step2', '/tmp/pwn-asm-0hel8f14/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-0hel8f14/step1: Assembler messages:
+/tmp/pwn-asm-0hel8f14/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-h1c4e2jq/step2', '/tmp/pwn-asm-h1c4e2jq/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-h1c4e2jq/step1: Assembler messages:
+/tmp/pwn-asm-h1c4e2jq/step1:6: Error: operand 1 must be an integer or stack pointer register -- `addg #0'
+
+
+Failed: ADDG #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-uja2ydt5/step2', '/tmp/pwn-asm-uja2ydt5/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-uja2ydt5/step1: Assembler messages:
+/tmp/pwn-asm-uja2ydt5/step1:6: Error: operand 1 must be an integer or stack pointer register -- `addg #0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-md6miccs/step2', '/tmp/pwn-asm-md6miccs/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-md6miccs/step1: Assembler messages:
+/tmp/pwn-asm-md6miccs/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-oeunautn/step2', '/tmp/pwn-asm-oeunautn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-oeunautn/step1: Assembler messages:
+/tmp/pwn-asm-oeunautn/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-y98f8hjr/step2', '/tmp/pwn-asm-y98f8hjr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-y98f8hjr/step1: Assembler messages:
+/tmp/pwn-asm-y98f8hjr/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-j2ohl_w0/step2', '/tmp/pwn-asm-j2ohl_w0/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-j2ohl_w0/step1: Assembler messages:
+/tmp/pwn-asm-j2ohl_w0/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-xbshwms7/step2', '/tmp/pwn-asm-xbshwms7/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-xbshwms7/step1: Assembler messages:
+/tmp/pwn-asm-xbshwms7/step1:6: Error: comma expected between operands at operand 3 -- `addg X0,X0'
+
+
+Failed: ADDG X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-j0ym_isn/step2', '/tmp/pwn-asm-j0ym_isn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-j0ym_isn/step1: Assembler messages:
+/tmp/pwn-asm-j0ym_isn/step1:6: Error: comma expected between operands at operand 3 -- `addg X0,X0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-t2f7kup9/step2', '/tmp/pwn-asm-t2f7kup9/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-t2f7kup9/step1: Assembler messages:
+/tmp/pwn-asm-t2f7kup9/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-6hr7s8kn/step2', '/tmp/pwn-asm-6hr7s8kn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-6hr7s8kn/step1: Assembler messages:
+/tmp/pwn-asm-6hr7s8kn/step1:6: Error: comma expected between operands at operand 4 -- `addg X0,X0,#0'
+
+
+Failed: ADDG X0, X0, #0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-cwg502_n/step2', '/tmp/pwn-asm-cwg502_n/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-cwg502_n/step1: Assembler messages:
+/tmp/pwn-asm-cwg502_n/step1:6: Error: selected processor does not support `addg X0,X0,#0,#0'
+
+
+Failed: ADDS W0, W0, W0, 000, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-giqdpssp/step2', '/tmp/pwn-asm-giqdpssp/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-giqdpssp/step1: Assembler messages:
+/tmp/pwn-asm-giqdpssp/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `adds W0,W0,W0,000,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-c0rhkyck/step2', '/tmp/pwn-asm-c0rhkyck/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-c0rhkyck/step1: Assembler messages:
+/tmp/pwn-asm-c0rhkyck/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-gjkd0e__/step2', '/tmp/pwn-asm-gjkd0e__/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-gjkd0e__/step1: Assembler messages:
+/tmp/pwn-asm-gjkd0e__/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rok697h1/step2', '/tmp/pwn-asm-rok697h1/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rok697h1/step1: Assembler messages:
+/tmp/pwn-asm-rok697h1/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-3yaso9ww/step2', '/tmp/pwn-asm-3yaso9ww/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-3yaso9ww/step1: Assembler messages:
+/tmp/pwn-asm-3yaso9ww/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADDS W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-5tq5b6_s/step2', '/tmp/pwn-asm-5tq5b6_s/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-5tq5b6_s/step1: Assembler messages:
+/tmp/pwn-asm-5tq5b6_s/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `adds W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-eik_k4wm/step2', '/tmp/pwn-asm-eik_k4wm/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-eik_k4wm/step1: Assembler messages:
+/tmp/pwn-asm-eik_k4wm/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rxfq6pl_/step2', '/tmp/pwn-asm-rxfq6pl_/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rxfq6pl_/step1: Assembler messages:
+/tmp/pwn-asm-rxfq6pl_/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-3fju2m9w/step2', '/tmp/pwn-asm-3fju2m9w/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-3fju2m9w/step1: Assembler messages:
+/tmp/pwn-asm-3fju2m9w/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-8mqzxx2_/step2', '/tmp/pwn-asm-8mqzxx2_/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-8mqzxx2_/step1: Assembler messages:
+/tmp/pwn-asm-8mqzxx2_/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qs65_xf6/step2', '/tmp/pwn-asm-qs65_xf6/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qs65_xf6/step1: Assembler messages:
+/tmp/pwn-asm-qs65_xf6/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-w8grc41a/step2', '/tmp/pwn-asm-w8grc41a/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-w8grc41a/step1: Assembler messages:
+/tmp/pwn-asm-w8grc41a/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-tht7ozu9/step2', '/tmp/pwn-asm-tht7ozu9/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-tht7ozu9/step1: Assembler messages:
+/tmp/pwn-asm-tht7ozu9/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-gcldrx66/step2', '/tmp/pwn-asm-gcldrx66/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-gcldrx66/step1: Assembler messages:
+/tmp/pwn-asm-gcldrx66/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-140oxgc4/step2', '/tmp/pwn-asm-140oxgc4/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-140oxgc4/step1: Assembler messages:
+/tmp/pwn-asm-140oxgc4/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-xv84ye3y/step2', '/tmp/pwn-asm-xv84ye3y/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-xv84ye3y/step1: Assembler messages:
+/tmp/pwn-asm-xv84ye3y/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-pr7vxh0c/step2', '/tmp/pwn-asm-pr7vxh0c/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-pr7vxh0c/step1: Assembler messages:
+/tmp/pwn-asm-pr7vxh0c/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-bug0c87x/step2', '/tmp/pwn-asm-bug0c87x/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-bug0c87x/step1: Assembler messages:
+/tmp/pwn-asm-bug0c87x/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-sgoc3v9b/step2', '/tmp/pwn-asm-sgoc3v9b/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-sgoc3v9b/step1: Assembler messages:
+/tmp/pwn-asm-sgoc3v9b/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-c9rea2hv/step2', '/tmp/pwn-asm-c9rea2hv/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-c9rea2hv/step1: Assembler messages:
+/tmp/pwn-asm-c9rea2hv/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-odrpkfe5/step2', '/tmp/pwn-asm-odrpkfe5/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-odrpkfe5/step1: Assembler messages:
+/tmp/pwn-asm-odrpkfe5/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-d6n6eadh/step2', '/tmp/pwn-asm-d6n6eadh/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-d6n6eadh/step1: Assembler messages:
+/tmp/pwn-asm-d6n6eadh/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-89b8cedu/step2', '/tmp/pwn-asm-89b8cedu/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-89b8cedu/step1: Assembler messages:
+/tmp/pwn-asm-89b8cedu/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-k62ft9s5/step2', '/tmp/pwn-asm-k62ft9s5/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-k62ft9s5/step1: Assembler messages:
+/tmp/pwn-asm-k62ft9s5/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qtfblysc/step2', '/tmp/pwn-asm-qtfblysc/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qtfblysc/step1: Assembler messages:
+/tmp/pwn-asm-qtfblysc/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-kcq4hbcs/step2', '/tmp/pwn-asm-kcq4hbcs/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-kcq4hbcs/step1: Assembler messages:
+/tmp/pwn-asm-kcq4hbcs/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-xohqvj0v/step2', '/tmp/pwn-asm-xohqvj0v/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-xohqvj0v/step1: Assembler messages:
+/tmp/pwn-asm-xohqvj0v/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-shcfn9v1/step2', '/tmp/pwn-asm-shcfn9v1/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-shcfn9v1/step1: Assembler messages:
+/tmp/pwn-asm-shcfn9v1/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-1psrlt1m/step2', '/tmp/pwn-asm-1psrlt1m/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-1psrlt1m/step1: Assembler messages:
+/tmp/pwn-asm-1psrlt1m/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-y4ton5qm/step2', '/tmp/pwn-asm-y4ton5qm/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-y4ton5qm/step1: Assembler messages:
+/tmp/pwn-asm-y4ton5qm/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zyi_02xn/step2', '/tmp/pwn-asm-zyi_02xn/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zyi_02xn/step1: Assembler messages:
+/tmp/pwn-asm-zyi_02xn/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-jrn8ct72/step2', '/tmp/pwn-asm-jrn8ct72/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-jrn8ct72/step1: Assembler messages:
+/tmp/pwn-asm-jrn8ct72/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rmoo352c/step2', '/tmp/pwn-asm-rmoo352c/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rmoo352c/step1: Assembler messages:
+/tmp/pwn-asm-rmoo352c/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-onpadxs2/step2', '/tmp/pwn-asm-onpadxs2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-onpadxs2/step1: Assembler messages:
+/tmp/pwn-asm-onpadxs2/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-2ij3spgk/step2', '/tmp/pwn-asm-2ij3spgk/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-2ij3spgk/step1: Assembler messages:
+/tmp/pwn-asm-2ij3spgk/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-2wa4yyst/step2', '/tmp/pwn-asm-2wa4yyst/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-2wa4yyst/step1: Assembler messages:
+/tmp/pwn-asm-2wa4yyst/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-r5j2pmwe/step2', '/tmp/pwn-asm-r5j2pmwe/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-r5j2pmwe/step1: Assembler messages:
+/tmp/pwn-asm-r5j2pmwe/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-0lhoj_ku/step2', '/tmp/pwn-asm-0lhoj_ku/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-0lhoj_ku/step1: Assembler messages:
+/tmp/pwn-asm-0lhoj_ku/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-n40ahcuj/step2', '/tmp/pwn-asm-n40ahcuj/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-n40ahcuj/step1: Assembler messages:
+/tmp/pwn-asm-n40ahcuj/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-8jyainx7/step2', '/tmp/pwn-asm-8jyainx7/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-8jyainx7/step1: Assembler messages:
+/tmp/pwn-asm-8jyainx7/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zsooed_n/step2', '/tmp/pwn-asm-zsooed_n/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zsooed_n/step1: Assembler messages:
+/tmp/pwn-asm-zsooed_n/step1:6: Error: unexpected characters following instruction at operand 3 -- `adds W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-m0lpjwtr/step2', '/tmp/pwn-asm-m0lpjwtr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-m0lpjwtr/step1: Assembler messages:
+/tmp/pwn-asm-m0lpjwtr/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-uybeeq0t/step2', '/tmp/pwn-asm-uybeeq0t/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-uybeeq0t/step1: Assembler messages:
+/tmp/pwn-asm-uybeeq0t/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zsvmisvi/step2', '/tmp/pwn-asm-zsvmisvi/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zsvmisvi/step1: Assembler messages:
+/tmp/pwn-asm-zsvmisvi/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-c7vyihdc/step2', '/tmp/pwn-asm-c7vyihdc/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-c7vyihdc/step1: Assembler messages:
+/tmp/pwn-asm-c7vyihdc/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-4j1773t_/step2', '/tmp/pwn-asm-4j1773t_/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-4j1773t_/step1: Assembler messages:
+/tmp/pwn-asm-4j1773t_/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, #0, UXTB
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qvxtsru2/step2', '/tmp/pwn-asm-qvxtsru2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qvxtsru2/step1: Assembler messages:
+/tmp/pwn-asm-qvxtsru2/step1:6: Error: only 'LSL' shift is permitted at operand 3 -- `add W0,W0,#0,UXTB'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-iol_z2un/step2', '/tmp/pwn-asm-iol_z2un/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-iol_z2un/step1: Assembler messages:
+/tmp/pwn-asm-iol_z2un/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADD W0, W0, W0, UXTB, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-h4uh7add/step2', '/tmp/pwn-asm-h4uh7add/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-h4uh7add/step1: Assembler messages:
+/tmp/pwn-asm-h4uh7add/step1:6: Error: unexpected characters following instruction at operand 3 -- `add W0,W0,W0,UXTB,#0'
+
+
+Failed: ADDS 
+                W0, 
+                W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-x6t_0eia/step2', '/tmp/pwn-asm-x6t_0eia/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-x6t_0eia/step1: Assembler messages:
+/tmp/pwn-asm-x6t_0eia/step1:6: Error: operand 1 must be an integer register -- `adds'
+/tmp/pwn-asm-x6t_0eia/step1:7: Error: unknown mnemonic `w0' -- `w0,'
+/tmp/pwn-asm-x6t_0eia/step1:8: Error: unknown mnemonic `w0' -- `w0, #0'
+
+
+Failed: ADDS 
+                X0, 
+                X0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zvpc0cpa/step2', '/tmp/pwn-asm-zvpc0cpa/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zvpc0cpa/step1: Assembler messages:
+/tmp/pwn-asm-zvpc0cpa/step1:6: Error: operand 1 must be an integer register -- `adds'
+/tmp/pwn-asm-zvpc0cpa/step1:7: Error: unknown mnemonic `x0' -- `x0,'
+/tmp/pwn-asm-zvpc0cpa/step1:8: Error: unknown mnemonic `x0' -- `x0, #0'
+
+
+Failed: CMN 
+                W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-zt5u7_xp/step2', '/tmp/pwn-asm-zt5u7_xp/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-zt5u7_xp/step1: Assembler messages:
+/tmp/pwn-asm-zt5u7_xp/step1:6: Error: operand 1 must be an integer or stack pointer register -- `cmn'
+/tmp/pwn-asm-zt5u7_xp/step1:7: Error: unknown mnemonic `w0' -- `w0, #0'
+
+
