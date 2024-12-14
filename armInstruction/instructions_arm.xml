@@ -518,5 +518,11 @@
         </operand>
     </instruction>
 
+    <instruction asm="EXTR" category="DataProc" extension="ARMv8" iclass="EXTR" iform="EXTR" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="lsb" type="imm" width="64" range="0-31" ></operand>
+    </instruction>
 
 </root>

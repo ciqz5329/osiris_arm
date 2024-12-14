@@ -2172,3 +2172,27 @@ It had this on stdout:
 /tmp/pwn-asm-16jxdjee/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#0'
 
 
+Failed: EOR W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-eyp8z8vd/step2', '/tmp/pwn-asm-eyp8z8vd/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-eyp8z8vd/step1: Assembler messages:
+/tmp/pwn-asm-eyp8z8vd/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#0'
+
+
+Failed: EOR W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-i9yys1gp/step2', '/tmp/pwn-asm-i9yys1gp/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-i9yys1gp/step1: Assembler messages:
+/tmp/pwn-asm-i9yys1gp/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#0'
+
+
+Failed: EOR W0, W0, W0, #1
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-j7yyllyv/step2', '/tmp/pwn-asm-j7yyllyv/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-j7yyllyv/step1: Assembler messages:
+/tmp/pwn-asm-j7yyllyv/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#1'
+
+
