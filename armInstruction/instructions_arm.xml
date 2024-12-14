@@ -389,6 +389,134 @@
 <!--        <operand idx="3" name="Xn" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
 <!--    </instruction>-->
 
+    <instruction asm="CSDB" category="DataProc" extension="ARMv8.5" iclass="CSDB" iform="CSDB" isa-set="A64">
+    </instruction>
+    <instruction asm="CSEL" category="DataProc" extension="ARMv8.5" iclass="CSEL" iform="CSEL" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="Wn" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="3" name="Xm" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="4" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+    <instruction asm="CSET" category="DataProc" extension="ARMv8.5" iclass="CSET" iform="CSET" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+    <instruction asm="CSETM" category="DataProc" extension="ARMv8.5" iclass="CSETM" iform="CSETM" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+    <instruction asm="CSINC" category="DataProc" extension="ARMv8.5" iclass="CSINC" iform="CSINC" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0, W1, ..., W30, X0, X1, ..., X30, SP</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0, W1, ..., W30, X0, X1, ..., X30, SP</operand>
+        <operand idx="4" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+
+    <instruction asm="CSNEG" category="DataProc" extension="ARMv8.5" iclass="CSNEG" iform="CSNEG" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0, W1, ..., W30, X0, X1, ..., X30, SP</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0, W1, ..., W30, X0, X1, ..., X30, SP</operand>
+        <operand idx="4" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+
+    <instruction asm="DCPS1" category="Control" extension="ARMv8.5" iclass="DCPS1" iform="DCPS1" isa-set="A64">
+        <operand idx="1" name="imm" type="imm" width="16">0-65535</operand>
+    </instruction>
+
+    <instruction asm="DCPS2" category="Control" extension="ARMv8.5" iclass="DCPS2" iform="DCPS2" isa-set="A64">
+        <operand idx="1" name="imm" type="imm" width="16">0-65535</operand>
+    </instruction>
+
+    <instruction asm="DCPS3" category="Control" extension="ARMv8.5" iclass="DCPS3" iform="DCPS3" isa-set="A64">
+        <operand idx="1" name="imm" type="imm" width="16">0-65535</operand>
+    </instruction>
+    <instruction asm="DGH" category="Hint" extension="ARMv8.5" iclass="SystemHintOp" isa-set="A64">
+    </instruction>
+
+    <instruction asm="DMB" category="MemoryBarrier" extension="ARMv8" iclass="DMB" iform="DMB_option_imm" isa-set="A64">
+        <operand idx="1" name="option" type="enum">
+            <option value="SY">Full system barrier (SY)</option>
+            <option value="ST">Full system, writes only (ST)</option>
+            <option value="LD">Full system, reads before (LD)</option>
+            <option value="ISH">Inner Shareable, reads and writes (ISH)</option>
+            <option value="ISHST">Inner Shareable, writes only (ISHST)</option>
+            <option value="ISHLD">Inner Shareable, reads before (ISHLD)</option>
+            <option value="NSH">Non-shareable, reads and writes (NSH)</option>
+            <option value="NSHST">Non-shareable, writes only (NSHST)</option>
+            <option value="NSHLD">Non-shareable, reads before (NSHLD)</option>
+            <option value="OSH">Outer Shareable, reads and writes (OSH)</option>
+            <option value="OSHST">Outer Shareable, writes only (OSHST)</option>
+            <option value="OSHLD">Outer Shareable, reads before (OSHLD)</option>
+        </operand>
+        <operand idx="2" name="imm" type="imm" width="4" range="0-15">#0, #1, ..., #15</operand>
+    </instruction>
+
+    <instruction asm="DRPS" category="Debug" extension="ARMv8" iclass="DRPS" iform="DRPS" isa-set="A64">
+    </instruction>
+
+    <instruction asm="DSB" category="MemoryBarrier" extension="ARMv8" iclass="DSB" iform="DSB" isa-set="A64">
+        <operand idx="1" name="option" type="enum" Optional="true">
+            <option value="1111">SY</option>
+            <option value="1110">ST</option>
+            <option value="1101">LD</option>
+            <option value="1011">ISH</option>
+            <option value="1010">ISHST</option>
+            <option value="1001">ISHLD</option>
+            <option value="0111">NSH</option>
+            <option value="0110">NSHST</option>
+            <option value="0101">NSHLD</option>
+            <option value="0011">OSH</option>
+            <option value="0010">OSHST</option>
+            <option value="0001">OSHLD</option>
+            <option value="0000">SSBB</option>
+            <option value="0100">PSSBB</option>
+        </operand>
+        <operand idx="2" name="imm" type="imm" width="4" range="0-15" Optional="true">#0,#1,...,#15</operand>
+    </instruction>
+
+
+<!--    <instruction asm="DVP RCTX ," category="System" extension="FEAT_SPECRES" iclass="DVP" iform="SYS" isa-set="A64">-->
+<!--        <operand idx="1" name="Rt" type="reg" width="64">X0</operand>-->
+<!--    </instruction>-->
+
+    <instruction asm="EON" category="DataProc" extension="ARMv8" iclass="EON_shifted_reg" iform="EON_shifted_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="shift" type="enum" Optional="true">
+            <option value="00">LSL</option>
+            <option value="01">LSR</option>
+            <option value="10">ASR</option>
+            <option value="11">ROR</option>
+        </operand>
+        <operand idx="5" name="amount" type="imm" width="6" range="0-63" Optional="true">#0,#1,...,#63</operand>
+        <operand idx="6" name="N" type="enum" Optional="true">
+            <option value="0">Normal</option>
+            <option value="1">Invert</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="EOR" category="DataProc" extension="ARMv8" iclass="EOR_immediate" iform="EOR_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="imm" type="imm" width="32" range="1-31" default="#1" >
+        </operand>
+
+    </instruction>
+
+    <instruction asm="EOR" category="DataProc" extension="ARMv8" iclass="EOR_shifted_register" iform="EOR_shifted_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="shift" type="enum" Optional="true">
+            <option value="00">LSL</option>
+            <option value="01">LSR</option>
+            <option value="10">ASR</option>
+            <option value="11">ROR</option>
+        </operand>
+        <operand idx="5" name="amount" type="imm" width="32" range="0-31" Optional="true">
+        </operand>
+    </instruction>
 
 
 </root>

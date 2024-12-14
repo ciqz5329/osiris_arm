@@ -2024,3 +2024,151 @@ It had this on stdout:
 /tmp/pwn-asm-qoljue66/step1:6: Warning: previous `cpyfp' sequence has not been closed
 
 
+Failed: DC X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-t3y6fc4x/step2', '/tmp/pwn-asm-t3y6fc4x/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-t3y6fc4x/step1: Assembler messages:
+/tmp/pwn-asm-t3y6fc4x/step1:6: Error: unknown or missing operation name at operand 1 -- `dc X0'
+
+
+Failed: DVP General-purpose source register
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qd7ycjru/step2', '/tmp/pwn-asm-qd7ycjru/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qd7ycjru/step1: Assembler messages:
+/tmp/pwn-asm-qd7ycjru/step1:6: Error: unknown or missing operation name at operand 1 -- `dvp General-purpose source register'
+
+
+Failed: DVP_RCTX 64-bit general-purpose register
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-031uypyy/step2', '/tmp/pwn-asm-031uypyy/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-031uypyy/step1: Assembler messages:
+/tmp/pwn-asm-031uypyy/step1:6: Error: unknown mnemonic `dvp_rctx' -- `dvp_rctx 64-bit general-purpose register'
+
+
+Failed: DVP RCTX General-purpose source register
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-_itwxtvq/step2', '/tmp/pwn-asm-_itwxtvq/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-_itwxtvq/step1: Assembler messages:
+/tmp/pwn-asm-_itwxtvq/step1:6: Error: selected processor does not support system register name 'rctx'
+/tmp/pwn-asm-_itwxtvq/step1:6: Error: comma expected between operands at operand 2 -- `dvp RCTX General-purpose source register'
+
+
+Failed: DVP RCTX X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-d4df3iq2/step2', '/tmp/pwn-asm-d4df3iq2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-d4df3iq2/step1: Assembler messages:
+/tmp/pwn-asm-d4df3iq2/step1:6: Error: selected processor does not support system register name 'rctx'
+/tmp/pwn-asm-d4df3iq2/step1:6: Error: comma expected between operands at operand 2 -- `dvp RCTX X0'
+
+
+Failed: DVP RCTX
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-w8cg3xwh/step2', '/tmp/pwn-asm-w8cg3xwh/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-w8cg3xwh/step1: Assembler messages:
+/tmp/pwn-asm-w8cg3xwh/step1:6: Error: selected processor does not support system register name 'rctx'
+/tmp/pwn-asm-w8cg3xwh/step1:6: Error: comma expected between operands at operand 2 -- `dvp RCTX'
+
+
+Failed: DVP RCTX , X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-3pjw_ygp/step2', '/tmp/pwn-asm-3pjw_ygp/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-3pjw_ygp/step1: Assembler messages:
+/tmp/pwn-asm-3pjw_ygp/step1:6: Error: selected processor does not support system register name 'rctx'
+/tmp/pwn-asm-3pjw_ygp/step1:6: Error: selected processor does not support `dvp RCTX,X0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-a26c7x35/step2', '/tmp/pwn-asm-a26c7x35/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-a26c7x35/step1: Assembler messages:
+/tmp/pwn-asm-a26c7x35/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-_8q0b4zv/step2', '/tmp/pwn-asm-_8q0b4zv/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-_8q0b4zv/step1: Assembler messages:
+/tmp/pwn-asm-_8q0b4zv/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-t6smbnio/step2', '/tmp/pwn-asm-t6smbnio/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-t6smbnio/step1: Assembler messages:
+/tmp/pwn-asm-t6smbnio/step1:6: Error: comma expected between operands at operand 3 -- `eor W0,W0'
+
+
+Failed: EOR W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-cec4smlc/step2', '/tmp/pwn-asm-cec4smlc/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-cec4smlc/step1: Assembler messages:
+/tmp/pwn-asm-cec4smlc/step1:6: Error: comma expected between operands at operand 3 -- `eor W0,W0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-49hqujk1/step2', '/tmp/pwn-asm-49hqujk1/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-49hqujk1/step1: Assembler messages:
+/tmp/pwn-asm-49hqujk1/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-4gcyr6ku/step2', '/tmp/pwn-asm-4gcyr6ku/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-4gcyr6ku/step1: Assembler messages:
+/tmp/pwn-asm-4gcyr6ku/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0, #0x0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qh39ubpo/step2', '/tmp/pwn-asm-qh39ubpo/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qh39ubpo/step1: Assembler messages:
+/tmp/pwn-asm-qh39ubpo/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0x0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-896md5zp/step2', '/tmp/pwn-asm-896md5zp/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-896md5zp/step1: Assembler messages:
+/tmp/pwn-asm-896md5zp/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qdumu22w/step2', '/tmp/pwn-asm-qdumu22w/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qdumu22w/step1: Assembler messages:
+/tmp/pwn-asm-qdumu22w/step1:6: Error: immediate out of range at operand 3 -- `eor W0,W0,#0'
+
+
+Failed: EOR W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-9sl8m16d/step2', '/tmp/pwn-asm-9sl8m16d/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-9sl8m16d/step1: Assembler messages:
+/tmp/pwn-asm-9sl8m16d/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#0'
+
+
+Failed: EOR W0, W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-16jxdjee/step2', '/tmp/pwn-asm-16jxdjee/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-16jxdjee/step1: Assembler messages:
+/tmp/pwn-asm-16jxdjee/step1:6: Error: unexpected register in the immediate operand at operand 3 -- `eor W0,W0,W0,#0'
+
+
