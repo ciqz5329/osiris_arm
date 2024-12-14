@@ -1797,3 +1797,230 @@ It had this on stdout:
 /tmp/pwn-asm-9bpetbfr/step1:6: Error: comma expected between operands at operand 4 -- `ccmn W0,#0,#0'
 
 
+Failed: CLS
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rbjedhsv/step2', '/tmp/pwn-asm-rbjedhsv/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rbjedhsv/step1: Assembler messages:
+/tmp/pwn-asm-rbjedhsv/step1:6: Error: operand 1 must be an integer register -- `cls'
+
+
+Failed: CLS
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-txj81991/step2', '/tmp/pwn-asm-txj81991/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-txj81991/step1: Assembler messages:
+/tmp/pwn-asm-txj81991/step1:6: Error: operand 1 must be an integer register -- `cls'
+
+
+Failed: CMN WZR, W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-772vzc42/step2', '/tmp/pwn-asm-772vzc42/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-772vzc42/step1: Assembler messages:
+/tmp/pwn-asm-772vzc42/step1:6: Error: shift operator expected at operand 2 -- `cmn WZR,W0,W0'
+
+
+Failed: CMN W0, W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-ed_kwu0_/step2', '/tmp/pwn-asm-ed_kwu0_/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-ed_kwu0_/step1: Assembler messages:
+/tmp/pwn-asm-ed_kwu0_/step1:6: Error: unexpected register in the immediate operand at operand 2 -- `cmn W0,W0,W0'
+
+
+Failed: CMN W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-8wbv0y16/step2', '/tmp/pwn-asm-8wbv0y16/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-8wbv0y16/step1: Assembler messages:
+/tmp/pwn-asm-8wbv0y16/step1:6: Error: comma expected between operands at operand 2 -- `cmn W0'
+
+
+Failed: CMN W0, #0, WZR
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-169a6rbr/step2', '/tmp/pwn-asm-169a6rbr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-169a6rbr/step1: Assembler messages:
+/tmp/pwn-asm-169a6rbr/step1:6: Error: shift operator expected at operand 2 -- `cmn W0,#0,WZR'
+
+
+Failed: CMP W0, W0, #0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-eldaief2/step2', '/tmp/pwn-asm-eldaief2/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-eldaief2/step1: Assembler messages:
+/tmp/pwn-asm-eldaief2/step1:6: Error: unexpected register in the immediate operand at operand 2 -- `cmp W0,W0,#0'
+
+
+Failed: CMPP X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-9lvw87f9/step2', '/tmp/pwn-asm-9lvw87f9/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-9lvw87f9/step1: Assembler messages:
+/tmp/pwn-asm-9lvw87f9/step1:6: Error: selected processor does not support `cmpp X0,X0'
+
+
+Failed: CPYFP X0, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-mrtz4y74/step2', '/tmp/pwn-asm-mrtz4y74/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-mrtz4y74/step1: Assembler messages:
+/tmp/pwn-asm-mrtz4y74/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,X0'
+
+
+Failed: CPYFM X0, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-el_ikuhh/step2', '/tmp/pwn-asm-el_ikuhh/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-el_ikuhh/step1: Assembler messages:
+/tmp/pwn-asm-el_ikuhh/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfm X0,X0,X0'
+
+
+Failed: CPYFE X0, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-p02jfiz3/step2', '/tmp/pwn-asm-p02jfiz3/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-p02jfiz3/step1: Assembler messages:
+/tmp/pwn-asm-p02jfiz3/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfe X0,X0,X0'
+
+
+Failed: CPYFP X0, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-teiviy3c/step2', '/tmp/pwn-asm-teiviy3c/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-teiviy3c/step1: Assembler messages:
+/tmp/pwn-asm-teiviy3c/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,X0'
+
+
+Failed: CPYFP X0, X0, !X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qs7jf81s/step2', '/tmp/pwn-asm-qs7jf81s/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qs7jf81s/step1: Assembler messages:
+/tmp/pwn-asm-qs7jf81s/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,!X0'
+
+
+Failed: CPYFP X0, X0, X0!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qr7en__g/step2', '/tmp/pwn-asm-qr7en__g/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qr7en__g/step1: Assembler messages:
+/tmp/pwn-asm-qr7en__g/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,X0!'
+
+
+Failed: CPYFP X0, X0, X1
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-yd1ib5pt/step2', '/tmp/pwn-asm-yd1ib5pt/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-yd1ib5pt/step1: Assembler messages:
+/tmp/pwn-asm-yd1ib5pt/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,X1'
+
+
+Failed: CPYFP  X1, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-kgegorsz/step2', '/tmp/pwn-asm-kgegorsz/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-kgegorsz/step1: Assembler messages:
+/tmp/pwn-asm-kgegorsz/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X1,X0,X0'
+
+
+Failed: CPYFP  X0, X0, X0!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-aevft5jl/step2', '/tmp/pwn-asm-aevft5jl/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-aevft5jl/step1: Assembler messages:
+/tmp/pwn-asm-aevft5jl/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0,X0,X0!'
+
+
+Failed: CPYFP  R0, R0, R0!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-yg4mmq00/step2', '/tmp/pwn-asm-yg4mmq00/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-yg4mmq00/step1: Assembler messages:
+/tmp/pwn-asm-yg4mmq00/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp R0,R0,R0!'
+
+
+Failed: CPYFP  X0!, X0, X0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-1f0qimqg/step2', '/tmp/pwn-asm-1f0qimqg/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-1f0qimqg/step1: Assembler messages:
+/tmp/pwn-asm-1f0qimqg/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0!,X0,X0'
+
+
+Failed: CPYFP  X0!, X0, X0!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-wprtf1wo/step2', '/tmp/pwn-asm-wprtf1wo/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-wprtf1wo/step1: Assembler messages:
+/tmp/pwn-asm-wprtf1wo/step1:6: Error: operand 1 must be a register destination address with writeback -- `cpyfp X0!,X0,X0!'
+
+
+Failed: CPYFP  [X0]!, [X0]!, [X0]!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-7gdmwml6/step2', '/tmp/pwn-asm-7gdmwml6/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-7gdmwml6/step1: Assembler messages:
+/tmp/pwn-asm-7gdmwml6/step1:6: Error: integer 64-bit register expected at operand 3 -- `cpyfp [X0]!,[X0]!,[X0]!'
+
+
+Failed: CPYFP [X0]!, [X2]!, [X1]!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-rqncg9fr/step2', '/tmp/pwn-asm-rqncg9fr/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-rqncg9fr/step1: Assembler messages:
+/tmp/pwn-asm-rqncg9fr/step1:6: Error: integer 64-bit register expected at operand 3 -- `cpyfp [X0]!,[X2]!,[X1]!'
+
+
+Failed: CPYFP [X0]!, [X2]!, [X3]!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-oj9n5iqh/step2', '/tmp/pwn-asm-oj9n5iqh/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-oj9n5iqh/step1: Assembler messages:
+/tmp/pwn-asm-oj9n5iqh/step1:6: Error: integer 64-bit register expected at operand 3 -- `cpyfp [X0]!,[X2]!,[X3]!'
+
+
+Failed: CPYFP [X0]!, [X2]!, X3!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-g3bm8oio/step2', '/tmp/pwn-asm-g3bm8oio/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-g3bm8oio/step1: Assembler messages:
+/tmp/pwn-asm-g3bm8oio/step1:6: Error: selected processor does not support `cpyfp [X0]!,[X2]!,X3!'
+/tmp/pwn-asm-g3bm8oio/step1:6: Warning: previous `cpyfp' sequence has not been closed
+
+
+Failed: CPYFP [X0]!, [X2]!, X3!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-6hfahr82/step2', '/tmp/pwn-asm-6hfahr82/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-6hfahr82/step1: Assembler messages:
+/tmp/pwn-asm-6hfahr82/step1:6: Error: selected processor does not support `cpyfp [X0]!,[X2]!,X3!'
+/tmp/pwn-asm-6hfahr82/step1:6: Warning: previous `cpyfp' sequence has not been closed
+
+
+Failed: CPYFP [X0]!, [X0]!, X0!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-dqwvjrj8/step2', '/tmp/pwn-asm-dqwvjrj8/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-dqwvjrj8/step1: Assembler messages:
+/tmp/pwn-asm-dqwvjrj8/step1:6: Error: the three register operands must be distinct from one another -- `cpyfp [X0]!,[X0]!,X0!'
+
+
+Failed: CPYFP [X0]!, [X0]!, X1!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-5uaoama0/step2', '/tmp/pwn-asm-5uaoama0/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-5uaoama0/step1: Assembler messages:
+/tmp/pwn-asm-5uaoama0/step1:6: Error: the three register operands must be distinct from one another -- `cpyfp [X0]!,[X0]!,X1!'
+
+
+Failed: CPYFP [X0]!, [X1]!, X3!
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-qoljue66/step2', '/tmp/pwn-asm-qoljue66/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-qoljue66/step1: Assembler messages:
+/tmp/pwn-asm-qoljue66/step1:6: Error: selected processor does not support `cpyfp [X0]!,[X1]!,X3!'
+/tmp/pwn-asm-qoljue66/step1:6: Warning: previous `cpyfp' sequence has not been closed
+
+

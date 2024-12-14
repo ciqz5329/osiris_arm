@@ -241,6 +241,154 @@
         </operand>
     </instruction>
 
+    <instruction asm="CCMP" category="DataProc" extension="ARMv8" iclass="CCMP" iform="CCMP_imm" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="imm" type="imm" width="5" range="0-31"/>
+        <operand idx="3" name="nzcv" type="imm" width="4" range="0-15"/>
+        <operand idx="4" name="cond" type="cond" width="4" default="EQ">
+            EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE, AL, NV
+        </operand>
+    </instruction>
+
+    <instruction asm="CCMP" category="DataProc" extension="ARMv8" iclass="CCMP" iform="CCMP_reg" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="nzcv" type="imm" width="4" range="0-15"/>
+        <operand idx="4" name="cond" type="cond" width="4" default="EQ">
+            EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE, AL, NV
+        </operand>
+    </instruction>
+
+    <instruction asm="CINC" category="DataProc" extension="ARMv8" iclass="CINC" iform="CINC" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="cond" type="cond" width="4" default="EQ">
+            EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE
+        </operand>
+    </instruction>
+    <instruction asm="CINV" category="DataProc" extension="ARMv8" iclass="CINV" iform="CINV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="cond" type="cond" width="4" default="EQ">
+            EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE
+        </operand>
+    </instruction>
+
+    <instruction asm="CLREX" category="Memory" extension="ARMv8" iclass="CLREX" iform="CLREX" isa-set="A64">
+        <operand idx="1" name="imm" type="imm" width="4">0-15</operand>
+    </instruction>
+
+    <instruction asm="CLS" category="Arithmetic" extension="ARMv8" iclass="CLS" iform="CLS" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+    </instruction>
+
+    <instruction asm="CLZ" category="Bitwise" extension="ARMv8" iclass="CLZ" iform="CLZ" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rd" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+    </instruction>
+
+    <instruction asm="CMN" category="DataProc" extension="ARMv8" iclass="CMN" iform="CMN_ext_reg" isa-set="A64">
+        <alias asm="ADDS" preferred="true"/>
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="extend" type="enum" Optional="true">
+            <option value="000">UXTB</option>
+            <option value="001">UXTH</option>
+            <option value="010">UXTW</option>
+            <option value="011">UXTX</option>
+            <option value="100">SXTB</option>
+            <option value="101">SXTH</option>
+            <option value="110">SXTW</option>
+            <option value="111">SXTX</option>
+        </operand>
+        <operand idx="4" name="amount" type="imm" width="3" range="0-4" Optional="true">#0,#1,#2,#3,#4</operand>
+    </instruction>
+
+    <instruction asm="CMN" category="DataProc" extension="ARMv8" iclass="CMN_Immediate" iform="CMN_immediate" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31,WSP,SP</operand>
+        <operand idx="2" name="imm" type="imm" width="12" range="0-4095">#0,#1,#2,...,#4095</operand>
+        <operand idx="3" name="shift" type="enum" Optional="true">
+            <option value="0">LSL #0</option>
+            <option value="1">LSL #12</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="CMN" category="DataProc" extension="ARMv8" iclass="CMN" iform="CMN_shifted_reg" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="shift" type="enum" Optional="true">
+            <option value="00">LSL</option>
+            <option value="01">LSR</option>
+            <option value="10">ASR</option>
+        </operand>
+        <operand idx="4" name="amount" type="imm" width="6" range="0-63" Optional="true">#0,#1,...,#63</operand>
+    </instruction>
+    <instruction asm="CMP" category="DataProc" extension="ARMv8" iclass="CMP" iform="CMP_extended_reg" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31,SP</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="extend" type="enum" Optional="true">
+            <option value="000">UXTB</option>
+            <option value="001">UXTH</option>
+            <option value="010">LSL|UXTW</option>
+            <option value="011">UXTX</option>
+            <option value="100">SXTB</option>
+            <option value="101">SXTH</option>
+            <option value="110">SXTW</option>
+            <option value="111">SXTX</option>
+        </operand>
+        <operand idx="4" name="amount" type="imm" width="3" range="0-4" Optional="true">#0,#1,...,#4</operand>
+    </instruction>
+
+    <instruction asm="CMP" category="DataProc" extension="ARMv8" iclass="CMP" iform="CMP_immediate" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31,SP</operand>
+        <operand idx="2" name="imm" type="imm" width="12" range="0-4095">#0, #1, ..., #4095</operand>
+        <operand idx="3" name="shift" type="enum" Optional="true">
+            <option value="0">LSL #0</option>
+            <option value="1">LSL #12</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="CMP" category="DataProc" extension="ARMv8" iclass="CMP" iform="CMP_shifted_register" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64">W0,W1,W2,...,W31,X0,X1,X2,...,X31</operand>
+        <operand idx="3" name="shift" type="enum" Optional="true">
+            <option value="00">LSL</option>
+            <option value="01">LSR</option>
+            <option value="10">ASR</option>
+        </operand>
+        <operand idx="4" name="amount" type="imm" width="6" range="0-31" Optional="true">#0, #1, ..., #31</operand>
+    </instruction>
+
+<!--    <instruction asm="CMPP" category="DataProc" extension="ARMv8.5" iclass="CMPP" iform="CMPP" isa-set="A64">-->
+<!--        <operand idx="1" name="Xn|SP" type="reg" width="64">X0,X1,X2,...,X31,SP</operand>-->
+<!--        <operand idx="2" name="Xm|SP" type="reg" width="64">X0,X1,X2,...,X31,SP</operand>-->
+<!--    </instruction>-->
+    <instruction asm="CNEG" category="DataProc" extension="ARMv8.5" iclass="CNEG" iform="CNEG" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="2" name="Wn" type="reg" width="32">W0, W1, ..., W30, WZR</operand>
+        <operand idx="3" name="cond" type="cond" width="8">EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE</operand>
+    </instruction>
+
+
+<!--    <instruction asm="CPYFP" category="MemoryCopy" extension="FEAT_MOPS" iclass="CPYFP" iform="CPYFP" isa-set="A64">-->
+<!--        <operand idx="1" name="Xd" type="reg" width="64">[X0]!, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="2" name="Xs" type="reg" width="64">[X1]!, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="3" name="Xn" type="reg" width="64">X3!, X1, ..., X30, XZR</operand>-->
+<!--    </instruction>-->
+
+<!--    <instruction asm="CPYFM" category="MemoryCopy" extension="FEAT_MOPS" iclass="CPYFM" iform="CPYFM" isa-set="A64">-->
+<!--        <operand idx="1" name="Xd" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="2" name="Xs" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="3" name="Xn" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--    </instruction>-->
+
+<!--    <instruction asm="CPYFE" category="MemoryCopy" extension="FEAT_MOPS" iclass="CPYFE" iform="CPYFE" isa-set="A64">-->
+<!--        <operand idx="1" name="Xd" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="2" name="Xs" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--        <operand idx="3" name="Xn" type="reg" width="64">X0, X1, ..., X30, XZR</operand>-->
+<!--    </instruction>-->
+
 
 
 </root>
