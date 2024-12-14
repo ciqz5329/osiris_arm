@@ -946,3 +946,11 @@ It had this on stdout:
 /tmp/pwn-asm-zt5u7_xp/step1:7: Error: unknown mnemonic `w0' -- `w0, #0'
 
 
+Failed: ADD W0, W0
+Error: There was an error running ['/usr/bin/aarch64-linux-gnu-as', '-EL', '-o', '/tmp/pwn-asm-t79t0s3h/step2', '/tmp/pwn-asm-t79t0s3h/step1']:
+It had the exitcode 1.
+It had this on stdout:
+/tmp/pwn-asm-t79t0s3h/step1: Assembler messages:
+/tmp/pwn-asm-t79t0s3h/step1:6: Error: comma expected between operands at operand 3 -- `add W0,W0'
+
+

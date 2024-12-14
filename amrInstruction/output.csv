@@ -1,6 +1,6 @@
 byte_representation;assembly_code;category;extension;isa_set
+AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
 AAAAGg==;ADC W0, W0, W0;DataProc;ARMv8;A64
 AAAAOg==;ADCS W0, W0, W0;DataProc;ARMv8;A64
 AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
 AAAAEQ==;ADD W0, W0, #0;DataProc;ARMv8;A64
-AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
