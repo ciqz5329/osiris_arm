@@ -1,0 +1,25 @@
+byte_representation;assembly_code;category;extension;isa_set
+AAAAKw==;ADDS W0, W0, W0;DataProc;ARMv8;A64
+AAAAGg==;ADC W0, W0, W0;DataProc;ARMv8;A64
+IAACig==;AND X0, X1, X2;DataProc;ARMv8;A64
+AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
+IHxA8g==;ANDS X0, X1, #0xFFFFFFFF;DataProc;ARMv8;A64
+AAAAOg==;ADCS W0, W0, W0;DataProc;ARMv8;A64
+IAAC6g==;ANDS X0, X1, X2;DataProc;ARMv8;A64
+AAAAMQ==;ADDS W0, W0, #0;DataProc;ARMv8;A64
+AAAAKw==;ADDS W0, W0, W0;DataProc;ARMv8;A64
+AABAsw==;BFI X0, X0, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+ICjCmg==;ASRV X0, X1, X2;DataProc;ARMv8;A64
+ICjCmg==;ASR X0, X1, X2;DataProc;ARMv8;A64
+AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
+AAAAEQ==;ADD W0, W0, #0;DataProc;ARMv8;A64
+AAAAEA==;ADR X0, 0;DataProc;ARMv8;A64
+AABAsw==;BFXIL X0, X0, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+AHxAkg==;AND X0, X0, #0xFFFFFFFF;DataProc;ARMv8;A64
+AABAsw==;BFM X0, X0, #0, #0;Bitfield;FEAT_ASMv8p2;A64
+IPxAkw==;ASR X0, X1, #0;DataProc;ARMv8;A64
+AAAg1A==;BRK #0;Control;FEAT_BTI;A64
+AAAgig==;BIC X0, X0, X0;Bitwise;FEAT_ASM;A64
+AAhAOg==;CCMN W0, #0, #0, EQ;DataProc;ARMv8;A64
+AAAg6g==;BICS X0, X0, X0;Bitwise;FEAT_ASM;A64
+AABAOg==;CCMN W0, W0, #0, EQ;DataProc;ARMv8;A64

@@ -69,18 +69,28 @@ def worker_func(input_queue, output_queue):
 def parse_operands(instrNode):
     """
     解析 <instruction> 节点下的 <operand> 子节点，并组合成完整的汇编指令文本。
-    这里默认只截取前三个操作数；如果实际超过 3 个，也可按需调整。
+    操作数的数量不固定，按需动态拼接所有操作数。
     """
     asm_code = instrNode.attrib['asm']
     operands = []
+
+    # 遍历所有操作数节点
     for operandNode in instrNode.iter('operand'):
         operandType = operandNode.attrib['type']
+        operandName = operandNode.attrib['name']
+
         if operandType == 'reg':
             # 默认使用第一个寄存器
             registers = operandNode.text.split(',')
-            operands.append(registers[0])
+            default_value = operandNode.attrib.get('default', None)
+            reg_value = default_value if default_value else registers[0]  # 默认值处理
+            operands.append(reg_value)
+
         elif operandType == 'enum':
             # 针对移位类型的简单映射
+            operandOptional = operandNode.attrib.get('Optional', '')
+            if (operandName == 'shift' or operandName=='extend')and operandOptional == 'true':
+                continue
             options = operandNode.findall('option')
             if options:
                 value = options[0].attrib.get('value', '')
@@ -88,13 +98,32 @@ def parse_operands(instrNode):
                     shift_map = {'00': 'LSL', '01': 'LSR', '10': 'ASR'}
                     operands.append(shift_map.get(value, 'LSL'))
         elif operandType == 'imm':
-            # 解析立即数范围，默认使用最小值
-            range_values = operandNode.attrib.get('range', '0-0').split('-')
-            imm_value = f"#{range_values[0]}"
+            operandOptional = operandNode.attrib.get('Optional', '')
+
+            if (operandName == 'amount' or operandName=='shift') and operandOptional == 'true':
+                continue
+            # 获取 default 节点的默认值
+            default_value = operandNode.attrib.get('default', None)
+
+            # 如果没有提供立即数或立即数不合法，使用默认值
+            imm_value = default_value if default_value else "#0"  # 默认值处理
             operands.append(imm_value)
-    # 拼成最终的汇编指令文本，这里默认只取前 3 个操作数
-    final_asm = f"{asm_code} {', '.join(operands[:3])}".strip()
+
+        elif operandType == 'label':
+            # 处理标签操作数，默认使用default属性值
+            default_value = operandNode.attrib.get('default', 'Program Label Address')
+            operands.append(default_value)
+
+        elif operandType == 'cond':
+            default_value = operandNode.attrib.get('default', 'EQ')
+            operands.append(default_value)
+
+
+    # 拼接所有操作数，不限制数量
+    final_asm = f"{asm_code} {', '.join(operands)}".strip()
+
     return final_asm
+
 
 def main():
     """
