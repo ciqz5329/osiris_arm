@@ -160,7 +160,7 @@ int Executor::TestSequenceTriple(const byte_array& trigger_sequence,
   *cycles_difference = static_cast<int64_t>(median<int64_t>(results));
   return 0;
 }
-
+//成功返回0
 int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
                                   const byte_array& measurement_sequence,
                                   const byte_array& reset_sequence,
@@ -207,6 +207,7 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
     }
   }
 
+  //
   for (int i = 0; i < no_testruns; i++) {
     // get timing without trigger sequence
     uint64_t cycles_elapsed_notrigger;
@@ -401,6 +402,7 @@ void Executor::ClearDataPage() {
   }
 }
 
+  //初始化指定的代码页
 void Executor::InitializeCodePage(int codepage_no) {
   constexpr char INST_RET = '\xc3';
   constexpr char INST_NOP = '\x90';
@@ -569,6 +571,26 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
 }
 
+//code for arm,maybe need to recode
+//   void Executor::AddTimerStartToCodePage(int codepage_no) {
+//   constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
+//   constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
+//   constexpr char INST_MOV_X10_X0[] = "\xAA\x00\x03\xE9"; // MOV X10, X0 (将计时结果保存到 X10)
+//
+//   // 插入序列化屏障
+//   AddInstructionToCodePage(codepage_no, INST_DSB, 4);
+//   // 读取当前时间戳
+//   AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
+//   // 将时间戳保存到 X10
+//   AddInstructionToCodePage(codepage_no, INST_MOV_X10_X0, 4);
+// }
+
+//   设置计时起点：
+// 利用硬件支持的时间戳计数器（如 x86 架构中的 RDTSC 指令）记录当前时间戳。
+// 将读取的时间戳值存储到寄存器 R10 中，便于后续与结束时间戳计算差值。
+// 序列化指令流：
+// 确保在计时前的所有指令都已完成，避免由于乱序执行导致的时间测量不准确。
+// 使用 MFENCE 和 CPUID 来实现指令流的同步。
 void Executor::AddTimerStartToCodePage(int codepage_no) {
   constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
@@ -589,6 +611,32 @@ void Executor::AddTimerStartToCodePage(int codepage_no) {
   AddInstructionToCodePage(codepage_no, INST_MOV_R10_RAX,3);
 }
 
+
+  //code for arm,maybe need to recode
+//   void Executor::AddTimerEndToCodePage(int codepage_no) {
+//   constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
+//   constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
+//   constexpr char INST_SUB_X0_X10[] = "\xCB\x0A\x00\x4B"; // SUB X0, X0, X10 (计算时间差)
+//   constexpr char INST_MOV_X11_X0[] = "\xAA\x00\x03\xEA"; // MOV X11, X0 (保存时间差)
+//
+//   // 插入序列化屏障
+//   AddInstructionToCodePage(codepage_no, INST_DSB, 4);
+//   // 读取结束时间戳
+//   AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
+//   // 计算时间差
+//   AddInstructionToCodePage(codepage_no, INST_SUB_X0_X10, 4);
+//   // 保存时间差
+//   AddInstructionToCodePage(codepage_no, INST_MOV_X11_X0, 4);
+// }
+
+
+//   读取结束时间戳：
+// 利用处理器时间戳（如 RDTSC 或 RDTSCP）记录结束时间。
+// 计算时间差：
+// 结束时间与起始时间（存储在 R10 寄存器中）做减法，得到执行时间差。
+// 时间差存储在寄存器 R11 中，以便后续使用。
+// 序列化指令流：
+// 确保读取时间戳的操作是准确的，不受指令乱序或处理器流水线的影响。
 void Executor::AddTimerEndToCodePage(int codepage_no) {
   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
   constexpr char INST_SUB_RAX_R10[] = "\x4c\x29\xd0";
@@ -655,6 +703,16 @@ void Executor::AddInstructionToCodePage(int codepage_no,
   code_pages_last_written_index_[codepage_no] = new_page_idx;
 }
 
+
+// code for arm,maybe need to recode
+//   void Executor::MakeTimerResultReturnValue(int codepage_no) {
+//   constexpr char MOV_X0_X11[] = "\xaa\x0b\x00\xe0"; // MOV X0, X11
+//
+//   AddInstructionToCodePage(codepage_no, MOV_X0_X11, 4);
+// }
+
+
+  //这段代码的功能是将定时器的结果存储到 RAX 寄存器中，以便返回给调用者或用于后续处理。
 void Executor::MakeTimerResultReturnValue(int codepage_no) {
   constexpr char MOV_RAX_R11[] = "\x4c\x89\xd8";
   assert(code_pages_last_written_index_[codepage_no] + 3 < kPagesize);
@@ -737,6 +795,8 @@ void Executor::UnregisterFaultHandler(std::array<int, size> signals_to_handle) {
   }
 }
 
+  //是一个动态代码执行的框架，能够安全地运行生成的代码页，同时测量其执行时间，并捕获运行时异常 need to change
+  //arm需要修改
 __attribute__((no_sanitize("address")))
 int Executor::ExecuteCodePage(void* codepage, uint64_t* cycles_elapsed) {
   /// NOTE: this function and Executor::FaultHandler must both be static functions
@@ -752,7 +812,7 @@ int Executor::ExecuteCodePage(void* codepage, uint64_t* cycles_elapsed) {
   RegisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
 #endif
 
-  if (!setjmp(fault_handler_jump_buf)) {
+  if (!setjmp(fault_handler_jump_buf)) {//backup寄存器状态
     // jump to codepage
     uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
     // set return argument
