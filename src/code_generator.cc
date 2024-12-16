@@ -43,7 +43,7 @@ std::string x86Instruction::GetCSVRepresentation() const {
   line << isa_set;
   return line.str();
 }
-
+  //生成指令list
 CodeGenerator::CodeGenerator(const std::string& instructions_filename) {
   // seed rng
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -87,6 +87,7 @@ CodeGenerator::CodeGenerator(const std::string& instructions_filename) {
   }
 }
 
+  //生成指令UID
 uint64_t CodeGenerator::GenerateInstructionUID(size_t instruction_idx) {
   // the filehash defaults to empty, hence we need to generate the corresponding instruction file
   // hash before calling this function
@@ -102,6 +103,7 @@ uint64_t CodeGenerator::GenerateInstructionUID(size_t instruction_idx) {
   return instruction_uid;
 }
 
+  //根据指令UID获取指令index
 size_t CodeGenerator::InstructionUIDToInstructionIndex(uint64_t instruction_uid) {
   // check whether the correct instruction file is used (last 2 byte of hash are encoded in UID)
   std::stringstream instructionfile_end_of_hash_uid;
@@ -122,11 +124,13 @@ size_t CodeGenerator::InstructionUIDToInstructionIndex(uint64_t instruction_uid)
   return instruction_uid & 0xffff;
 }
 
+  // 生成随机数
 int CodeGenerator::GenerateRandomNumber(int min, int max) {
   std::uniform_int_distribution<int> distribution(min, max);
   return distribution(rand_generator_);
 }
 
+  //根据index获取从list指令
 x86Instruction CodeGenerator::CreateInstructionFromIndex(uint64_t instruction_idx) {
   if (instruction_idx > instruction_list_.size()) {
     LOG_ERROR("Invalid instruction index");
@@ -135,6 +139,7 @@ x86Instruction CodeGenerator::CreateInstructionFromIndex(uint64_t instruction_id
   return instruction_list_[instruction_idx];
 }
 
+  //根据UID（分析获得）获取从list指令
 x86Instruction CodeGenerator::CreateInstructionFromUID(uint64_t instruction_uid) {
   size_t instruction_idx = InstructionUIDToInstructionIndex(instruction_uid);
   if (instruction_idx > instruction_list_.size()) {
@@ -143,7 +148,7 @@ x86Instruction CodeGenerator::CreateInstructionFromUID(uint64_t instruction_uid)
   }
   return instruction_list_[instruction_idx];
 }
-
+  //生成随机指令
 x86Instruction CodeGenerator::CreateRandomInstruction() {
   size_t idx = GenerateRandomNumber(0, instruction_list_.size() - 1);
   LOG_DEBUG("Got random instruction on index " + std::to_string(idx));

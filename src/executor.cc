@@ -14,17 +14,14 @@
 
 
 #include "executor.h"
-
 #include <setjmp.h>
 #include <signal.h>
 #include <sys/mman.h>
-
 #include <cassert>
 #include <cstddef>
 #include <cstring>
 #include <iostream>
 #include <sstream>
-
 #include "code_generator.h"
 #include "logger.h"
 
@@ -33,9 +30,9 @@ namespace osiris {
 Executor::Executor() {
   // allocate memory for memory accesses during execution
   for (size_t i = 0; i < execution_data_pages_.size(); i++) {
-    void* addr = reinterpret_cast<void*>(kMemoryBegin + i * kPagesize);
+    void* addr = reinterpret_cast<void*>(kMemoryBegin + i * kPagesize);//物理adr-虚拟adr，生成虚拟地址，用于内存映射
     // check that page is not mapped
-    int ret = msync(addr, kPagesize, 0);
+    int ret = msync(addr, kPagesize, 0);//msync 是一个用于 同步内存映射区域到磁盘 的系统调用
     if (ret != -1 || errno != ENOMEM) {
       LOG_ERROR("Execution page is already mapped. Aborting!");
       std::exit(1);
@@ -45,13 +42,12 @@ Executor::Executor() {
                                          PROT_READ | PROT_WRITE,
                                          MAP_FIXED | MAP_PRIVATE | MAP_ANONYMOUS,
                                          -1,
-                                         0));
-
+                                         0));//这行代码调用了 mmap 函数，目的是在特定地址 addr 分配一块大小为 kPagesize 的内存，并返回该内存的指针
     if (page != reinterpret_cast<void*>(kMemoryBegin + i * kPagesize) || page == MAP_FAILED) {
       LOG_ERROR("Couldn't allocate memory for execution (data memory). Aborting!");
       std::exit(1);
     }
-    execution_data_pages_[i] = page;
+    execution_data_pages_[i] = page;//将分配的内存地址指针存入execution_data_pages_
   }
 
   // allocate memory that holds the actual instructions we execute
@@ -90,10 +86,10 @@ int Executor::TestResetSequence(const byte_array& trigger_sequence,
                                 int no_testruns,
                                 int reset_executions_amount,
                                 int64_t* cycles_difference) {
-  byte_array nop_sequence = CreateSequenceOfNOPs(reset_sequence.size());
+  byte_array nop_sequence = CreateSequenceOfNOPs(reset_sequence.size());//生成nop序列
   std::vector<int64_t> clean_runs;
   std::vector<int64_t> noisy_runs;
-  clean_runs.reserve(no_testruns);
+  clean_runs.reserve(no_testruns);//预留no_testruns个空间
   noisy_runs.reserve(no_testruns);
 
   // intuition:
@@ -420,6 +416,50 @@ void Executor::InitializeCodePage(int codepage_no) {
   code_pages_last_written_index_[codepage_no] = 0;
 }
 
+
+
+//arm prolog
+//   void Executor::AddProlog_AArch64(int codepage_no) {
+//     // 保存调用者保存的寄存器
+//     constexpr char INST_STP_X19_X20[] = "\xfd\x7b\xbf\xa9"; // STP X19, X20, [SP, #-16]!
+//     constexpr char INST_STP_X21_X22[] = "\xfd\x7b\xbf\xa9"; // STP X21, X22, [SP, #-16]!
+//     constexpr char INST_STP_X23_X24[] = "\xfd\x7b\xbf\xa9"; // STP X23, X24, [SP, #-16]!
+//     constexpr char INST_STP_X25_X26[] = "\xfd\x7b\xbf\xa9"; // STP X25, X26, [SP, #-16]!
+//     constexpr char INST_STP_X27_X28[] = "\xfd\x7b\xbf\xa9"; // STP X27, X28, [SP, #-16]!
+//     constexpr char INST_STP_FP_LR[] = "\xfd\x7b\xbf\xa9";   // STP FP, LR, [SP, #-16]!
+//
+//     AddInstructionToCodePage(codepage_no, INST_STP_X19_X20, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_X21_X22, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_X23_X24, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_X25_X26, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_X27_X28, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_FP_LR, 4);
+//
+//     // 保存 SIMD 寄存器
+//     constexpr char INST_STP_Q8_Q9[] = "\xfd\x7b\xbf\xa9"; // STP Q8, Q9, [SP, #-32]!
+//     constexpr char INST_STP_Q10_Q11[] = "\xfd\x7b\xbf\xa9"; // STP Q10, Q11, [SP, #-32]!
+//
+//     AddInstructionToCodePage(codepage_no, INST_STP_Q8_Q9, 4);
+//     AddInstructionToCodePage(codepage_no, INST_STP_Q10_Q11, 4);
+//
+//     // 分配栈空间
+//     constexpr char INST_SUB_SP[] = "\xff\x43\x00\xd1"; // SUB SP, SP, #4096
+//     AddInstructionToCodePage(codepage_no, INST_SUB_SP, 4);
+//
+//     // 初始化寄存器
+//     constexpr char INST_MOV_X0[] = "\xa0\x00\x80\xd2"; // MOV X0, #0x1000000
+//     constexpr char INST_MOV_X1[] = "\xa1\x00\x80\xd2"; // MOV X1, #0x1000000
+//     constexpr char INST_MOV_X2[] = "\xa2\x00\x80\xd2"; // MOV X2, #0x1000000
+//
+//     AddInstructionToCodePage(codepage_no, INST_MOV_X0, 4);
+//     AddInstructionToCodePage(codepage_no, INST_MOV_X1, 4);
+//     AddInstructionToCodePage(codepage_no, INST_MOV_X2, 4);
+//
+//     // 清理状态
+//     constexpr char INST_DSB[] = "\xbf\x3f\x03\xd5"; // DSB SY
+//     AddInstructionToCodePage(codepage_no, INST_DSB, 4);
+// }
+
 void Executor::AddProlog(int codepage_no) {
   // NOTE: everything in this function must be mirrored by AddEpilog
   constexpr char INST_PUSH_RBX_RSP_RBP[] = "\x53\x54\x55";
@@ -485,7 +525,12 @@ void Executor::AddProlog(int codepage_no) {
 
   AddInstructionToCodePage(codepage_no, INST_MOVQ_XMM0_R8, 5);
 }
-
+  // 插入一段序言代码（Prolog），其目的是为后续代码执行创建一个安全且受控的环境。具体包括：
+  //
+  // 保存必要的寄存器和硬件状态（如栈指针、寄存器值）。
+  // 为程序执行分配足够的栈空间。
+  // 初始化一些特定寄存器的值。
+  // 确保硬件状态符合预期，避免意外错误（如浮点异常）。
 void Executor::AddEpilog(int codepage_no) {
   // NOTE: everything in this function must be mirrored by AddProlog
   constexpr char INST_CLD[] = "\xfc";
@@ -566,6 +611,9 @@ void Executor::AddTimerEndToCodePage(int codepage_no) {
   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
 }
 
+  //把指定的机器指令字节写入到代码页
+
+  //将指令写入代码页的作用主要在于支持 动态代码生成 和 运行时执行，通过这种方式，程序可以根据运行时环境动态生成、调整并执行代码，从而实现更高的性能和灵活性。
 void Executor::AddInstructionToCodePage(int codepage_no,
                                           const char* instruction_bytes,
                                           size_t instruction_length) {
@@ -584,6 +632,7 @@ void Executor::AddInstructionToCodePage(int codepage_no,
   code_pages_last_written_index_[codepage_no] = page_idx + instruction_length;
 }
 
+  //overload
 void Executor::AddInstructionToCodePage(int codepage_no,
                                           const byte_array& instruction_bytes) {
   size_t page_idx = code_pages_last_written_index_[codepage_no];
@@ -613,6 +662,18 @@ void Executor::MakeTimerResultReturnValue(int codepage_no) {
   AddInstructionToCodePage(codepage_no, MOV_RAX_R11, 3);
 }
 
+
+  //生成x86的nops指令，对arm需要recode
+// 在 ARM 中，NOP 的机器码是固定的，具体值依架构版本而定：
+// ARM 模式（32 位指令集）：
+// 指令编码为：0xE1A00000。
+// 表示：MOV R0, R0（将寄存器 R0 的值移动到自身，不执行任何实际操作）。
+// Thumb 模式（16 位指令集）：
+// 指令编码为：0xBF00。
+// 表示：无操作。
+// AArch64（64 位 ARM）模式：
+// 指令编码为：0xD503201F。
+// 表示：无操作。
 byte_array Executor::CreateSequenceOfNOPs(size_t length) {
   constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
   byte_array nops;

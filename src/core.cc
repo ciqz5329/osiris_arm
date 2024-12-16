@@ -52,13 +52,15 @@ void Core::FindAndOutputTriggerpairsWithoutAssumptions(const std::string& output
                          "reset-isa-set");
   output_csvfile << headerline << std::endl;
 
+
   size_t max_instruction_no = code_generator_.GetNumberOfInstructions();
   for (size_t measurement_idx = 0; measurement_idx < max_instruction_no; measurement_idx++) {
     x86Instruction measurement_sequence =
-        code_generator_.CreateInstructionFromIndex(measurement_idx);
+        code_generator_.CreateInstructionFromIndex(measurement_idx);//根据index获得指令
     LOG_INFO("processing measurement " + std::to_string(measurement_idx) + "/"
                  + std::to_string(max_instruction_no - 1));
 
+    //开始执行三元组，3个for循环，分别是trigger、measurement、reset
     for (size_t trigger_idx = 0; trigger_idx < max_instruction_no; trigger_idx++) {
       x86Instruction trigger_sequence = code_generator_.CreateInstructionFromIndex(trigger_idx);
       if (trigger_sequence.assembly_code == "busy-sleep" ||
@@ -67,6 +69,7 @@ void Core::FindAndOutputTriggerpairsWithoutAssumptions(const std::string& output
         // the sleeps are only valid reset sequences
         continue;
       }
+
       for (size_t reset_idx = 0; reset_idx < max_instruction_no; reset_idx++) {
         x86Instruction reset_sequence = code_generator_.CreateInstructionFromIndex(reset_idx);
         // execute sleeps only 1 time
