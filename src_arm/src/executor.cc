@@ -722,7 +722,7 @@ void Executor::AddInstructionToCodePage(int codepage_no,
 void Executor::MakeTimerResultReturnValue(int codepage_no) {
   //remake for arm
   //constexpr char MOV_RAX_R11[] = "\x4c\x89\xd8";
-  constexpr char MOV_X0_X11[] = "\xaa\x0b\x00\xe0"; // MOV X0, X11
+  constexpr char MOV_RAX_R11[] = "\xaa\x0b\x00\xe0"; // MOV X0, X11
 
   assert(code_pages_last_written_index_[codepage_no] + 3 < kPagesize);
 
@@ -741,14 +741,36 @@ void Executor::MakeTimerResultReturnValue(int codepage_no) {
 // AArch64（64 位 ARM）模式：
 // 指令编码为：0xD503201F。
 // 表示：无操作。
+// byte_array Executor::CreateSequenceOfNOPs(size_t length) {
+//   //constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
+//   constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned int>(0xD503201F); // ARM NOP
+//   byte_array nops;
+//   std::byte nop_byte{INST_NOP_AS_DECIMAL};
+//   for (size_t i = 0; i < length; i++) {
+//     nops.push_back(nop_byte);
+//   }
+//   return nops;
+// }
 byte_array Executor::CreateSequenceOfNOPs(size_t length) {
-  //constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
-  constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned int>(0xD503201F); // ARM NOP
+  constexpr uint32_t INST_NOP_AS_DECIMAL = 0xD503201F; // ARM NOP 指令 (32位)
   byte_array nops;
-  std::byte nop_byte{INST_NOP_AS_DECIMAL};
-  for (size_t i = 0; i < length; i++) {
-    nops.push_back(nop_byte);
+
+  // 将32位的 NOP 指令拆分成4个字节
+  std::byte nop_bytes[4] = {
+    std::byte(INST_NOP_AS_DECIMAL & 0xFF),         // 低8位
+    std::byte((INST_NOP_AS_DECIMAL >> 8) & 0xFF),  // 次低8位
+    std::byte((INST_NOP_AS_DECIMAL >> 16) & 0xFF), // 次高8位
+    std::byte((INST_NOP_AS_DECIMAL >> 24) & 0xFF)  // 高8位
+};
+
+  // 每条 NOP 是4字节，因此需要按照4字节为单位重复填充
+  for (size_t i = 0; i < length; i += 4) {
+    nops.push_back(nop_bytes[0]);
+    nops.push_back(nop_bytes[1]);
+    nops.push_back(nop_bytes[2]);
+    nops.push_back(nop_bytes[3]);
   }
+
   return nops;
 }
 

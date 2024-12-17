@@ -73,99 +73,99 @@ CMakeFiles/osiris.dir/src/osiris.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/osiris.cc.o: ../src/osiris.cc
 CMakeFiles/osiris.dir/src/osiris.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/osiris.dir/src/osiris.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/osiris.cc.o -MF CMakeFiles/osiris.dir/src/osiris.cc.o.d -o CMakeFiles/osiris.dir/src/osiris.cc.o -c /home/ac_machine/CLionProjects/osiris/src/osiris.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/osiris.cc.o -MF CMakeFiles/osiris.dir/src/osiris.cc.o.d -o CMakeFiles/osiris.dir/src/osiris.cc.o -c /home/ac_machine/CLionProjects/osiris/src/osiris.cc
 
 CMakeFiles/osiris.dir/src/osiris.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/osiris.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/osiris.cc > CMakeFiles/osiris.dir/src/osiris.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/osiris.cc > CMakeFiles/osiris.dir/src/osiris.cc.i
 
 CMakeFiles/osiris.dir/src/osiris.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/osiris.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/osiris.cc -o CMakeFiles/osiris.dir/src/osiris.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/osiris.cc -o CMakeFiles/osiris.dir/src/osiris.cc.s
 
 CMakeFiles/osiris.dir/src/executor.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/executor.cc.o: ../src/executor.cc
 CMakeFiles/osiris.dir/src/executor.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/osiris.dir/src/executor.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/executor.cc.o -MF CMakeFiles/osiris.dir/src/executor.cc.o.d -o CMakeFiles/osiris.dir/src/executor.cc.o -c /home/ac_machine/CLionProjects/osiris/src/executor.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/executor.cc.o -MF CMakeFiles/osiris.dir/src/executor.cc.o.d -o CMakeFiles/osiris.dir/src/executor.cc.o -c /home/ac_machine/CLionProjects/osiris/src/executor.cc
 
 CMakeFiles/osiris.dir/src/executor.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/executor.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/executor.cc > CMakeFiles/osiris.dir/src/executor.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/executor.cc > CMakeFiles/osiris.dir/src/executor.cc.i
 
 CMakeFiles/osiris.dir/src/executor.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/executor.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/executor.cc -o CMakeFiles/osiris.dir/src/executor.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/executor.cc -o CMakeFiles/osiris.dir/src/executor.cc.s
 
 CMakeFiles/osiris.dir/src/code_generator.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/code_generator.cc.o: ../src/code_generator.cc
 CMakeFiles/osiris.dir/src/code_generator.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/osiris.dir/src/code_generator.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/code_generator.cc.o -MF CMakeFiles/osiris.dir/src/code_generator.cc.o.d -o CMakeFiles/osiris.dir/src/code_generator.cc.o -c /home/ac_machine/CLionProjects/osiris/src/code_generator.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/code_generator.cc.o -MF CMakeFiles/osiris.dir/src/code_generator.cc.o.d -o CMakeFiles/osiris.dir/src/code_generator.cc.o -c /home/ac_machine/CLionProjects/osiris/src/code_generator.cc
 
 CMakeFiles/osiris.dir/src/code_generator.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/code_generator.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/code_generator.cc > CMakeFiles/osiris.dir/src/code_generator.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/code_generator.cc > CMakeFiles/osiris.dir/src/code_generator.cc.i
 
 CMakeFiles/osiris.dir/src/code_generator.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/code_generator.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/code_generator.cc -o CMakeFiles/osiris.dir/src/code_generator.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/code_generator.cc -o CMakeFiles/osiris.dir/src/code_generator.cc.s
 
 CMakeFiles/osiris.dir/src/core.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/core.cc.o: ../src/core.cc
 CMakeFiles/osiris.dir/src/core.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/osiris.dir/src/core.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/core.cc.o -MF CMakeFiles/osiris.dir/src/core.cc.o.d -o CMakeFiles/osiris.dir/src/core.cc.o -c /home/ac_machine/CLionProjects/osiris/src/core.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/core.cc.o -MF CMakeFiles/osiris.dir/src/core.cc.o.d -o CMakeFiles/osiris.dir/src/core.cc.o -c /home/ac_machine/CLionProjects/osiris/src/core.cc
 
 CMakeFiles/osiris.dir/src/core.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/core.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/core.cc > CMakeFiles/osiris.dir/src/core.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/core.cc > CMakeFiles/osiris.dir/src/core.cc.i
 
 CMakeFiles/osiris.dir/src/core.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/core.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/core.cc -o CMakeFiles/osiris.dir/src/core.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/core.cc -o CMakeFiles/osiris.dir/src/core.cc.s
 
 CMakeFiles/osiris.dir/src/logger.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/logger.cc.o: ../src/logger.cc
 CMakeFiles/osiris.dir/src/logger.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/osiris.dir/src/logger.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/logger.cc.o -MF CMakeFiles/osiris.dir/src/logger.cc.o.d -o CMakeFiles/osiris.dir/src/logger.cc.o -c /home/ac_machine/CLionProjects/osiris/src/logger.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/logger.cc.o -MF CMakeFiles/osiris.dir/src/logger.cc.o.d -o CMakeFiles/osiris.dir/src/logger.cc.o -c /home/ac_machine/CLionProjects/osiris/src/logger.cc
 
 CMakeFiles/osiris.dir/src/logger.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/logger.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/logger.cc > CMakeFiles/osiris.dir/src/logger.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/logger.cc > CMakeFiles/osiris.dir/src/logger.cc.i
 
 CMakeFiles/osiris.dir/src/logger.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/logger.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/logger.cc -o CMakeFiles/osiris.dir/src/logger.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/logger.cc -o CMakeFiles/osiris.dir/src/logger.cc.s
 
 CMakeFiles/osiris.dir/src/utils.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/utils.cc.o: ../src/utils.cc
 CMakeFiles/osiris.dir/src/utils.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/osiris.dir/src/utils.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/utils.cc.o -MF CMakeFiles/osiris.dir/src/utils.cc.o.d -o CMakeFiles/osiris.dir/src/utils.cc.o -c /home/ac_machine/CLionProjects/osiris/src/utils.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/utils.cc.o -MF CMakeFiles/osiris.dir/src/utils.cc.o.d -o CMakeFiles/osiris.dir/src/utils.cc.o -c /home/ac_machine/CLionProjects/osiris/src/utils.cc
 
 CMakeFiles/osiris.dir/src/utils.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/utils.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/utils.cc > CMakeFiles/osiris.dir/src/utils.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/utils.cc > CMakeFiles/osiris.dir/src/utils.cc.i
 
 CMakeFiles/osiris.dir/src/utils.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/utils.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/utils.cc -o CMakeFiles/osiris.dir/src/utils.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/utils.cc -o CMakeFiles/osiris.dir/src/utils.cc.s
 
 CMakeFiles/osiris.dir/src/filter.cc.o: CMakeFiles/osiris.dir/flags.make
 CMakeFiles/osiris.dir/src/filter.cc.o: ../src/filter.cc
 CMakeFiles/osiris.dir/src/filter.cc.o: CMakeFiles/osiris.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris/src_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/osiris.dir/src/filter.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/filter.cc.o -MF CMakeFiles/osiris.dir/src/filter.cc.o.d -o CMakeFiles/osiris.dir/src/filter.cc.o -c /home/ac_machine/CLionProjects/osiris/src/filter.cc
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris.dir/src/filter.cc.o -MF CMakeFiles/osiris.dir/src/filter.cc.o.d -o CMakeFiles/osiris.dir/src/filter.cc.o -c /home/ac_machine/CLionProjects/osiris/src/filter.cc
 
 CMakeFiles/osiris.dir/src/filter.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris.dir/src/filter.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/filter.cc > CMakeFiles/osiris.dir/src/filter.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris/src/filter.cc > CMakeFiles/osiris.dir/src/filter.cc.i
 
 CMakeFiles/osiris.dir/src/filter.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris.dir/src/filter.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/filter.cc -o CMakeFiles/osiris.dir/src/filter.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris/src/filter.cc -o CMakeFiles/osiris.dir/src/filter.cc.s
 
 # Object files for target osiris
 osiris_OBJECTS = \
