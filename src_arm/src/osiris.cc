@@ -31,8 +31,9 @@
 //
 // Constants
 //
-const std::string kInstructionFile("../x86-instructions/instructions.b64");
-const std::string kInstructionFileCleaned("../x86-instructions/instructions_cleaned.b64");
+//recode for asm instructions
+const std::string kInstructionFile("../arm-instructions/instructions.b64");
+const std::string kInstructionFileCleaned("../arm-instructions/instructions_cleaned.b64");
 
 const std::string kOutputCSVNoAssumptions("./measure_trigger_pairs.csv");
 
@@ -43,16 +44,17 @@ const std::string kOutputFolderFormattedTriggerEqualsMeasurement("./triggerpairs
 //
 // Validate Target Architecture Macros
 //
-#ifdef INTEL
-  #ifdef AMD
-  static_assert(false, "Multiple target architectures defined! Aborting!");
-  #endif
-#endif
-#ifndef INTEL
-  #ifndef AMD
-  static_assert(false, "No target architecture defined! Aborting!");
-  #endif
-#endif
+//do not define multiple target architectures,wo just need one architecture  which is arm
+// #ifdef INTEL
+//   #ifdef AMD
+//   static_assert(false, "Multiple target architectures defined! Aborting!");
+//   #endif
+// #endif
+// #ifndef INTEL
+//   #ifndef AMD
+//   static_assert(false, "No target architecture defined! Aborting!");
+//   #endif
+// #endif
 
 
 void ConfirmResultsOfFuzzer(const std::string& input_file, const std::string& output_file) {
