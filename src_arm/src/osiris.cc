@@ -161,20 +161,31 @@ void ConfirmResultsOfFuzzer(const std::string& input_file, const std::string& ou
 void PrintHelp(char** argv) {
   std::cout << "USAGE: " << argv[0]
             << " [OPTION] [confirmation input file] [confirmation output file]" << std::endl
-            << "Without any option the tool searches with trigger sequence == measurement sequence"
-            << std::endl
-            << "The following options can influence or change the behavior:" << std::endl
-            << "--cleanup \t Create new instruction file "
-            << "consisting of only non-faulting instructions" << std::endl
-            << "--all \t\t Search with trigger sequence != measurement sequence (takes a few days)"
-            << std::endl
-            << "--speculation \t Executes trigger sequence only transiently" << std::endl
-            << "--filter \t Apply filters to the output of the search" << std::endl
-            << "--confirm-results \t Randomize order of the sequence triples and test again. "
-            << std::endl
-            << " \t\t Requires 2 positional arguments for the input and output file" << std::endl
+            << "--cleanup \t Clean instruction file" << std::endl
+            << "--all \t\t Search with trigger != measurement sequence" << std::endl
+            << "--speculation \t Execute trigger sequence transiently" << std::endl
+            << "--filter \t Apply filters to output" << std::endl
+            << "--confirm-results \t Re-test results (requires input and output files)" << std::endl
             << "--help/-h \t Print usage" << std::endl;
 }
+
+// void PrintHelp(char** argv) {
+//   std::cout << "USAGE: " << argv[0]
+//             << " [OPTION] [confirmation input file] [confirmation output file]" << std::endl
+//             << "Without any option the tool searches with trigger sequence == measurement sequence"
+//             << std::endl
+//             << "The following options can influence or change the behavior:" << std::endl
+//             << "--cleanup \t Create new instruction file "
+//             << "consisting of only non-faulting instructions" << std::endl
+//             << "--all \t\t Search with trigger sequence != measurement sequence (takes a few days)"
+//             << std::endl
+//             << "--speculation \t Executes trigger sequence only transiently" << std::endl
+//             << "--filter \t Apply filters to the output of the search" << std::endl
+//             << "--confirm-results \t Randomize order of the sequence triples and test again. "
+//             << std::endl
+//             << " \t\t Requires 2 positional arguments for the input and output file" << std::endl
+//             << "--help/-h \t Print usage" << std::endl;
+// }
 
 struct CommandLineArguments {
   bool cleanup = false;
@@ -250,11 +261,15 @@ int main(int argc, char* argv[]) {
   if (DEBUGMODE) {
     LOG_WARNING("Started in DEBUGMODE");
     osiris::SetLogLevel(osiris::DEBUG);
-#if defined(INTEL)
-    LOG_DEBUG("Osiris was compiled for Intel");
-#elif defined(AMD)
-    LOG_DEBUG("Osiris was compiled for AMD");
-#endif
+
+
+    LOG_INFO("Osiris for ARM Architecture Started");
+
+// #if defined(INTEL)
+//     LOG_DEBUG("Osiris was compiled for Intel");
+// #elif defined(AMD)
+//     LOG_DEBUG("Osiris was compiled for AMD");
+// #endif
   } else {
     osiris::SetLogLevel(osiris::INFO);
   }
@@ -329,6 +344,8 @@ int main(int argc, char* argv[]) {
   //
   // FUZZING RUNS
   //
+  LOG_INFO("Starting Main Fuzzing Process");
+
   osiris::Core osiris_core(kInstructionFileCleaned);
   LOG_INFO(" === Starting Main Fuzzing Stage ===");
   if (command_line_arguments.speculation_trigger) {
