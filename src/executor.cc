@@ -464,8 +464,11 @@ void Executor::InitializeCodePage(int codepage_no) {
 
 void Executor::AddProlog(int codepage_no) {
   // NOTE: everything in this function must be mirrored by AddEpilog
-  constexpr char INST_PUSH_RBX_RSP_RBP[] = "\x53\x54\x55";
-  constexpr char INST_PUSH_R12_R13_R14_R15[] = "\x41\x54\x41\x55\x41\x56\x41\x57";
+  // constexpr char INST_PUSH_RBX_RSP_RBP[] = "\x53\x54\x55";
+  // constexpr char INST_PUSH_R12_R13_R14_R15[] = "\x41\x54\x41\x55\x41\x56\x41\x57";
+  //remake for arm
+  constexpr char INST_PUSH_RBX_RSP_RBP[] = "\xfd\x7b\xbf\xa9";  // STP X19, X20, [SP, #-16]!
+  constexpr char INST_PUSH_R12_R13_R14_R15[] = "\xff\x43\x00\xd1";       // SUB SP, SP, #4096
   constexpr char INST_SUB_RSP_0x8[] = "\x48\x83\xec\x08";
   constexpr char INST_STMXCSR_RSP[] = "\x0f\xae\x1c\x24";
   constexpr char INST_FSTCW_RSP[] = "\x9b\xd9\x3c\x24";
@@ -536,8 +539,11 @@ void Executor::AddProlog(int codepage_no) {
 void Executor::AddEpilog(int codepage_no) {
   // NOTE: everything in this function must be mirrored by AddProlog
   constexpr char INST_CLD[] = "\xfc";
-  constexpr char INST_POP_R15_R14_R13_R12[] = "\x41\x5f\x41\x5e\x41\x5d\x41\x5c";
-  constexpr char INST_POP_RBP_RSP_RBX[] = "\x5d\x5c\x5b";
+  //remake for arm
+  //constexpr char INST_POP_R15_R14_R13_R12[] = "\x41\x5f\x41\x5e\x41\x5d\x41\x5c";
+  //constexpr char INST_POP_RBP_RSP_RBX[] = "\x5d\x5c\x5b";
+  constexpr char INST_POP_R15_R14_R13_R12[] = "\xfd\x7b\xc1\xa8"; // LDP X19, X20, [SP], #16
+  constexpr char INST_POP_RBP_RSP_RBX[] = "\xc0\x03\x5f\xd6";         // RET
   constexpr char INST_MOV_RSP_RBP[] = "\x48\x89\xec";
   constexpr char INST_RET[] = "\xc3";
   constexpr char INST_ADD_RSP_0x8[] = "\x48\x83\xc4\x08";
@@ -572,18 +578,18 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 }
 
 //code for arm,maybe need to recode
-//   void Executor::AddTimerStartToCodePage(int codepage_no) {
-//   constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
-//   constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
-//   constexpr char INST_MOV_X10_X0[] = "\xAA\x00\x03\xE9"; // MOV X10, X0 (将计时结果保存到 X10)
-//
-//   // 插入序列化屏障
-//   AddInstructionToCodePage(codepage_no, INST_DSB, 4);
-//   // 读取当前时间戳
-//   AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
-//   // 将时间戳保存到 X10
-//   AddInstructionToCodePage(codepage_no, INST_MOV_X10_X0, 4);
-// }
+  void Executor::AddTimerStartToCodePage(int codepage_no) {
+  constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
+  constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
+  constexpr char INST_MOV_X10_X0[] = "\xAA\x00\x03\xE9"; // MOV X10, X0 (将计时结果保存到 X10)
+
+  // 插入序列化屏障
+  AddInstructionToCodePage(codepage_no, INST_DSB, 4);
+  // 读取当前时间戳
+  AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
+  // 将时间戳保存到 X10
+  AddInstructionToCodePage(codepage_no, INST_MOV_X10_X0, 4);
+}
 
 //   设置计时起点：
 // 利用硬件支持的时间戳计数器（如 x86 架构中的 RDTSC 指令）记录当前时间戳。
@@ -591,43 +597,43 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 // 序列化指令流：
 // 确保在计时前的所有指令都已完成，避免由于乱序执行导致的时间测量不准确。
 // 使用 MFENCE 和 CPUID 来实现指令流的同步。
-void Executor::AddTimerStartToCodePage(int codepage_no) {
-  constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
-  constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
-  // note that we can use R10 as it is caller-saved
-  constexpr char INST_MOV_R10_RAX[] = "\x49\x89\xc2";
-
-  AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
-  AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-#if defined(INTEL)
-  constexpr char INST_RDTSC[] = "\x0f\x31";
-  AddInstructionToCodePage(codepage_no, INST_RDTSC, 2);
-#elif defined(AMD)
-  constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
-  // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
-  AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
-#endif
-  // move result to R10 s.t. we can use it later in AddTimerEndToCodePage
-  AddInstructionToCodePage(codepage_no, INST_MOV_R10_RAX,3);
-}
+// void Executor::AddTimerStartToCodePage(int codepage_no) {
+//   constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
+//   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
+//   // note that we can use R10 as it is caller-saved
+//   constexpr char INST_MOV_R10_RAX[] = "\x49\x89\xc2";
+//
+//   AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
+//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
+// #if defined(INTEL)
+//   constexpr char INST_RDTSC[] = "\x0f\x31";
+//   AddInstructionToCodePage(codepage_no, INST_RDTSC, 2);
+// #elif defined(AMD)
+//   constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
+//   // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
+//   AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
+// #endif
+//   // move result to R10 s.t. we can use it later in AddTimerEndToCodePage
+//   AddInstructionToCodePage(codepage_no, INST_MOV_R10_RAX,3);
+// }
 
 
   //code for arm,maybe need to recode
-//   void Executor::AddTimerEndToCodePage(int codepage_no) {
-//   constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
-//   constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
-//   constexpr char INST_SUB_X0_X10[] = "\xCB\x0A\x00\x4B"; // SUB X0, X0, X10 (计算时间差)
-//   constexpr char INST_MOV_X11_X0[] = "\xAA\x00\x03\xEA"; // MOV X11, X0 (保存时间差)
-//
-//   // 插入序列化屏障
-//   AddInstructionToCodePage(codepage_no, INST_DSB, 4);
-//   // 读取结束时间戳
-//   AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
-//   // 计算时间差
-//   AddInstructionToCodePage(codepage_no, INST_SUB_X0_X10, 4);
-//   // 保存时间差
-//   AddInstructionToCodePage(codepage_no, INST_MOV_X11_X0, 4);
-// }
+  void Executor::AddTimerEndToCodePage(int codepage_no) {
+  constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
+  constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
+  constexpr char INST_SUB_X0_X10[] = "\xCB\x0A\x00\x4B"; // SUB X0, X0, X10 (计算时间差)
+  constexpr char INST_MOV_X11_X0[] = "\xAA\x00\x03\xEA"; // MOV X11, X0 (保存时间差)
+
+  // 插入序列化屏障
+  AddInstructionToCodePage(codepage_no, INST_DSB, 4);
+  // 读取结束时间戳
+  AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
+  // 计算时间差
+  AddInstructionToCodePage(codepage_no, INST_SUB_X0_X10, 4);
+  // 保存时间差
+  AddInstructionToCodePage(codepage_no, INST_MOV_X11_X0, 4);
+}
 
 
 //   读取结束时间戳：
@@ -637,27 +643,27 @@ void Executor::AddTimerStartToCodePage(int codepage_no) {
 // 时间差存储在寄存器 R11 中，以便后续使用。
 // 序列化指令流：
 // 确保读取时间戳的操作是准确的，不受指令乱序或处理器流水线的影响。
-void Executor::AddTimerEndToCodePage(int codepage_no) {
-  constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
-  constexpr char INST_SUB_RAX_R10[] = "\x4c\x29\xd0";
-  // note that we can use R11 as it is caller-saved
-  constexpr char INST_MOV_R11_RAX[] = "\x49\x89\xc3";
-
-#if defined(INTEL)
-  constexpr char INST_RDTSCP[] = "\x0f\x01\xf9";
-  AddInstructionToCodePage(codepage_no, INST_RDTSCP, 3);
-#elif defined(AMD)
-  // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
-  constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
-  constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
-  AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
-  AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-  AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
-#endif
-  AddInstructionToCodePage(codepage_no, INST_SUB_RAX_R10, 3);
-  AddInstructionToCodePage(codepage_no, INST_MOV_R11_RAX, 3);
-  AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-}
+// void Executor::AddTimerEndToCodePage(int codepage_no) {
+//   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
+//   constexpr char INST_SUB_RAX_R10[] = "\x4c\x29\xd0";
+//   // note that we can use R11 as it is caller-saved
+//   constexpr char INST_MOV_R11_RAX[] = "\x49\x89\xc3";
+//
+// #if defined(INTEL)
+//   constexpr char INST_RDTSCP[] = "\x0f\x01\xf9";
+//   AddInstructionToCodePage(codepage_no, INST_RDTSCP, 3);
+// #elif defined(AMD)
+//   // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
+//   constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
+//   constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
+//   AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
+//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
+//   AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
+// #endif
+//   AddInstructionToCodePage(codepage_no, INST_SUB_RAX_R10, 3);
+//   AddInstructionToCodePage(codepage_no, INST_MOV_R11_RAX, 3);
+//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
+// }
 
   //把指定的机器指令字节写入到代码页
 
@@ -714,7 +720,10 @@ void Executor::AddInstructionToCodePage(int codepage_no,
 
   //这段代码的功能是将定时器的结果存储到 RAX 寄存器中，以便返回给调用者或用于后续处理。
 void Executor::MakeTimerResultReturnValue(int codepage_no) {
-  constexpr char MOV_RAX_R11[] = "\x4c\x89\xd8";
+  //remake for arm
+  //constexpr char MOV_RAX_R11[] = "\x4c\x89\xd8";
+  constexpr char MOV_RAX_R11[] = "\xaa\x0b\x00\xe0"; // MOV X0, X11
+
   assert(code_pages_last_written_index_[codepage_no] + 3 < kPagesize);
 
   AddInstructionToCodePage(codepage_no, MOV_RAX_R11, 3);
@@ -732,13 +741,36 @@ void Executor::MakeTimerResultReturnValue(int codepage_no) {
 // AArch64（64 位 ARM）模式：
 // 指令编码为：0xD503201F。
 // 表示：无操作。
+// byte_array Executor::CreateSequenceOfNOPs(size_t length) {
+//   //constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
+//   constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned int>(0xD503201F); // ARM NOP
+//   byte_array nops;
+//   std::byte nop_byte{INST_NOP_AS_DECIMAL};
+//   for (size_t i = 0; i < length; i++) {
+//     nops.push_back(nop_byte);
+//   }
+//   return nops;
+// }
 byte_array Executor::CreateSequenceOfNOPs(size_t length) {
-  constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
+  constexpr uint32_t INST_NOP_AS_DECIMAL = 0xD503201F; // ARM NOP 指令 (32位)
   byte_array nops;
-  std::byte nop_byte{INST_NOP_AS_DECIMAL};
-  for (size_t i = 0; i < length; i++) {
-    nops.push_back(nop_byte);
+
+  // 将32位的 NOP 指令拆分成4个字节
+  std::byte nop_bytes[4] = {
+    std::byte(INST_NOP_AS_DECIMAL & 0xFF),         // 低8位
+    std::byte((INST_NOP_AS_DECIMAL >> 8) & 0xFF),  // 次低8位
+    std::byte((INST_NOP_AS_DECIMAL >> 16) & 0xFF), // 次高8位
+    std::byte((INST_NOP_AS_DECIMAL >> 24) & 0xFF)  // 高8位
+};
+
+  // 每条 NOP 是4字节，因此需要按照4字节为单位重复填充
+  for (size_t i = 0; i < length; i += 4) {
+    nops.push_back(nop_bytes[0]);
+    nops.push_back(nop_bytes[1]);
+    nops.push_back(nop_bytes[2]);
+    nops.push_back(nop_bytes[3]);
   }
+
   return nops;
 }
 

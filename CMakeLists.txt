@@ -1,76 +1,88 @@
-# Copyright 2021 Daniel Weber, Ahmad Ibrahim, Hamed Nemati, Michael Schwarz, Christian Rossow
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-#     limitations under the License.
-
-
 cmake_minimum_required(VERSION 3.10)
 project(osiris)
 
-# set default build type to release if nothing else is specified
-set(default_build_type "Release")
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
-    # overwrite empty build type
-    set(CMAKE_BUILD_TYPE "${default_build_type}")
-endif()
-
+# 设置C++标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
 
-# Set compile flags for target architecture
-if (ARCH STREQUAL INTEL)
-    message(STATUS "Compiling for Intel processor.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DINTEL")
-elseif(ARCH STREQUAL AMD)
-    message(STATUS "Compiling for AMD processor.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAMD")
-else()
-    message(WARNING "Illegal or missing value for target processor. Set '-DARCH=[INTEL|AMD]'. Defaulting to INTEL.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DINTEL")
+# 设置默认构建类型
+set(default_build_type "Release")
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to '${default_build_type}' as none was specified.")
+    set(CMAKE_BUILD_TYPE "${default_build_type}")
 endif()
 
-set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DDEBUGMODE=0")
-
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -DDEBUGMODE=1 -ggdb")
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -Wno-unused-variable")
-
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUGMODE=1 -ggdb")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize-recover=address")
-
-
-
-
-set(OPENSSL_ROOT_DIR "/usr")
-set(OPENSSL_INCLUDE_DIR "/usr/include/openssl")
-set(OPENSSL_CRYPTO_LIBRARY "/usr/lib/x86_64-linux-gnu/libcrypto.so")
-
-
-
-add_executable(osiris
+# 公共源文件列表
+set(SOURCE_FILES
         src/osiris.cc
         src/executor.cc src/executor.h
         src/code_generator.cc src/code_generator.h
         src/core.cc src/core.h
         src/logger.cc src/logger.h
         src/utils.cc src/utils.h
-        src/filter.cc src/filter.h)
+        src/filter.cc src/filter.h
+)
 
-# dependencies
-find_package(OpenSSL REQUIRED)
-target_link_libraries(osiris OpenSSL::Crypto)
-target_link_libraries(osiris capstone)
-target_link_libraries(osiris stdc++fs)  # GCC version < 9 needs this to support c++ filesystem lib
+# ---- 针对 ARM 平台的配置 ----
+if(ARCH STREQUAL "ARM")
+    message(STATUS "Configuring for ARMv8-A architecture")
+
+    # 设置编译器标志
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARM -march=armv8-a -mtune=cortex-a72")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DDEBUGMODE=0")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUGMODE=1 -ggdb -fsanitize=address")
+
+    # 如果是交叉编译的环境，请指定 Capstone 的路径
+    set(CAPSTONE_LIB_PATH "/usr/aarch64-linux-gnu/lib")
+    find_library(CAPSTONE_LIB NAMES capstone HINTS ${CAPSTONE_LIB_PATH} REQUIRED)
+
+    # 如果 Capstone 安装在其他路径，手动指定
+
+
+
+    # OpenSSL for ARM
+    set(OPENSSL_ROOT_DIR "/opt/openssl-aarch64")
+    set(OPENSSL_INCLUDE_DIR "${OPENSSL_ROOT_DIR}/include")
+    set(OPENSSL_LIB_DIR "${OPENSSL_ROOT_DIR}/lib")
+
+    # 添加可执行文件 osiris_arm
+    add_executable(osiris_arm ${SOURCE_FILES})
+    include_directories(${OPENSSL_INCLUDE_DIR})
+    link_directories(${OPENSSL_LIB_DIR})
+
+    # 链接库
+    find_library(CAPSTONE_LIB capstone REQUIRED)
+    target_link_libraries(osiris_arm
+            ${OPENSSL_LIB_DIR}/libcrypto.so
+            ${OPENSSL_LIB_DIR}/libssl.so
+            ${CAPSTONE_LIB}
+            stdc++fs
+    )
+
+    # ---- 针对 x86_64 平台的配置 ----
+else()
+    message(STATUS "Configuring for x86_64 architecture")
+
+    # 设置编译器标志
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DDEBUGMODE=0")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUGMODE=1 -ggdb")
+
+    # OpenSSL for x86_64
+    set(OPENSSL_ROOT_DIR "/usr")
+    set(OPENSSL_CRYPTO_LIBRARY "/usr/lib/x86_64-linux-gnu/libcrypto.so")
+
+    # 添加可执行文件 osiris
+    add_executable(osiris ${SOURCE_FILES})
+    include_directories("/usr/include")
+
+    # 链接库
+    find_package(OpenSSL REQUIRED)
+    find_library(CAPSTONE_LIB capstone REQUIRED)
+    target_link_libraries(osiris
+            OpenSSL::Crypto
+            ${CAPSTONE_LIB}
+            stdc++fs
+    )
+endif()

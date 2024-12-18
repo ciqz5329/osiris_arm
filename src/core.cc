@@ -206,9 +206,13 @@ void Core::FormatTriggerPairOutput(const std::string& output_folder,
 
   // initialize capstone
   csh capstone_handle;
-  if (cs_open(CS_ARCH_X86, CS_MODE_64, &capstone_handle) != CS_ERR_OK) {
-    LOG_ERROR("Couldn't initialize Capstone! Aborting!");
-    std::exit(1);
+  // if (cs_open(CS_ARCH_X86, CS_MODE_64, &capstone_handle) != CS_ERR_OK) {
+  //   LOG_ERROR("Couldn't initialize Capstone! Aborting!");
+  //   std::exit(1);
+  // }
+  //remake for arm
+  if (cs_open(CS_ARCH_ARM, CS_MODE_ARM, &capstone_handle) != CS_ERR_OK) {
+    LOG_ERROR("Couldn't initialize Capstone for ARM! Aborting!");
   }
   // iterate over all files and format them and store inside the new folder
   size_t unique_idx = 0;
