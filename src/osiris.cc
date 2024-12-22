@@ -32,7 +32,7 @@
 // Constants
 //
 //recode for asm instructions
-const std::string kInstructionFile("../arm-instructions/instructions_arm.b64");
+const std::string kInstructionFile("../arm-Instructions/instructions_arm.b64");
 const std::string kInstructionFileCleaned("../arm-instructions/instructions_arm_cleaned.b64");
 
 const std::string kOutputCSVNoAssumptions("./measure_trigger_pairs.csv");
