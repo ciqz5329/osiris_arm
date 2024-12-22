@@ -39,7 +39,8 @@ set(CAPSTONE_LIB_PATH "/usr/aarch64-linux-gnu/lib")
 
 # 查找 OpenSSL 和 Capstone 库
 find_package(OpenSSL REQUIRED)
-find_library(CAPSTONE_LIB NAMES capstone HINTS ${CAPSTgit ONE_LIB_PATH} REQUIRED)
+find_library(CAPSTONE_LIB NAMES capstone HINTS ${CAPSTONE_LIB_PATH} REQUIRED)
+
 
 # 添加可执行文件 osiris_arm
 add_executable(osiris_arm ${SOURCE_FILES})
