@@ -1,0 +1,3 @@
+/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles/osiris_arm.dir
+/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles/edit_cache.dir
+/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles/rebuild_cache.dir
