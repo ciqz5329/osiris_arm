@@ -32,8 +32,8 @@
 // Constants
 //
 //recode for asm instructions
-const std::string kInstructionFile("../arm-instructions/instructions.b64");
-const std::string kInstructionFileCleaned("../arm-instructions/instructions_cleaned.b64");
+const std::string kInstructionFile("../arm-instructions/instructions_arm.b64");
+const std::string kInstructionFileCleaned("../arm-instructions/instructions_arm_cleaned.b64");
 
 const std::string kOutputCSVNoAssumptions("./measure_trigger_pairs.csv");
 
@@ -344,6 +344,7 @@ int main(int argc, char* argv[]) {
   //
   // FUZZING RUNS
   //
+  //一般情况下，我们只需要这个分支
   LOG_INFO("Starting Main Fuzzing Process");
 
   osiris::Core osiris_core(kInstructionFileCleaned);

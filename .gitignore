@@ -3,3 +3,5 @@ cmake-build-debug
 .idea
 instructions.xml
 instructions_cleaned.b64
+openssl-1.1.1w.tar.gz
+openssl-1.1.1w
