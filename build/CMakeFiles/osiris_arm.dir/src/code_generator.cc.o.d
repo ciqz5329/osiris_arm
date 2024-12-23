@@ -1,7 +1,7 @@
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.h \
  /usr/aarch64-linux-gnu/include/c++/11/unordered_map \
  /usr/aarch64-linux-gnu/include/c++/11/type_traits \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
@@ -211,7 +211,7 @@ CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bit \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/glue_numeric_defs.h \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/execution_defs.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.h \
  /usr/aarch64-linux-gnu/include/c++/11/algorithm \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_algo.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/algorithmfwd.h \
@@ -272,4 +272,4 @@ CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/locale_conv.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/unique_ptr.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/quoted_string.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h

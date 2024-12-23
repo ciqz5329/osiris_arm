@@ -1,7 +1,7 @@
 CMakeFiles/osiris_arm.dir/src/utils.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.h \
  /usr/aarch64-linux-gnu/include/c++/11/algorithm \
  /usr/aarch64-linux-gnu/include/c++/11/utility \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
@@ -238,4 +238,4 @@ CMakeFiles/osiris_arm.dir/src/utils.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/basic_file.h \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++io.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/fstream.tcc \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h

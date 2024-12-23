@@ -1,5 +1,5 @@
 CMakeFiles/osiris_arm.dir/src/logger.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
  /usr/aarch64-linux-gnu/include/c++/11/iostream \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
@@ -193,4 +193,4 @@ CMakeFiles/osiris_arm.dir/src/logger.cc.o: \
  /usr/aarch64-linux-gnu/include/strings.h \
  /usr/aarch64-linux-gnu/include/bits/strings_fortified.h \
  /usr/aarch64-linux-gnu/include/bits/string_fortified.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h

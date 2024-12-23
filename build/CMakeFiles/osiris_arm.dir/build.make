@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/hgfs/ShareDir/osiris-arm
+CMAKE_SOURCE_DIR = /home/ac_machine/CLionProjects/osiris-arm
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/hgfs/ShareDir/osiris-arm/build
+CMAKE_BINARY_DIR = /home/ac_machine/CLionProjects/osiris-arm/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/osiris_arm.dir/depend.make
@@ -72,100 +72,100 @@ include CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/osiris.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/osiris.cc.o: ../src/osiris.cc
 CMakeFiles/osiris_arm.dir/src/osiris.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/osiris_arm.dir/src/osiris.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/osiris.cc.o -MF CMakeFiles/osiris_arm.dir/src/osiris.cc.o.d -o CMakeFiles/osiris_arm.dir/src/osiris.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/osiris.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/osiris_arm.dir/src/osiris.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/osiris.cc.o -MF CMakeFiles/osiris_arm.dir/src/osiris.cc.o.d -o CMakeFiles/osiris_arm.dir/src/osiris.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/osiris.cc
 
 CMakeFiles/osiris_arm.dir/src/osiris.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/osiris.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/osiris.cc > CMakeFiles/osiris_arm.dir/src/osiris.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/osiris.cc > CMakeFiles/osiris_arm.dir/src/osiris.cc.i
 
 CMakeFiles/osiris_arm.dir/src/osiris.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/osiris.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/osiris.cc -o CMakeFiles/osiris_arm.dir/src/osiris.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/osiris.cc -o CMakeFiles/osiris_arm.dir/src/osiris.cc.s
 
 CMakeFiles/osiris_arm.dir/src/executor.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/executor.cc.o: ../src/executor.cc
 CMakeFiles/osiris_arm.dir/src/executor.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/osiris_arm.dir/src/executor.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/executor.cc.o -MF CMakeFiles/osiris_arm.dir/src/executor.cc.o.d -o CMakeFiles/osiris_arm.dir/src/executor.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/executor.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/osiris_arm.dir/src/executor.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/executor.cc.o -MF CMakeFiles/osiris_arm.dir/src/executor.cc.o.d -o CMakeFiles/osiris_arm.dir/src/executor.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/executor.cc
 
 CMakeFiles/osiris_arm.dir/src/executor.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/executor.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/executor.cc > CMakeFiles/osiris_arm.dir/src/executor.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/executor.cc > CMakeFiles/osiris_arm.dir/src/executor.cc.i
 
 CMakeFiles/osiris_arm.dir/src/executor.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/executor.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/executor.cc -o CMakeFiles/osiris_arm.dir/src/executor.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/executor.cc -o CMakeFiles/osiris_arm.dir/src/executor.cc.s
 
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: ../src/code_generator.cc
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/osiris_arm.dir/src/code_generator.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/code_generator.cc.o -MF CMakeFiles/osiris_arm.dir/src/code_generator.cc.o.d -o CMakeFiles/osiris_arm.dir/src/code_generator.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/osiris_arm.dir/src/code_generator.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/code_generator.cc.o -MF CMakeFiles/osiris_arm.dir/src/code_generator.cc.o.d -o CMakeFiles/osiris_arm.dir/src/code_generator.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.cc
 
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/code_generator.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.cc > CMakeFiles/osiris_arm.dir/src/code_generator.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.cc > CMakeFiles/osiris_arm.dir/src/code_generator.cc.i
 
 CMakeFiles/osiris_arm.dir/src/code_generator.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/code_generator.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.cc -o CMakeFiles/osiris_arm.dir/src/code_generator.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.cc -o CMakeFiles/osiris_arm.dir/src/code_generator.cc.s
 
 CMakeFiles/osiris_arm.dir/src/core.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/core.cc.o: ../src/core.cc
 CMakeFiles/osiris_arm.dir/src/core.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/osiris_arm.dir/src/core.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/core.cc.o -MF CMakeFiles/osiris_arm.dir/src/core.cc.o.d -o CMakeFiles/osiris_arm.dir/src/core.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/core.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/osiris_arm.dir/src/core.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/core.cc.o -MF CMakeFiles/osiris_arm.dir/src/core.cc.o.d -o CMakeFiles/osiris_arm.dir/src/core.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/core.cc
 
 CMakeFiles/osiris_arm.dir/src/core.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/core.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/core.cc > CMakeFiles/osiris_arm.dir/src/core.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/core.cc > CMakeFiles/osiris_arm.dir/src/core.cc.i
 
 CMakeFiles/osiris_arm.dir/src/core.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/core.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/core.cc -o CMakeFiles/osiris_arm.dir/src/core.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/core.cc -o CMakeFiles/osiris_arm.dir/src/core.cc.s
 
 CMakeFiles/osiris_arm.dir/src/logger.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/logger.cc.o: ../src/logger.cc
 CMakeFiles/osiris_arm.dir/src/logger.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/osiris_arm.dir/src/logger.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/logger.cc.o -MF CMakeFiles/osiris_arm.dir/src/logger.cc.o.d -o CMakeFiles/osiris_arm.dir/src/logger.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/logger.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/osiris_arm.dir/src/logger.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/logger.cc.o -MF CMakeFiles/osiris_arm.dir/src/logger.cc.o.d -o CMakeFiles/osiris_arm.dir/src/logger.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/logger.cc
 
 CMakeFiles/osiris_arm.dir/src/logger.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/logger.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/logger.cc > CMakeFiles/osiris_arm.dir/src/logger.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/logger.cc > CMakeFiles/osiris_arm.dir/src/logger.cc.i
 
 CMakeFiles/osiris_arm.dir/src/logger.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/logger.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/logger.cc -o CMakeFiles/osiris_arm.dir/src/logger.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/logger.cc -o CMakeFiles/osiris_arm.dir/src/logger.cc.s
 
 CMakeFiles/osiris_arm.dir/src/utils.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/utils.cc.o: ../src/utils.cc
 CMakeFiles/osiris_arm.dir/src/utils.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/osiris_arm.dir/src/utils.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/utils.cc.o -MF CMakeFiles/osiris_arm.dir/src/utils.cc.o.d -o CMakeFiles/osiris_arm.dir/src/utils.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/utils.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/osiris_arm.dir/src/utils.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/utils.cc.o -MF CMakeFiles/osiris_arm.dir/src/utils.cc.o.d -o CMakeFiles/osiris_arm.dir/src/utils.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/utils.cc
 
 CMakeFiles/osiris_arm.dir/src/utils.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/utils.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/utils.cc > CMakeFiles/osiris_arm.dir/src/utils.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/utils.cc > CMakeFiles/osiris_arm.dir/src/utils.cc.i
 
 CMakeFiles/osiris_arm.dir/src/utils.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/utils.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/utils.cc -o CMakeFiles/osiris_arm.dir/src/utils.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/utils.cc -o CMakeFiles/osiris_arm.dir/src/utils.cc.s
 
 CMakeFiles/osiris_arm.dir/src/filter.cc.o: CMakeFiles/osiris_arm.dir/flags.make
 CMakeFiles/osiris_arm.dir/src/filter.cc.o: ../src/filter.cc
 CMakeFiles/osiris_arm.dir/src/filter.cc.o: CMakeFiles/osiris_arm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/osiris_arm.dir/src/filter.cc.o"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/filter.cc.o -MF CMakeFiles/osiris_arm.dir/src/filter.cc.o.d -o CMakeFiles/osiris_arm.dir/src/filter.cc.o -c /mnt/hgfs/ShareDir/osiris-arm/src/filter.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/osiris_arm.dir/src/filter.cc.o"
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/osiris_arm.dir/src/filter.cc.o -MF CMakeFiles/osiris_arm.dir/src/filter.cc.o.d -o CMakeFiles/osiris_arm.dir/src/filter.cc.o -c /home/ac_machine/CLionProjects/osiris-arm/src/filter.cc
 
 CMakeFiles/osiris_arm.dir/src/filter.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/osiris_arm.dir/src/filter.cc.i"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/hgfs/ShareDir/osiris-arm/src/filter.cc > CMakeFiles/osiris_arm.dir/src/filter.cc.i
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ac_machine/CLionProjects/osiris-arm/src/filter.cc > CMakeFiles/osiris_arm.dir/src/filter.cc.i
 
 CMakeFiles/osiris_arm.dir/src/filter.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/osiris_arm.dir/src/filter.cc.s"
-	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/hgfs/ShareDir/osiris-arm/src/filter.cc -o CMakeFiles/osiris_arm.dir/src/filter.cc.s
+	/usr/bin/aarch64-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ac_machine/CLionProjects/osiris-arm/src/filter.cc -o CMakeFiles/osiris_arm.dir/src/filter.cc.s
 
 # Object files for target osiris_arm
 osiris_arm_OBJECTS = \
@@ -188,11 +188,11 @@ osiris_arm: CMakeFiles/osiris_arm.dir/src/logger.cc.o
 osiris_arm: CMakeFiles/osiris_arm.dir/src/utils.cc.o
 osiris_arm: CMakeFiles/osiris_arm.dir/src/filter.cc.o
 osiris_arm: CMakeFiles/osiris_arm.dir/build.make
-osiris_arm: /usr/aarch64-linux-gnu/usr/lib/libssl.so
+osiris_arm: /usr/aarch64-linux-gnu/lib/libssl.so
 osiris_arm: /usr/aarch64-linux-gnu/lib/libcrypto.so
-osiris_arm: /usr/aarch64-linux-gnu/usr/lib/libcapstone.a
+osiris_arm: /usr/aarch64-linux-gnu/lib/libcapstone.a
 osiris_arm: CMakeFiles/osiris_arm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable osiris_arm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable osiris_arm"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/osiris_arm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -204,6 +204,6 @@ CMakeFiles/osiris_arm.dir/clean:
 .PHONY : CMakeFiles/osiris_arm.dir/clean
 
 CMakeFiles/osiris_arm.dir/depend:
-	cd /mnt/hgfs/ShareDir/osiris-arm/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hgfs/ShareDir/osiris-arm /mnt/hgfs/ShareDir/osiris-arm /mnt/hgfs/ShareDir/osiris-arm/build /mnt/hgfs/ShareDir/osiris-arm/build /mnt/hgfs/ShareDir/osiris-arm/build/CMakeFiles/osiris_arm.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ac_machine/CLionProjects/osiris-arm/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ac_machine/CLionProjects/osiris-arm /home/ac_machine/CLionProjects/osiris-arm /home/ac_machine/CLionProjects/osiris-arm/build /home/ac_machine/CLionProjects/osiris-arm/build /home/ac_machine/CLionProjects/osiris-arm/build/CMakeFiles/osiris_arm.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/osiris_arm.dir/depend
 

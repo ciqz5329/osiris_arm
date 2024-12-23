@@ -1,7 +1,7 @@
 CMakeFiles/osiris_arm.dir/src/core.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/core.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/core.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/core.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/core.h \
  /usr/aarch64-linux-gnu/include/c++/11/string \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/os_defines.h \
@@ -162,7 +162,7 @@ CMakeFiles/osiris_arm.dir/src/core.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_vector.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_bvector.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/vector.tcc \
- /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.h \
  /usr/aarch64-linux-gnu/include/c++/11/unordered_map \
  /usr/aarch64-linux-gnu/include/c++/11/ext/aligned_buffer.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/hashtable.h \
@@ -212,7 +212,7 @@ CMakeFiles/osiris_arm.dir/src/core.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bit \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/glue_numeric_defs.h \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/execution_defs.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.h \
  /usr/aarch64-linux-gnu/include/c++/11/algorithm \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_algo.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/algorithmfwd.h \
@@ -223,7 +223,7 @@ CMakeFiles/osiris_arm.dir/src/core.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/refwrap.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/std_function.h \
  /usr/aarch64-linux-gnu/include/c++/11/typeinfo \
- /mnt/hgfs/ShareDir/osiris-arm/src/executor.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/executor.h \
  /usr/aarch64-linux-gnu/include/capstone/capstone.h \
  /usr/aarch64-linux-gnu/include/c++/11/stdlib.h \
  /usr/aarch64-linux-gnu/include/capstone/cs_operand.h \
@@ -316,4 +316,4 @@ CMakeFiles/osiris_arm.dir/src/core.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/basic_file.h \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++io.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/fstream.tcc \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h

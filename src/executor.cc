@@ -836,58 +836,56 @@ void Executor::UnregisterFaultHandler(std::array<int, size> signals_to_handle) {
   //arm需要修改
 __attribute__((no_sanitize("address")))
 int Executor::ExecuteCodePage(void* codepage, uint64_t* cycles_elapsed) {
-  /// NOTE: this function and Executor::FaultHandler must both be static functions
-  ///       for the signal handling + jmp logic to work
-
-
-#if DEBUGMODE == 1
-  // list of signals that we catch and throw as errors
-  // (without DEBUGMODE the array is defined in the error case)
-  std::array<int, 4> signals_to_handle = {SIGSEGV, SIGILL, SIGFPE, SIGTRAP};
-  // register fault handler (if not in debugmode we do this in constructor/destructor as
-  //    this has a huge impact on the runtime)
-  RegisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
-#endif
-
-  if (!setjmp(fault_handler_jump_buf)) {//backup寄存器状态
-    // jump to codepage
-    uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
-    // set return argument
-    *cycles_elapsed = cycle_diff;
+    /// NOTE: this function and Executor::FaultHandler must both be static functions
+    ///       for the signal handling + jmp logic to work
 
 #if DEBUGMODE == 1
-    // unregister signal handler (if not in debugmode we do this in constructor/destructor as
-    // this has a huge impact on the runtime)
-    UnregisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
-#endif
-
-    return 0;
-  } else {
-    // if we reach this; the code has caused a fault
-
-    // unmask the signal again as we reached this point directly from the signal handler
-#if DEBUGMODE == 0
-    // only allocate the array in case of an error to safe execution time
     // list of signals that we catch and throw as errors
+    // (without DEBUGMODE the array is defined in the error case)
     std::array<int, 4> signals_to_handle = {SIGSEGV, SIGILL, SIGFPE, SIGTRAP};
+    // register fault handler (if not in debugmode we do this in constructor/destructor as
+    //    this has a huge impact on the runtime)
+    RegisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
 #endif
-    sigset_t signal_set;
-    sigemptyset(&signal_set);
-    for (int sig : signals_to_handle) {
-      sigaddset(&signal_set, sig);
-    }
-    sigprocmask(SIG_UNBLOCK, &signal_set, nullptr);
+
+    if (!setjmp(fault_handler_jump_buf)) { // backup寄存器状态
+        // jump to codepage
+        uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
+        // set return argument
+        *cycles_elapsed = cycle_diff;
 
 #if DEBUGMODE == 1
-    // unregister signal handler (if not in debugmode we do this in constructor/destructor as
-    // this has a huge impact on the runtime)
-    UnregisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
+        // unregister signal handler (if not in debugmode we do this in constructor/destructor as
+        // this has a huge impact on the runtime)
+        UnregisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
 #endif
 
-    // report that we crashed
-    *cycles_elapsed = -1;
-    return 1;
-  }
+        return 0;
+    } else {
+        // if we reach this; the code has caused a fault
+
+#if DEBUGMODE == 0
+        // only allocate the array in case of an error to save execution time
+        // list of signals that we catch and throw as errors
+        std::array<int, 4> signals_to_handle = {SIGSEGV, SIGILL, SIGFPE, SIGTRAP};
+#endif
+        sigset_t signal_set;
+        sigemptyset(&signal_set);
+        for (int sig : signals_to_handle) {
+            sigaddset(&signal_set, sig);
+        }
+        sigprocmask(SIG_UNBLOCK, &signal_set, nullptr);
+
+#if DEBUGMODE == 1
+        // unregister signal handler (if not in debugmode we do this in constructor/destructor as
+        // this has a huge impact on the runtime)
+        UnregisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
+#endif
+
+        // report that we crashed
+        *cycles_elapsed = -1;
+        return 1;
+    }
 }
 
 }  // namespace osiris

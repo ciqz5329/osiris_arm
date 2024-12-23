@@ -1,7 +1,7 @@
 CMakeFiles/osiris_arm.dir/src/filter.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/filter.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/filter.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/filter.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/filter.h \
  /usr/aarch64-linux-gnu/include/c++/11/string \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/os_defines.h \
@@ -247,5 +247,5 @@ CMakeFiles/osiris_arm.dir/src/filter.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/fstream.tcc \
  /usr/aarch64-linux-gnu/include/c++/11/cassert \
  /usr/aarch64-linux-gnu/include/assert.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h

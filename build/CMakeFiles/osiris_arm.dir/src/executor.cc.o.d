@@ -1,7 +1,7 @@
 CMakeFiles/osiris_arm.dir/src/executor.cc.o: \
- /mnt/hgfs/ShareDir/osiris-arm/src/executor.cc \
+ /home/ac_machine/CLionProjects/osiris-arm/src/executor.cc \
  /usr/aarch64-linux-gnu/include/stdc-predef.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/executor.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/executor.h \
  /usr/aarch64-linux-gnu/include/c++/11/vector \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_algobase.h \
  /usr/aarch64-linux-gnu/include/c++/11/aarch64-linux-gnu/bits/c++config.h \
@@ -49,7 +49,7 @@ CMakeFiles/osiris_arm.dir/src/executor.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/hash_bytes.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/range_access.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/vector.tcc \
- /mnt/hgfs/ShareDir/osiris-arm/src/code_generator.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/code_generator.h \
  /usr/aarch64-linux-gnu/include/c++/11/unordered_map \
  /usr/aarch64-linux-gnu/include/c++/11/ext/aligned_buffer.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_function.h \
@@ -212,7 +212,7 @@ CMakeFiles/osiris_arm.dir/src/executor.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bit \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/glue_numeric_defs.h \
  /usr/aarch64-linux-gnu/include/c++/11/pstl/execution_defs.h \
- /mnt/hgfs/ShareDir/osiris-arm/src/utils.h \
+ /home/ac_machine/CLionProjects/osiris-arm/src/utils.h \
  /usr/aarch64-linux-gnu/include/c++/11/algorithm \
  /usr/aarch64-linux-gnu/include/c++/11/bits/stl_algo.h \
  /usr/aarch64-linux-gnu/include/c++/11/bits/algorithmfwd.h \
@@ -318,4 +318,4 @@ CMakeFiles/osiris_arm.dir/src/executor.cc.o: \
  /usr/aarch64-linux-gnu/include/c++/11/bits/istream.tcc \
  /usr/aarch64-linux-gnu/include/c++/11/sstream \
  /usr/aarch64-linux-gnu/include/c++/11/bits/sstream.tcc \
- /mnt/hgfs/ShareDir/osiris-arm/src/logger.h
+ /home/ac_machine/CLionProjects/osiris-arm/src/logger.h
