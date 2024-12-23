@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/osiris/arm_pmu_module/arm_pmu.ko := ld -r -EL  -maarch64elf -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/acmachines/osiris/arm_pmu_module/arm_pmu.ko /home/acmachines/osiris/arm_pmu_module/arm_pmu.o /home/acmachines/osiris/arm_pmu_module/arm_pmu.mod.o
