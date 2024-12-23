@@ -579,17 +579,21 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 
 //code for arm,maybe need to recode
   void Executor::AddTimerStartToCodePage(int codepage_no) {
-  constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
-  constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
-  constexpr char INST_MOV_X10_X0[] = "\xAA\x00\x03\xE9"; // MOV X10, X0 (将计时结果保存到 X10)
+  // 定义 ARM 指令的机器码（AArch64，小端序）
+  constexpr char INST_DMB_SY[] = "\x7f\x23\x03\xd5";              // DMB SY
+  constexpr char INST_MOV_X0_0[] = "\x00\x00\x80\xd2";          // MOV X9, #0
+  constexpr char INST_ISB_SY[] = "\x1F\x20\x03\xd5";             // ISB SY
+  constexpr char INST_MRS_X0_PMCCNTR_EL0[] = "\x1f\x20\x03\xd5"; // MRS X9, PMCCNTR_EL0
+  constexpr char INST_MOV_X10_X0[] = "\xAA\x1F\x03\xD6";          // MOV X10, X9
 
-  // 插入序列化屏障
-  AddInstructionToCodePage(codepage_no, INST_DSB, 4);
-  // 读取当前时间戳
-  AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
-  // 将时间戳保存到 X10
+  // 添加 ARM 指令到代码页，每条指令长度为 4 字节
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, 4);
+  AddInstructionToCodePage(codepage_no, INST_MOV_X0_0, 4);
+  AddInstructionToCodePage(codepage_no, INST_ISB_SY, 4);
+  AddInstructionToCodePage(codepage_no, INST_MRS_X0_PMCCNTR_EL0, 4);
   AddInstructionToCodePage(codepage_no, INST_MOV_X10_X0, 4);
 }
+
 
 //   设置计时起点：
 // 利用硬件支持的时间戳计数器（如 x86 架构中的 RDTSC 指令）记录当前时间戳。
@@ -620,19 +624,19 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 
   //code for arm,maybe need to recode
   void Executor::AddTimerEndToCodePage(int codepage_no) {
-  constexpr char INST_DSB[] = "\xBF\x3F\x03\xD5";      // DSB SY (数据同步屏障)
-  constexpr char INST_MRS_X0_CNTVCT_EL0[] = "\xD5\x00\x00\x1E"; // MRS X0, CNTVCT_EL0
-  constexpr char INST_SUB_X0_X10[] = "\xCB\x0A\x00\x4B"; // SUB X0, X0, X10 (计算时间差)
-  constexpr char INST_MOV_X11_X0[] = "\xAA\x00\x03\xEA"; // MOV X11, X0 (保存时间差)
+  // 定义 ARM 指令的机器码（AArch64，小端序）
+  constexpr char INST_MOV_X0_0[] = "\x00\x00\x80\xd2";             // MOV X9, #0
+  constexpr char INST_ISB_SY[] = "\x1F\x20\x03\xd5";               // ISB SY
+  constexpr char INST_MRS_X0_PMCCNTR_EL0[] = "\x39\x00\x00\xd5";  // MRS X9, PMCCNTR_EL0
+  constexpr char INST_SUB_X11_X0_X10[] = "\x4f\x3f\x1f\xd3";  // SUB X11, X9, X10
+  constexpr char INST_MOV_X11_X0[] = "\x1F\x20\x03\xd5";       // MOV X0, X11
 
-  // 插入序列化屏障
-  AddInstructionToCodePage(codepage_no, INST_DSB, 4);
-  // 读取结束时间戳
-  AddInstructionToCodePage(codepage_no, INST_MRS_X0_CNTVCT_EL0, 4);
-  // 计算时间差
-  AddInstructionToCodePage(codepage_no, INST_SUB_X0_X10, 4);
-  // 保存时间差
-  AddInstructionToCodePage(codepage_no, INST_MOV_X11_X0, 4);
+  // 添加 ARM 指令到代码页，每条指令长度为 4 字节
+  AddInstructionToCodePage(codepage_no, INST_MOV_X0_0, 4);                // MOV X0, #0
+  AddInstructionToCodePage(codepage_no, INST_ISB_SY, 4);                  // ISB SY
+  AddInstructionToCodePage(codepage_no, INST_MRS_X0_PMCCNTR_EL0, 4);      // MRS X0, PMCCNTR_EL0
+  AddInstructionToCodePage(codepage_no, INST_SUB_X11_X0_X10, 4);          // SUB X11, X0, X10
+  AddInstructionToCodePage(codepage_no, INST_MOV_X11_X0, 4);              // MOV X11, X0
 }
 
 
