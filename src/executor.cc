@@ -756,24 +756,20 @@ void Executor::MakeTimerResultReturnValue(int codepage_no) {
 //   }
 //   return nops;
 // }
-byte_array Executor::CreateSequenceOfNOPs(size_t length) {
-  constexpr uint32_t INST_NOP_AS_DECIMAL = 0xD503201F; // ARM NOP 指令 (32位)
+  byte_array Executor::CreateSequenceOfNOPs(size_t num_nops) {
+  // ARM64 NOP 指令编码：MOV XZR, XZR，机器码为 0x1F2003D5 (小端序)
+  constexpr std::array<std::byte, 4> INST_NOP_AS_BYTES = {
+    std::byte{0x1F},
+    std::byte{0x20},
+    std::byte{0x03},
+    std::byte{0xD5}
+  };
+
   byte_array nops;
+  nops.reserve(num_nops * INST_NOP_AS_BYTES.size()); // 预分配内存，提高性能
 
-  // 将32位的 NOP 指令拆分成4个字节
-  std::byte nop_bytes[4] = {
-    std::byte(INST_NOP_AS_DECIMAL & 0xFF),         // 低8位
-    std::byte((INST_NOP_AS_DECIMAL >> 8) & 0xFF),  // 次低8位
-    std::byte((INST_NOP_AS_DECIMAL >> 16) & 0xFF), // 次高8位
-    std::byte((INST_NOP_AS_DECIMAL >> 24) & 0xFF)  // 高8位
-};
-
-  // 每条 NOP 是4字节，因此需要按照4字节为单位重复填充
-  for (size_t i = 0; i < length; i += 4) {
-    nops.push_back(nop_bytes[0]);
-    nops.push_back(nop_bytes[1]);
-    nops.push_back(nop_bytes[2]);
-    nops.push_back(nop_bytes[3]);
+  for (size_t i = 0; i < num_nops; ++i) {
+    nops.insert(nops.end(), INST_NOP_AS_BYTES.begin(), INST_NOP_AS_BYTES.end());
   }
 
   return nops;
