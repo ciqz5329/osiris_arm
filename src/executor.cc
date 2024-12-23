@@ -288,7 +288,7 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
   AddTimerEndToCodePage(codepage_no);
 
   // return timing result and epilog
-  MakeTimerResultReturnValue(codepage_no);
+  //MakeTimerResultReturnValue(codepage_no); arm不用我已经把时间差放在X0寄存器中了
   AddEpilog(codepage_no);
 
   // make sure that we do not exceed page boundaries
@@ -463,72 +463,57 @@ void Executor::InitializeCodePage(int codepage_no) {
 // }
 
 void Executor::AddProlog(int codepage_no) {
-  // NOTE: everything in this function must be mirrored by AddEpilog
-  // constexpr char INST_PUSH_RBX_RSP_RBP[] = "\x53\x54\x55";
-  // constexpr char INST_PUSH_R12_R13_R14_R15[] = "\x41\x54\x41\x55\x41\x56\x41\x57";
-  //remake for arm
-  constexpr char INST_PUSH_RBX_RSP_RBP[] = "\xfd\x7b\xbf\xa9";  // STP X19, X20, [SP, #-16]!
-  constexpr char INST_PUSH_R12_R13_R14_R15[] = "\xff\x43\x00\xd1";       // SUB SP, SP, #4096
-  constexpr char INST_SUB_RSP_0x8[] = "\x48\x83\xec\x08";
-  constexpr char INST_STMXCSR_RSP[] = "\x0f\xae\x1c\x24";
-  constexpr char INST_FSTCW_RSP[] = "\x9b\xd9\x3c\x24";
-  constexpr char INST_MOV_RBP_RSP[] = "\x48\x89\xe5";
-  constexpr char INST_SUB_RSP_0x1000[] = "\x48\x81\xec\x00\x10\x00\x00";
+    // 定义 ARM64 指令的机器码（AArch64，小端序）
 
+    // 保存被调用者保存的寄存器 X19-X28
+    constexpr char INST_STP_X19_X20_SP_NEG16[] = "\xF9\x7B\xC1\xA8"; // STP X19, X20, [SP, #-16]!
+    constexpr char INST_STP_X21_X22_SP_NEG16[] = "\xF7\x7B\xC1\xA8"; // STP X21, X22, [SP, #-16]!
+    constexpr char INST_STP_X23_X24_SP_NEG16[] = "\xF5\x7B\xC1\xA8"; // STP X23, X24, [SP, #-16]!
+    constexpr char INST_STP_X25_X26_SP_NEG16[] = "\xF3\x7B\xC1\xA8"; // STP X25, X26, [SP, #-16]!
+    constexpr char INST_STP_X27_X28_SP_NEG16[] = "\xF1\x7B\xC1\xA8"; // STP X27, X28, [SP, #-16]!
 
-  // safe all callee-saved registers (according to System V amd64 ABI)
-  AddInstructionToCodePage(codepage_no, INST_PUSH_RBX_RSP_RBP,
-                                                 3);
-  AddInstructionToCodePage(codepage_no, INST_PUSH_R12_R13_R14_R15,
-                                          8);
+    // 保存帧指针（FP）和链接寄存器（LR）
+    constexpr char INST_STP_X29_X30_SP_NEG16[] = "\xF9\x7B\xC1\xA8"; // STP X29, X30, [SP, #-16]!
 
-  // save MXCSR register (misconfigured MXCSR can lead to floating point exceptions)
-  AddInstructionToCodePage(codepage_no, INST_SUB_RSP_0x8,
-                                          4);
-  AddInstructionToCodePage(codepage_no, INST_STMXCSR_RSP,
-                                          4);
+    // 设置帧指针
+    constexpr char INST_MOV_X29_SP[] = "\x29\x00\xa0\xe1";            // MOV X29, SP
 
-  // save x87 FPU control word (according to System V amd64 ABI)
-  AddInstructionToCodePage(codepage_no, INST_SUB_RSP_0x8,
-                                          4);
-  AddInstructionToCodePage(codepage_no, INST_FSTCW_RSP,
-                                          4);
+    // 分配栈空间
+    constexpr char INST_SUB_SP_0x1000[] = "\xC8\x00\x00\xD1";        // SUB SP, SP, #0x1000
 
-  // save stackpointer in RBP (in case some instruction changes the RSP value)
-  AddInstructionToCodePage(codepage_no, INST_MOV_RBP_RSP, 3);
+    // 初始化寄存器（示例：加载 0）
+    constexpr char INST_MOVZ_X8_0[] = "\x00\x00\x80\xd2";            // MOVZ X8, #0x0000, LSL #0
+    constexpr char INST_MOVZ_X0_0[] = "\x00\x00\x80\xd2";            // MOVZ X0, #0x0000, LSL #0
+    constexpr char INST_MOVZ_X1_0[] = "\x00\x00\x80\xd2";            // MOVZ X1, #0x0000, LSL #0
+    constexpr char INST_MOVZ_X2_0[] = "\x00\x00\x80\xd2";            // MOVZ X2, #0x0000, LSL #0
+    constexpr char INST_MOVZ_X3_0[] = "\x00\x00\x80\xd2";            // MOVZ X3, #0x0000, LSL #0
 
-  // create room on stack that is big enough in case some instructions trashes stack values
-  // (e.g. PUSH/POP)
-  AddInstructionToCodePage(codepage_no, INST_SUB_RSP_0x1000, 7);
+    // 初始化 NEON 寄存器 V0
+    constexpr char INST_MOV_V0_X8[] = "\x1F\x00\x80\xAA";            // MOV V0.16B, X8.16B
 
-  // initialize registers R8, RAX, RDI, RSI, RDX and XMM0 to point to memory locations
-  // NOTE: this must match the memory registers in the code generation
-  // last 4 bytes encode the immediate in little endian
-  constexpr char INST_MOV_R8_0xffffffff[] = "\x49\xc7\xc0\xff\xff\xff\xff";
-  constexpr char INST_MOV_RAX_0xffffffff[] = "\x48\xc7\xc0\xff\xff\xff\xff";
-  constexpr char INST_MOV_RDI_0xffffffff[] = "\x48\xc7\xc7\xff\xff\xff\xff";
-  constexpr char INST_MOV_RSI_0xffffffff[] = "\x48\xc7\xc6\xff\xff\xff\xff";
-  constexpr char INST_MOV_RDX_0xffffffff[] = "\x48\xc7\xc2\xff\xff\xff\xff";
-  byte_array encoded_immediate = NumberToBytesLE(kMemoryBegin, 4);
-  constexpr char INST_MOVQ_XMM0_R8[] = "\x66\x49\x0f\x6e\xc0";
+    // 确保代码页有足够的空间
+    // 总指令数：6 STP (4 bytes each) + 1 MOV + 1 SUB + 5 MOVZ + 1 MOV V0 = 6 +1 +1 +5 +1 = 14
+    // 总字节数：14 * 4 = 56 bytes
+    assert(code_pages_last_written_index_[codepage_no] + 56 <= kPagesize);
 
-  // add only the first 3 instruction bytes and add the encoded address manually
-  AddInstructionToCodePage(codepage_no, INST_MOV_R8_0xffffffff, 3);
-  AddInstructionToCodePage(codepage_no, encoded_immediate);
+    // 添加指令到代码页
+    AddInstructionToCodePage(codepage_no, INST_STP_X19_X20_SP_NEG16, 4);  // STP X19, X20, [SP, #-16]!
+    AddInstructionToCodePage(codepage_no, INST_STP_X21_X22_SP_NEG16, 4);  // STP X21, X22, [SP, #-16]!
+    AddInstructionToCodePage(codepage_no, INST_STP_X23_X24_SP_NEG16, 4);  // STP X23, X24, [SP, #-16]!
+    AddInstructionToCodePage(codepage_no, INST_STP_X25_X26_SP_NEG16, 4);  // STP X25, X26, [SP, #-16]!
+    AddInstructionToCodePage(codepage_no, INST_STP_X27_X28_SP_NEG16, 4);  // STP X27, X28, [SP, #-16]!
 
-  AddInstructionToCodePage(codepage_no, INST_MOV_RAX_0xffffffff, 3);
-  AddInstructionToCodePage(codepage_no, encoded_immediate);
+    AddInstructionToCodePage(codepage_no, INST_STP_X29_X30_SP_NEG16, 4);  // STP X29, X30, [SP, #-16]!
+    AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, 4);           // MOV X29, SP
+    AddInstructionToCodePage(codepage_no, INST_SUB_SP_0x1000, 4);       // SUB SP, SP, #0x1000
 
-  AddInstructionToCodePage(codepage_no, INST_MOV_RDI_0xffffffff, 3);
-  AddInstructionToCodePage(codepage_no, encoded_immediate);
-
-  AddInstructionToCodePage(codepage_no, INST_MOV_RSI_0xffffffff, 3);
-  AddInstructionToCodePage(codepage_no, encoded_immediate);
-
-  AddInstructionToCodePage(codepage_no, INST_MOV_RDX_0xffffffff, 3);
-  AddInstructionToCodePage(codepage_no, encoded_immediate);
-
-  AddInstructionToCodePage(codepage_no, INST_MOVQ_XMM0_R8, 5);
+    // 初始化寄存器
+    AddInstructionToCodePage(codepage_no, INST_MOVZ_X8_0, 4);           // MOVZ X8, #0x0000, LSL #0
+    AddInstructionToCodePage(codepage_no, INST_MOVZ_X0_0, 4);           // MOVZ X0, #0x0000, LSL #0
+    AddInstructionToCodePage(codepage_no, INST_MOVZ_X1_0, 4);           // MOVZ X1, #0x0000, LSL #0
+    AddInstructionToCodePage(codepage_no, INST_MOVZ_X2_0, 4);           // MOVZ X2, #0x0000, LSL #0
+    AddInstructionToCodePage(codepage_no, INST_MOVZ_X3_0, 4);           // MOVZ X3, #0x0000, LSL #0
+    AddInstructionToCodePage(codepage_no, INST_MOV_V0_X8, 4);         // MOV V0.16B, X8.16B
 }
   // 插入一段序言代码（Prolog），其目的是为后续代码执行创建一个安全且受控的环境。具体包括：
   //
@@ -537,40 +522,56 @@ void Executor::AddProlog(int codepage_no) {
   // 初始化一些特定寄存器的值。
   // 确保硬件状态符合预期，避免意外错误（如浮点异常）。
 void Executor::AddEpilog(int codepage_no) {
-  // NOTE: everything in this function must be mirrored by AddProlog
-  constexpr char INST_CLD[] = "\xfc";
-  //remake for arm
-  //constexpr char INST_POP_R15_R14_R13_R12[] = "\x41\x5f\x41\x5e\x41\x5d\x41\x5c";
-  //constexpr char INST_POP_RBP_RSP_RBX[] = "\x5d\x5c\x5b";
-  constexpr char INST_POP_R15_R14_R13_R12[] = "\xfd\x7b\xc1\xa8"; // LDP X19, X20, [SP], #16
-  constexpr char INST_POP_RBP_RSP_RBX[] = "\xc0\x03\x5f\xd6";         // RET
-  constexpr char INST_MOV_RSP_RBP[] = "\x48\x89\xec";
-  constexpr char INST_RET[] = "\xc3";
-  constexpr char INST_ADD_RSP_0x8[] = "\x48\x83\xc4\x08";
-  constexpr char INST_LDMXCSR_RSP[] = "\x0f\xae\x14\x24";
-  constexpr char INST_FLDCW_RSP[] = "\xd9\x2c\x24";
+    // 定义 ARM64 指令的机器码（AArch64，小端序）
 
-  // System-V abi specifies that DF is always zero upon function return
-  AddInstructionToCodePage(codepage_no, INST_CLD, 1);
-  // restore stack
-  AddInstructionToCodePage(codepage_no, INST_MOV_RSP_RBP, 3);
+    // 恢复被调用者保存的寄存器 X19-X28
+    constexpr char INST_LDP_X19_X20_SP_16[] = "\xA8\xC1\x7B\xF9"; // LDP X19, X20, [SP], #16
+    constexpr char INST_LDP_X21_X22_SP_16[] = "\xA8\xC1\x7B\xF7"; // LDP X21, X22, [SP], #16
+    constexpr char INST_LDP_X23_X24_SP_16[] = "\xA8\xC1\x7B\xF5"; // LDP X23, X24, [SP], #16
+    constexpr char INST_LDP_X25_X26_SP_16[] = "\xA8\xC1\x7B\xF3"; // LDP X25, X26, [SP], #16
+    constexpr char INST_LDP_X27_X28_SP_16[] = "\xA8\xC1\x7B\xF1"; // LDP X27, X28, [SP], #16
 
-  // restore x87 FPU control word
-  AddInstructionToCodePage(codepage_no, INST_FLDCW_RSP, 3);
-  AddInstructionToCodePage(codepage_no, INST_ADD_RSP_0x8, 4);
+    // 恢复帧指针（FP）和链接寄存器（LR）
+    constexpr char INST_LDP_X29_X30_SP_16[] = "\xA8\xC1\x7B\xF9"; // LDP X29, X30, [SP], #16
 
-  // restore MXCSR register
-  AddInstructionToCodePage(codepage_no, INST_LDMXCSR_RSP, 4);
-  AddInstructionToCodePage(codepage_no, INST_ADD_RSP_0x8, 4);
+    // 设置栈指针恢复到帧指针位置
+    constexpr char INST_MOV_SP_X29[] = "\xA9\x40\x03\xE1"; // MOV SP, X29
 
-  // restore registers
-  AddInstructionToCodePage(codepage_no, INST_POP_R15_R14_R13_R12, 8);
-  AddInstructionToCodePage(codepage_no, INST_POP_RBP_RSP_RBX, 3);
+    // 恢复浮点状态（如果需要，具体指令根据需求调整）
+    // 示例：恢复 NEON 寄存器 V0-V7 (假设之前保存了这些寄存器)
+    // 使用 LDP 指令批量恢复
+    constexpr char INST_LDP_V0_V1_SP_16[] = "\xA8\xC1\x7B\xF9"; // LDP V0, V1, [SP], #16
+    constexpr char INST_LDP_V2_V3_SP_16[] = "\xA8\xC1\x7B\xF7"; // LDP V2, V3, [SP], #16
+    constexpr char INST_LDP_V4_V5_SP_16[] = "\xA8\xC1\x7B\xF5"; // LDP V4, V5, [SP], #16
+    constexpr char INST_LDP_V6_V7_SP_16[] = "\xA8\xC1\x7B\xF3"; // LDP V6, V7, [SP], #16
 
-  // insert return
-  AddInstructionToCodePage(codepage_no, INST_RET, 1);
+    // 返回指令
+    constexpr char INST_RET[] = "\xD6\x5F\x03\xC0"; // RET
+
+    // 确保代码页有足够的空间
+    // 总指令数：7 LDP (4 bytes each) + 1 MOV + 4 LDP (浮点寄存器) + 1 RET = 13
+    // 总字节数：13 * 4 = 52 bytes
+    assert(code_pages_last_written_index_[codepage_no] + 52 <= kPagesize);
+
+    // 添加指令到代码页
+    AddInstructionToCodePage(codepage_no, INST_LDP_X19_X20_SP_16, 4);      // LDP X19, X20, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_X21_X22_SP_16, 4);      // LDP X21, X22, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_X23_X24_SP_16, 4);      // LDP X23, X24, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_X25_X26_SP_16, 4);      // LDP X25, X26, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_X27_X28_SP_16, 4);      // LDP X27, X28, [SP], #16
+
+    AddInstructionToCodePage(codepage_no, INST_LDP_X29_X30_SP_16, 4);      // LDP X29, X30, [SP], #16
+
+    AddInstructionToCodePage(codepage_no, INST_MOV_SP_X29, 4);            // MOV SP, X29
+
+    // 恢复浮点寄存器（根据实际需求调整）
+    AddInstructionToCodePage(codepage_no, INST_LDP_V0_V1_SP_16, 4);       // LDP V0, V1, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_V2_V3_SP_16, 4);       // LDP V2, V3, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_V4_V5_SP_16, 4);       // LDP V4, V5, [SP], #16
+    AddInstructionToCodePage(codepage_no, INST_LDP_V6_V7_SP_16, 4);       // LDP V6, V7, [SP], #16
+
+    AddInstructionToCodePage(codepage_no, INST_RET, 4);                   // RET
 }
-
 void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   // insert CPUID to serialize instruction stream
   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
