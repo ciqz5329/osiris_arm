@@ -350,6 +350,9 @@ void Core::OutputNonFaultingInstructions(const std::string& output_filename) {
 }
 
 std::vector<size_t> Core::FindNonFaultingInstructions() {
+  auto func_ptr = &osiris::CodeGenerator::CreateInstructionFromIndex;
+  // 输出成员函数址
+  printf("Address of CreateInstructionFromIndex: %p\n", (void*)func_ptr);
   std::vector<size_t> non_faulting_instruction_indexes;
   byte_array empty_sequence;
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {

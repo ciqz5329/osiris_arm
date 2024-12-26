@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <cstdint>  // 添加这行
 
 namespace osiris {
 

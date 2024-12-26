@@ -27,6 +27,7 @@
 #include "utils.h"
 #include "filter.h"
 #include "logger.h"
+#include <unistd.h>
 
 //
 // Constants
@@ -258,7 +259,7 @@ CommandLineArguments ParseArguments(int argc, char** argv) {
 }
 
 int main(int argc, char* argv[]) {
-  if (DEBUGMODE) {
+  if (DEBUGMODE==1) {
     LOG_WARNING("Started in DEBUGMODE");
     osiris::SetLogLevel(osiris::DEBUG);
 

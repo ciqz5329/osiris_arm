@@ -195,7 +195,6 @@ std::string base64_encode(const byte_array& bytes_to_encode) {
 std::string CalculateFileHashSHA256(const std::string& filename) {
   std::ifstream file_stream(filename);
   if (!file_stream.is_open()) {
-    LOG_ERROR(filename);
     LOG_ERROR("Could not access file for hashing.");
     // return empty string on error
     return std::string();

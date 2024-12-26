@@ -17,6 +17,7 @@
 #define OSIRIS_SRC_EXECUTOR_H_
 
 #include <vector>
+#include <array>  // 添加这行
 
 #include "code_generator.h"
 

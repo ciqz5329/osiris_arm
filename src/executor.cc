@@ -47,7 +47,7 @@ Executor::Executor() {
                                          -1,
                                          0));
 
-    if (page != reinterpret_cast<void*>(kMemoryBegin + i * kPagesize) || page == MAP_FAILED) {
+    if (page != reinterpret_cast<void*>(kMemoryBegin + i* kPagesize) || page == MAP_FAILED) {
       LOG_ERROR("Couldn't allocate memory for execution (data memory). Aborting!");
       std::exit(1);
     }
@@ -70,6 +70,7 @@ Executor::Executor() {
 
 #if DEBUGMODE == 0
   // if we are not in DEBUGMODE this will instead be inlined in Executor::ExecuteCodePage()
+  std::cout << "DEBUGMODE ==0";
   std::array<int, 4> signals_to_handle = {SIGSEGV, SIGILL, SIGFPE, SIGTRAP};
   // register fault handler
   RegisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
@@ -192,43 +193,55 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
                                         nop_sequence,
                                         reset_sequence, reset_executions_amount);
   } else {
+
     CreateTestrunCode(0, reset_sequence, trigger_sequence, measurement_sequence,
                       reset_executions_amount);
-    CreateTestrunCode(1, reset_sequence, nop_sequence, measurement_sequence,
-                      reset_executions_amount);
+
+     CreateTestrunCode(1, reset_sequence, nop_sequence, measurement_sequence,
+                       reset_executions_amount);
+
+
   }
+
 
   // get timing with trigger sequence
   for (int i = 0; i < no_testruns; i++) {
-    uint64_t cycles_elapsed_trigger;
+
+    uint64_t cycles_elapsed_trigger ;
     int error = ExecuteTestrun(0, &cycles_elapsed_trigger);
     if (error) {
       // abort
       *cycles_difference = -1;
       return 1;
     }
-    if (cycles_elapsed_trigger <= 5000) {
+    if (cycles_elapsed_trigger <= 5000000000) {
       results_trigger.emplace_back(cycles_elapsed_trigger);
     }
+
   }
+
+
 
   //
   for (int i = 0; i < no_testruns; i++) {
     // get timing without trigger sequence
-    uint64_t cycles_elapsed_notrigger;
-    int error = ExecuteTestrun(1, &cycles_elapsed_notrigger);
+    uint64_t cycles_elapsed_notrigger ;
+
+    int error = ExecuteTestrun(0, &cycles_elapsed_notrigger);
     if (error) {
       // abort
       *cycles_difference = -1;
       return 1;
     }
-    if (cycles_elapsed_notrigger <= 5000) {
+    if (cycles_elapsed_notrigger <= 500) {
       results_notrigger.emplace_back(cycles_elapsed_notrigger);
     }
+
   }
   double median_trigger = median<int64_t>(results_trigger);
   double median_notrigger = median<int64_t>(results_notrigger);
   *cycles_difference = static_cast<int64_t>(median_notrigger - median_trigger);
+
   return 0;
 }
 
@@ -298,7 +311,7 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
   //AddEpilog(codepage_no);
 
   // make sure that we do not exceed page boundaries
-  //assert(code_pages_last_written_index_[codepage_no] < kPagesize);
+  assert(code_pages_last_written_index_[codepage_no] < kPagesize);
 }
 
 void Executor::CreateSpeculativeTriggerTestrunCode(int codepage_no,
@@ -409,32 +422,31 @@ void Executor::ClearDataPage() {
 }
 
 
-  constexpr uint32_t ARM64_NOP = 0xD503201F; // NOP
-  constexpr uint32_t ARM64_RET = 0xD65F03C0; // RET
+
 
 
   //初始化指定的代码页
   void Executor::InitializeCodePage(int codepage_no) {
-    // 断言合法范围
-    assert(codepage_no < static_cast<int>(execution_code_pages_.size()));
+  // ARM64 NOP 和 RET 指令的机器码
+  constexpr uint32_t INST_RET = 0xD65F03C0; // RET
+  constexpr uint32_t INST_NOP = 0xD503201F; // NOP
 
-    // 先将指针转换为 uint32_t*，便于 4 字节写入
-    // 注意：这里假设页面是对齐的，可执行的，并且大小是 kPageSize
-    uint32_t* page_ptr = reinterpret_cast<uint32_t*>(execution_code_pages_[codepage_no]);
+  assert(codepage_no < static_cast<int>(execution_code_pages_.size()));
 
-    // 以 4 字节为单位将页面填充为 NOP
-    size_t num_instructions = kPagesize / sizeof(uint32_t);
-    for (size_t i = 0; i < num_instructions; ++i) {
-      page_ptr[i] = ARM64_NOP;
-    }
-
-    // 将页面最后一个指令替换为 RET
-    // num_instructions - 1 即指向最后 4 字节的位置
-    page_ptr[num_instructions - 1] = ARM64_RET;
-
-    // 将写索引重置为 0，表示这页重新可写
-    code_pages_last_written_index_[codepage_no] = 0;
+  // 填充 NOP 指令
+  uint32_t* page = reinterpret_cast<uint32_t*>(execution_code_pages_[codepage_no]);
+  size_t num_nops = kPagesize / sizeof(uint32_t);
+  for (size_t i = 0; i < num_nops; ++i) {
+    page[i] = INST_NOP;
   }
+
+  // 添加 RET 指令作为最后一条指令
+  page[num_nops - 1] = INST_RET;
+
+  // 重置写入索引
+  code_pages_last_written_index_[codepage_no] = 0;
+}
+
 
 
 
@@ -826,20 +838,22 @@ void Executor::MakeTimerResultReturnValue(int codepage_no) {
 //   }
 //   return nops;
 // }
-  byte_array Executor::CreateSequenceOfNOPs(size_t num_nops) {
-  // ARM64 NOP 指令编码：MOV XZR, XZR，机器码为 0x1F2003D5 (小端序)
-  constexpr std::array<std::byte, 4> INST_NOP_AS_BYTES = {
-    std::byte{0x1F},
-    std::byte{0x20},
-    std::byte{0x03},
-    std::byte{0xD5}
-  };
-
+  byte_array Executor::CreateSequenceOfNOPs(size_t length) {
+  //constexpr uint32_t ARM64_NOP = 0xD503201F;
   byte_array nops;
-  nops.reserve(num_nops * INST_NOP_AS_BYTES.size()); // 预分配内存，提高性能
-
-  for (size_t i = 0; i < num_nops; ++i) {
-    nops.insert(nops.end(), INST_NOP_AS_BYTES.begin(), INST_NOP_AS_BYTES.end());
+  constexpr auto ARM64_NOP_0 = static_cast<unsigned char>(0xD5);
+  constexpr auto ARM64_NOP_1 = static_cast<unsigned char>(0x03);
+  constexpr auto ARM64_NOP_2 = static_cast<unsigned char>(0x20);
+  constexpr auto ARM64_NOP_3 = static_cast<unsigned char>(0x1F);
+  std::byte nop_byte0{ARM64_NOP_0};
+  std::byte nop_byte1{ARM64_NOP_1};
+  std::byte nop_byte2{ARM64_NOP_2};
+  std::byte nop_byte3{ARM64_NOP_3};
+  for (size_t i = 0; i < length; i+=4) {
+    nops.push_back(nop_byte0);
+    nops.push_back(nop_byte1);
+    nops.push_back(nop_byte2);
+    nops.push_back(nop_byte3);
   }
 
   return nops;
@@ -889,7 +903,12 @@ void Executor::RegisterFaultHandler(std::array<int, size> signals_to_handle) {
     signal(sig, Executor::FaultHandler);
   }
 }
-
+ void ScanCodePage(void* codepage, size_t size) {
+  uint8_t* byte_ptr = (uint8_t*)codepage;
+  for (size_t i = 0; i < size; i+=4) {
+    printf(" 0x%02x%02x%02x%02x \n", byte_ptr[i],byte_ptr[i+1],byte_ptr[i+2],byte_ptr[i+3]);
+  }
+}
 template<size_t size>
 void Executor::UnregisterFaultHandler(std::array<int, size> signals_to_handle) {
   for (int sig : signals_to_handle) {
@@ -928,6 +947,7 @@ __attribute__((no_sanitize("address")))
 
     return 0;
   } else {
+    ScanCodePage(codepage, kPagesize);
     // if we reach this; the code has caused a fault
 
     // unmask the signal again as we reached this point directly from the signal handler
@@ -936,6 +956,7 @@ __attribute__((no_sanitize("address")))
     // list of signals that we catch and throw as errors
     std::array<int, 4> signals_to_handle = {SIGSEGV, SIGILL, SIGFPE, SIGTRAP};
 #endif
+
     sigset_t signal_set;
     sigemptyset(&signal_set);
     for (int sig : signals_to_handle) {

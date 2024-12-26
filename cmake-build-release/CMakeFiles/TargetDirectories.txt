@@ -1,0 +1,3 @@
+/home/ac_machine/CLionProjects/osiris-arm/cmake-build-release/CMakeFiles/osiris_arm.dir
+/home/ac_machine/CLionProjects/osiris-arm/cmake-build-release/CMakeFiles/edit_cache.dir
+/home/ac_machine/CLionProjects/osiris-arm/cmake-build-release/CMakeFiles/rebuild_cache.dir
