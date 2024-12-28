@@ -1,0 +1,10 @@
+#build
+cmake-build-debug
+.idea
+./openssl-1.1.1w
+./openssl-1.1.1w.tar.gz
+
+instructions.xml
+instructions_cleaned.b64
+openssl-1.1.1w.tar.gz
+openssl-1.1.1w

@@ -1,0 +1,56 @@
+byte_representation;assembly_code;category;extension;isa_set
+AHxAkg==;AND X0, X0, #0xFFFFFFFF;DataProc;ARMv8;A64
+AAAACw==;AND X0, X0, X1;DataProc;ARMv8;A64
+AAAACw==;ADD W0, W0, W0;DataProc;ARMv8;A64
+AAAAEA==;ADR X0, 0;DataProc;ARMv8;A64
+AAAAKw==;ADDS W0, W0, W0;DataProc;ARMv8;A64
+AAAAGg==;ADC W0, W0, W0;DataProc;ARMv8;A64
+AAAAOg==;ADCS W0, W0, W0;DataProc;ARMv8;A64
+AAAAMQ==;ADDS W0, W0, #0;DataProc;ARMv8;A64
+AAAAEQ==;ADD W0, W0, #0;DataProc;ARMv8;A64
+AAAAKw==;ADDS W0, W0, W0;DataProc;ARMv8;A64
+IPxAkw==;ASR X0, X1, #0;DataProc;ARMv8;A64
+AABAsw==;BFI X0, X0, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+IAAC6g==;ANDS X0, X1, X2;DataProc;ARMv8;A64
+ICjCmg==;ASR X0, X1, X2;DataProc;ARMv8;A64
+AABAsw==;BFXIL X0, X0, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+IHxA8g==;ANDS X0, X1, #0xFFFFFFFF;DataProc;ARMv8;A64
+AABAsw==;BFM X0, X0, #0, #0;Bitfield;FEAT_ASMv8p2;A64
+AAAgig==;BIC X0, X0, X0;Bitwise;FEAT_ASM;A64
+ICjCmg==;ASRV X0, X1, X2;DataProc;ARMv8;A64
+IAACig==;AND X0, X1, X2;DataProc;ARMv8;A64
+AAAg1A==;BRK #0;Control;FEAT_BTI;A64
+ABCAWg==;CINV W0, W0, EQ;DataProc;ARMv8;A64
+AAAg6g==;BICS X0, X0, X0;Bitwise;FEAT_ASM;A64
+AAhAOg==;CCMN W0, #0, #0, EQ;DataProc;ARMv8;A64
+AABAOg==;CCMN W0, W0, #0, EQ;DataProc;ARMv8;A64
+XzAD1Q==;CLREX #0;Memory;ARMv8;A64
+ABSAGg==;CINC W0, W0, EQ;DataProc;ARMv8;A64
+AABAeg==;CCMP W0, W0, #0, EQ;DataProc;ARMv8;A64
+ABTAWg==;CLS W0, W0;Arithmetic;ARMv8;A64
+AAhAeg==;CCMP W0, #0, #0, EQ;DataProc;ARMv8;A64
+ABDAWg==;CLZ W0, W0;Bitwise;ARMv8;A64
+HwAAKw==;CMN W0, W0;DataProc;ARMv8;A64
+HwAAMQ==;CMN W0, #0;DataProc;ARMv8;A64
+HwAAaw==;CMP W0, W0;DataProc;ARMv8;A64
+ABSAWg==;CNEG W0, W0, EQ;DataProc;ARMv8.5;A64
+HwAAKw==;CMN W0, W0;DataProc;ARMv8;A64
+HwAAcQ==;CMP W0, #0;DataProc;ARMv8;A64
+nyID1Q==;CSDB;DataProc;ARMv8.5;A64
+HwAAaw==;CMP W0, W0;DataProc;ARMv8;A64
+AACAGg==;CSEL W0, W0, W0, EQ;DataProc;ARMv8.5;A64
+4BefGg==;CSET W0, EQ;DataProc;ARMv8.5;A64
+AASAWg==;CSNEG W0, W0, W0, EQ;DataProc;ARMv8.5;A64
+AgCg1A==;DCPS2 #0;Control;ARMv8.5;A64
+AwCg1A==;DCPS3 #0;Control;ARMv8.5;A64
+3yAD1Q==;DGH;Hint;ARMv8.5;A64
+4BOfWg==;CSETM W0, EQ;DataProc;ARMv8.5;A64
+AASAGg==;CSINC W0, W0, W0, EQ;DataProc;ARMv8.5;A64
+AQCg1A==;DCPS1 #0;Control;ARMv8.5;A64
+vzAD1Q==;DMB #0;MemoryBarrier;ARMv8;A64
+4AO/1g==;DRPS;Debug;ARMv8;A64
+nzAD1Q==;DSB #0;MemoryBarrier;ARMv8;A64
+AAAAUg==;EOR W0, W0, #1;DataProc;ARMv8;A64
+AACAEw==;EXTR W0, W0, W0, #0;DataProc;ARMv8;A64
+AAAgSg==;EON W0, W0, W0;DataProc;ARMv8;A64
+AAAASg==;EOR W0, W0, W0;DataProc;ARMv8;A64

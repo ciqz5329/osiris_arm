@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/osiris/arm_pmu_module/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/acmachines/osiris/arm_pmu_module/Module.symvers -T /home/acmachines/osiris/arm_pmu_module/modules.order -i Module.symvers -e 
