@@ -203,21 +203,20 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
 
 
   }
-  asm volatile("dsb ish" ::: "memory");
-  asm volatile("isb" ::: "memory");
+
   // get timing with trigger sequence
   for (int i = 0; i < no_testruns; i++) {
 
     uint64_t cycles_elapsed_trigger ;
     //__sync_synchronize();
-    std::cout<<&cycles_elapsed_trigger<<std::endl;
+    //std::cout<<&cycles_elapsed_trigger<<std::endl;
     int error = ExecuteTestrun(0, &cycles_elapsed_trigger);
     if (error) {
       // abort
       *cycles_difference = -1;
       return 1;
     }
-    std::cout<<"out cycles_elapsed"<<cycles_elapsed_trigger<<std::endl;
+    //std::cout<<"out cycles_elapsed"<<cycles_elapsed_trigger<<std::endl;
     if (cycles_elapsed_trigger <= 500) {
       results_trigger.emplace_back(cycles_elapsed_trigger);
     }
@@ -295,19 +294,19 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
   // first sequence
   // if we need more we also have to increase the guardian stack space
 
-  // assert(first_sequence_executions_amount <= 100);
-  // for (int i = 0; i < first_sequence_executions_amount; i++) {
-  //   AddInstructionToCodePage(codepage_no, first_sequence);
-  // }
-  //AddSerializeInstructionToCodePage(codepage_no);
-  //
+   assert(first_sequence_executions_amount <= 100);
+   for (int i = 0; i < first_sequence_executions_amount; i++) {
+     AddInstructionToCodePage(codepage_no, first_sequence);
+   }
+  AddSerializeInstructionToCodePage(codepage_no);
+
   // // second sequence
-  // AddInstructionToCodePage(codepage_no, second_sequence);
-  // AddSerializeInstructionToCodePage(codepage_no);
+  AddInstructionToCodePage(codepage_no, second_sequence);
+  AddSerializeInstructionToCodePage(codepage_no);
   //
   // // time measurement sequence
    AddTimerStartToCodePage(codepage_no);
-  // AddInstructionToCodePage(codepage_no, measurement_sequence);
+   AddInstructionToCodePage(codepage_no, measurement_sequence);
   AddTimerEndToCodePage(codepage_no);
 
   // return timing result and epilog
@@ -454,51 +453,9 @@ void Executor::ClearDataPage() {
 
 
 
-//arm prolog
-//   void Executor::AddProlog_AArch64(int codepage_no) {
-//     // 保存调用者保存的寄存器
-//     constexpr char INST_STP_X19_X20[] = "\xfd\x7b\xbf\xa9"; // STP X19, X20, [SP, #-16]!
-//     constexpr char INST_STP_X21_X22[] = "\xfd\x7b\xbf\xa9"; // STP X21, X22, [SP, #-16]!
-//     constexpr char INST_STP_X23_X24[] = "\xfd\x7b\xbf\xa9"; // STP X23, X24, [SP, #-16]!
-//     constexpr char INST_STP_X25_X26[] = "\xfd\x7b\xbf\xa9"; // STP X25, X26, [SP, #-16]!
-//     constexpr char INST_STP_X27_X28[] = "\xfd\x7b\xbf\xa9"; // STP X27, X28, [SP, #-16]!
-//     constexpr char INST_STP_FP_LR[] = "\xfd\x7b\xbf\xa9";   // STP FP, LR, [SP, #-16]!
-//
-//     AddInstructionToCodePage(codepage_no, INST_STP_X19_X20, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_X21_X22, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_X23_X24, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_X25_X26, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_X27_X28, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_FP_LR, 4);
-//
-//     // 保存 SIMD 寄存器
-//     constexpr char INST_STP_Q8_Q9[] = "\xfd\x7b\xbf\xa9"; // STP Q8, Q9, [SP, #-32]!
-//     constexpr char INST_STP_Q10_Q11[] = "\xfd\x7b\xbf\xa9"; // STP Q10, Q11, [SP, #-32]!
-//
-//     AddInstructionToCodePage(codepage_no, INST_STP_Q8_Q9, 4);
-//     AddInstructionToCodePage(codepage_no, INST_STP_Q10_Q11, 4);
-//
-//     // 分配栈空间
-//     constexpr char INST_SUB_SP[] = "\xff\x43\x00\xd1"; // SUB SP, SP, #4096
-//     AddInstructionToCodePage(codepage_no, INST_SUB_SP, 4);
-//
-//     // 初始化寄存器
-//     constexpr char INST_MOV_X0[] = "\xa0\x00\x80\xd2"; // MOV X0, #0x1000000
-//     constexpr char INST_MOV_X1[] = "\xa1\x00\x80\xd2"; // MOV X1, #0x1000000
-//     constexpr char INST_MOV_X2[] = "\xa2\x00\x80\xd2"; // MOV X2, #0x1000000
-//
-//     AddInstructionToCodePage(codepage_no, INST_MOV_X0, 4);
-//     AddInstructionToCodePage(codepage_no, INST_MOV_X1, 4);
-//     AddInstructionToCodePage(codepage_no, INST_MOV_X2, 4);
-//
-//     // 清理状态
-//     constexpr char INST_DSB[] = "\xbf\x3f\x03\xd5"; // DSB SY
-//     AddInstructionToCodePage(codepage_no, INST_DSB, 4);
-// }
+
 
 void Executor::AddEpilog(int codepage_no) {
-        // 恢复初始化的浮点寄存器 v0
-
 
         constexpr char INST_LDR_X28[] = "\xFF\x23\x00\x91"; // ff 23 00 91
         constexpr char INST_ADD_SP_8[] = "\xFC\x87\x40\xF8"; // fc 87 40 f8
@@ -512,19 +469,15 @@ void Executor::AddEpilog(int codepage_no) {
         constexpr char INST_LDP_X12_X13[] = "\xEC\x37\xC1\xA8"; // ec 37 c1 a8
         constexpr char INST_LDP_X10_X11[] = "\xEA\x2F\xC1\xA8"; //ea 2f c1 a8
         constexpr char INST_LDP_X8_X9[] = "\xE8\x27\xC1\xA8"; //e8 27 c1 a8
-
         constexpr char INST_LDP_X29_30[] = "\xFD\x7B\xC1\xA8"; // fd 7b c1 a8
+        constexpr char INST_MOV_SP_X29[] = "\xbf\x03\x00\x91"; // fd 7b c1 a8 "mov sp,X29\n"//bf 03 00 91
 
-
+        AddInstructionToCodePage(codepage_no, INST_MOV_SP_X29, sizeof(INST_MOV_SP_X29) - 1);
         AddInstructionToCodePage(codepage_no, INST_ADD_SP_8, sizeof(INST_ADD_SP_8) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDR_X28, sizeof(INST_LDR_X28) - 1);
-
-
         AddInstructionToCodePage(codepage_no, INST_LDP_X26_X27, sizeof(INST_LDP_X26_X27) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X24_X25, sizeof(INST_LDP_X24_X25) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X22_X23, sizeof(INST_LDP_X22_X23) - 1);
-
-        // 恢复寄存器 x8
         AddInstructionToCodePage(codepage_no, INST_LDP_X20_X21, sizeof(INST_LDP_X20_X21) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X18_X19, sizeof(INST_LDP_X18_X19) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X16_X17, sizeof(INST_LDP_X16_X17) - 1);
@@ -532,24 +485,15 @@ void Executor::AddEpilog(int codepage_no) {
         AddInstructionToCodePage(codepage_no, INST_LDP_X12_X13, sizeof(INST_LDP_X12_X13) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X10_X11, sizeof(INST_LDP_X10_X11) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X8_X9, sizeof(INST_LDP_X8_X9) - 1);
-
         AddInstructionToCodePage(codepage_no, INST_LDP_X29_30, sizeof(INST_LDP_X29_30) - 1);
+
         constexpr char INST_RET[] = "\xC0\x03\x5F\xD6"; // ret
         AddInstructionToCodePage(codepage_no, INST_RET, sizeof(INST_RET) - 1);
-    }
-  // 插入一段序言代码（Prolog），其目的是为后续代码执行创建一个安全且受控的环境。具体包括：
-  //
-  // 保存必要的寄存器和硬件状态（如栈指针、寄存器值）。
-  // 为程序执行分配足够的栈空间。
-  // 初始化一些特定寄存器的值。
-  // 确保硬件状态符合预期，避免意外错误（如浮点异常）。
+}
+
  void Executor::AddProlog(int codepage_no) {
-        // ARM64 Prolog 指令字节序列
 
-        // 保存被调用者保存的寄存器 X0-X30,帧指针 (x29) 和链接寄存器 (x30)
-        //
         constexpr char INST_MOV_X29_SP[] = "\xFd\x03\x00\x91"; // fd 03 00 91
-
         constexpr char INST_STP_X29_X30[] = "\xfd\x7B\xBF\xA9"; //fd 7b bf a9
         constexpr char INST_STP_X8_X9[] = "\xe8\x27\xBF\xA9"; // e8 27 bf a9
         constexpr char INST_STP_X10_X11[] = "\xea\x2f\xBF\xA9"; //ea 2f bf a9
@@ -561,15 +505,15 @@ void Executor::AddEpilog(int codepage_no) {
         constexpr char INST_STP_X22_X23[] = "\xf6\x5f\xBF\xA9"; // f6 5f bf a9
         constexpr char INST_STP_X24_X25[] = "\xf8\x67\xBF\xA9"; // f8 67 bf a9
         constexpr char INST_STP_X26_X27[] = "\xfa\x6f\xBF\xA9"; // fa 6f bf a9
-
         constexpr char INST_STP_X28[] = "\xfc\x8f\x1F\xf8"; // fc 8f 1f f8
         constexpr char INST_SUB_SP_8[] = "\xff\x23\x00\xd1"; // ff 23 00 d1
+
+        //constexpr char INST_MOV_X29_SP[] = "\xfd\x03\x00\x91"; // ff 23 00 d1
+        constexpr char INST_SUB_SP_1000[] = "\xff\x07\x40\xd1"; // ff 23 00 d1
 
 
         AddInstructionToCodePage(codepage_no, INST_STP_X29_X30, sizeof(INST_STP_X29_X30) - 1);
         AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
-
-
         AddInstructionToCodePage(codepage_no, INST_STP_X8_X9, sizeof(INST_STP_X8_X9) - 1);
         AddInstructionToCodePage(codepage_no, INST_STP_X10_X11, sizeof(INST_STP_X10_X11) - 1);
         AddInstructionToCodePage(codepage_no, INST_STP_X12_X13, sizeof(INST_STP_X12_X13) - 1);
@@ -583,17 +527,23 @@ void Executor::AddEpilog(int codepage_no) {
         AddInstructionToCodePage(codepage_no, INST_STP_X28, sizeof(INST_STP_X28) - 1);
         AddInstructionToCodePage(codepage_no, INST_SUB_SP_8, sizeof(INST_SUB_SP_8) - 1);
 
-
-
+        AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
+        AddInstructionToCodePage(codepage_no, INST_SUB_SP_1000, sizeof(INST_SUB_SP_1000) - 1);
+        //默认寄存器 X0,X1
+        constexpr char INST_MOV_X0[] = "\x00\x00\x80\xd2"; // 00 00 80 d2
+        constexpr char INST_MOV_X1[] = "\x01\x00\x80\xd2"; // 01 00 80 d2
+        AddInstructionToCodePage(codepage_no, INST_MOV_X0, sizeof(INST_MOV_X0) - 1);
+        AddInstructionToCodePage(codepage_no, INST_MOV_X1, sizeof(INST_MOV_X1) - 1);
     }
 
 void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   // insert CPUID to serialize instruction stream
   constexpr char INST_DSB_SY[] = "\x9f\x3f\x03\xd5"; // DSB SY
   constexpr char INST_ISB_SY[] = "\xdf\x3f\x03\xd5"; // ISB SY
-
+  constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";
   AddInstructionToCodePage(codepage_no, INST_DSB_SY, sizeof(INST_DSB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
 
 }
 
@@ -609,61 +559,28 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   constexpr char INST_ISB_SY[] = "\xdF\x3f\x03\xd5";// ISB SY
   constexpr char INST_DSB[] = "\x9f\x3f\x03\xd5";    // DSB SY
   constexpr char INST_MOV_X9_0[] = "\x09\x00\x80\xd2";          // MOV X9, #0  09 00 80 d2
-  //09 9d 3b d5
   constexpr char INST_MRS_X9_PMCCNTR_EL0[] = "\x09\x9d\x3b\xd5"; // MRS X9, PMCCNTR_EL0 09 9d 3b d5
   constexpr char INST_MOV_X10_X9[] = "\xea\x03\x09\xaa";          // MOV X10, X9 ea 03 09 aa
-//ea 03 09 aa
+
   // 添加 ARM 指令到代码页，每条指令长度为 4 字节
   AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
-  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_MOV_X9_0, sizeof(INST_MOV_X9_0)-1);
   AddInstructionToCodePage(codepage_no, INST_MRS_X9_PMCCNTR_EL0, sizeof(INST_MRS_X9_PMCCNTR_EL0)-1);
   AddInstructionToCodePage(codepage_no, INST_MOV_X10_X9, sizeof(INST_MOV_X10_X9)-1);
 }
 
-
-//   设置计时起点：
-// 利用硬件支持的时间戳计数器（如 x86 架构中的 RDTSC 指令）记录当前时间戳。
-// 将读取的时间戳值存储到寄存器 R10 中，便于后续与结束时间戳计算差值。
-// 序列化指令流：
-// 确保在计时前的所有指令都已完成，避免由于乱序执行导致的时间测量不准确。
-// 使用 MFENCE 和 CPUID 来实现指令流的同步。
-// void Executor::AddTimerStartToCodePage(int codepage_no) {
-//   constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
-//   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
-//   // note that we can use R10 as it is caller-saved
-//   constexpr char INST_MOV_R10_RAX[] = "\x49\x89\xc2";
-//
-//   AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
-//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-// #if defined(INTEL)
-//   constexpr char INST_RDTSC[] = "\x0f\x31";
-//   AddInstructionToCodePage(codepage_no, INST_RDTSC, 2);
-// #elif defined(AMD)
-//   constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
-//   // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
-//   AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
-// #endif
-//   // move result to R10 s.t. we can use it later in AddTimerEndToCodePage
-//   AddInstructionToCodePage(codepage_no, INST_MOV_R10_RAX,3);
-// }
   void Executor::MakeTimerResultReturnValue(int codepage_no) {
   constexpr char INST_MOV_X0_15[] = "\xe0\x03\x0f\xaa";  // MOV X0, X15, e0 03 0f aa
-  //constexpr char INST_RET[] = "\xC0\x03\x5F\xD6"; //0xD503201F; // NOP
   assert(code_pages_last_written_index_[codepage_no] + sizeof(INST_MOV_X0_15)-1 < kPagesize);
   AddInstructionToCodePage(codepage_no, INST_MOV_X0_15, sizeof(INST_MOV_X0_15) -1 );
-  //AddInstructionToCodePage(codepage_no, INST_RET, sizeof(INST_RET) -1 );
+
 }
 
   //code for arm,maybe need to recode
   void Executor::AddTimerEndToCodePage(int codepage_no) {
 
-//09 9d 3b d5
-  //23 01 0a cb
-  //20 01 0a cb
-
-  // 定义 ARM 指令的机器码（AArch64，小端序）
   constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";              // DMB SY
   constexpr char INST_ISB_SY[] = "\xdF\x3f\x03\xd5";// ISB SY
   constexpr char INST_DSB[] = "\x9f\x3f\x03\xd5";    // DSB SY
@@ -676,43 +593,14 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   AddInstructionToCodePage(codepage_no, INST_MRS_X9_PMCCNTR_EL0, sizeof(INST_MRS_X9_PMCCNTR_EL0)-1);                  // ISB SY
   AddInstructionToCodePage(codepage_no, INST_SUB_X15_X9_X10, sizeof(INST_SUB_X15_X9_X10)-1);
 
+
   AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
-  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   // MRS X0, PMCCNTR_EL0
 }
 
 
-//   读取结束时间戳：
-// 利用处理器时间戳（如 RDTSC 或 RDTSCP）记录结束时间。
-// 计算时间差：
-// 结束时间与起始时间（存储在 R10 寄存器中）做减法，得到执行时间差。
-// 时间差存储在寄存器 R11 中，以便后续使用。
-// 序列化指令流：
-// 确保读取时间戳的操作是准确的，不受指令乱序或处理器流水线的影响。
-// void Executor::AddTimerEndToCodePage(int codepage_no) {
-//   constexpr char INST_XOR_EAX_EAX_CPUID[] = "\x31\xc0\x0f\xa2";
-//   constexpr char INST_SUB_RAX_R10[] = "\x4c\x29\xd0";
-//   // note that we can use R11 as it is caller-saved
-//   constexpr char INST_MOV_R11_RAX[] = "\x49\x89\xc3";
-//
-// #if defined(INTEL)
-//   constexpr char INST_RDTSCP[] = "\x0f\x01\xf9";
-//   AddInstructionToCodePage(codepage_no, INST_RDTSCP, 3);
-// #elif defined(AMD)
-//   // for AMD we use RDPRU to read the APERF register which makes a more stable timer than RDTSC
-//   constexpr char INST_MFENCE[] = "\x0f\xae\xf0";
-//   constexpr char INST_MOV_ECX_1_RDPRU[] = "\xb9\x01\x00\x00\x00\x0f\x01\xfd";
-//   AddInstructionToCodePage(codepage_no, INST_MFENCE, 3);
-//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-//   AddInstructionToCodePage(codepage_no, INST_MOV_ECX_1_RDPRU, 8);
-// #endif
-//   AddInstructionToCodePage(codepage_no, INST_SUB_RAX_R10, 3);
-//   AddInstructionToCodePage(codepage_no, INST_MOV_R11_RAX, 3);
-//   AddInstructionToCodePage(codepage_no, INST_XOR_EAX_EAX_CPUID, 4);
-// }
-
-  //把指定的机器指令字节写入到代码页
 
   //将指令写入代码页的作用主要在于支持 动态代码生成 和 运行时执行，通过这种方式，程序可以根据运行时环境动态生成、调整并执行代码，从而实现更高的性能和灵活性。
 void Executor::AddInstructionToCodePage(int codepage_no,
@@ -757,36 +645,6 @@ void Executor::AddInstructionToCodePage(int codepage_no,
 }
 
 
-// code for arm,maybe need to recode
-//   void Executor::MakeTimerResultReturnValue(int codepage_no) {
-//   constexpr char MOV_X0_X11[] = "\xaa\x0b\x00\xe0"; // MOV X0, X11
-//
-//   AddInstructionToCodePage(codepage_no, MOV_X0_X11, 4);
-// }
-
-
-
-  //生成x86的nops指令，对arm需要recode
-// 在 ARM 中，NOP 的机器码是固定的，具体值依架构版本而定：
-// ARM 模式（32 位指令集）：
-// 指令编码为：0xE1A00000。
-// 表示：MOV R0, R0（将寄存器 R0 的值移动到自身，不执行任何实际操作）。
-// Thumb 模式（16 位指令集）：
-// 指令编码为：0xBF00。
-// 表示：无操作。
-// AArch64（64 位 ARM）模式：
-// 指令编码为：0xD503201F。
-// 表示：无操作。
-// byte_array Executor::CreateSequenceOfNOPs(size_t length) {
-//   //constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned char>(0x90);
-//   constexpr auto INST_NOP_AS_DECIMAL = static_cast<unsigned int>(0xD503201F); // ARM NOP
-//   byte_array nops;
-//   std::byte nop_byte{INST_NOP_AS_DECIMAL};
-//   for (size_t i = 0; i < length; i++) {
-//     nops.push_back(nop_byte);
-//   }
-//   return nops;
-// }
   byte_array Executor::CreateSequenceOfNOPs(size_t length) {
   //constexpr uint32_t ARM64_NOP = 0xD503201F;
   byte_array nops;
@@ -893,7 +751,7 @@ __attribute__((no_sanitize("address")))
   if (!setjmp(fault_handler_jump_buf)) {
     // jump to codepage
     // 更新函数指针
-    flush_instruction_cache(codepage, sizeof(kPagesize));
+    //flush_instruction_cache(codepage, sizeof(kPagesize));
 
     // // 使用内存屏障确保更新完成
     // __asm__ volatile("ic iallu" ::: "memory");
@@ -903,7 +761,7 @@ __attribute__((no_sanitize("address")))
     uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
     // set return argument
     *cycles_elapsed = cycle_diff;
-    std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;
+   // std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;
 
 #if DEBUGMODE == 1
     // unregister signal handler (if not in debugmode we do this in constructor/destructor as
@@ -913,7 +771,7 @@ __attribute__((no_sanitize("address")))
 
     return 0;
   } else {
-    ScanCodePage(codepage, kPagesize);
+    //ScanCodePage(codepage, kPagesize);
     // if we reach this; the code has caused a fault
 
     // unmask the signal again as we reached this point directly from the signal handler
