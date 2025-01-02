@@ -1306,6 +1306,8 @@ void Executor::AddEpilog(int codepage_no) {
         //AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
 
 
+        constexpr char INST_SP_X29[] = "\xbF\x03\x00\x91";//bf 03 00 91
+
         //constexpr char INST_ADD_SP_1000[] = "\xFF\x07\x40\x91"; // fc 87 40 f8
         constexpr char INST_LDR_Q15[] = "\xEF\x07\xC1\x3C"; // fa 6f c1 a8
         constexpr char INST_LDR_Q14[] = "\xEE\x07\xC1\x3C"; // fa 6f c1 a8
@@ -1325,7 +1327,7 @@ void Executor::AddEpilog(int codepage_no) {
 
         constexpr char INST_LDP_X29_30[] = "\xFD\x7B\xC1\xA8"; // fd 7b c1 a8
 
-        //AddInstructionToCodePage(codepage_no, INST_ADD_SP_1000, sizeof(INST_ADD_SP_1000) - 1);
+        AddInstructionToCodePage(codepage_no, INST_SP_X29, sizeof(INST_SP_X29) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDR_Q15, sizeof(INST_LDR_Q15) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDR_Q14, sizeof(INST_LDR_Q14) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDR_Q13, sizeof(INST_LDR_Q13) - 1);
@@ -1366,7 +1368,6 @@ void Executor::AddEpilog(int codepage_no) {
 
         //constexpr char INST_SUB_SP_1000[] = "\xff\x07\x40\xd1"; // ff 23 00 d1
         AddInstructionToCodePage(codepage_no, INST_STP_X29_X30, sizeof(INST_STP_X29_X30) - 1);
-        AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
         AddInstructionToCodePage(codepage_no, INST_STP_X19_X20, sizeof(INST_STP_X19_X20) - 1);
         AddInstructionToCodePage(codepage_no, INST_STP_X21_X22, sizeof(INST_STP_X21_X22) - 1);
         AddInstructionToCodePage(codepage_no, INST_STP_X23_X24, sizeof(INST_STP_X23_X24) - 1);
@@ -1380,7 +1381,7 @@ void Executor::AddEpilog(int codepage_no) {
         AddInstructionToCodePage(codepage_no, INST_STR_Q13, sizeof(INST_STR_Q13) - 1);
         AddInstructionToCodePage(codepage_no, INST_STR_Q14, sizeof(INST_STR_Q14) - 1);
         AddInstructionToCodePage(codepage_no, INST_STR_Q15, sizeof(INST_STR_Q15) - 1);
-
+        AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
         //AddInstructionToCodePage(codepage_no, INST_SUB_SP_1000, sizeof(INST_SUB_SP_1000) - 1);
         //默认OP寄存器 X15,X16
         constexpr char INST_MOV_X25_0[] = "\x19\x00\x80\xd2"; // 0f 00 80 d2
