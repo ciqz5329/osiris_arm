@@ -98,7 +98,7 @@
     </instruction>
 
     <instruction asm="ADR" category="DataProc" extension="ARMv8" iclass="ADR" iform="ADR" isa-set="A64">
-        <operand idx="1" name="Rd" type="reg" width="64">X0,X1,...,X31</operand>
+        <operand idx="1" name="Rd" type="reg" width="64" default="X15">X0,X1,...,X31</operand>
         <operand idx="2" name="label" type="label" width="32" range="±1MB" default="0">Program Label Address</operand>
     </instruction>
 

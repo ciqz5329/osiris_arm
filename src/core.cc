@@ -325,7 +325,11 @@ void Core::OutputNonFaultingInstructions(const std::string& output_filename) {
   LOG_INFO("found " + std::to_string(non_faulting_instructions.size())
                + " non faulting instructions");
   std::ofstream output_file(output_filename);
-
+  LOG_INFO("Writing to file...");
+  if (non_faulting_instructions.empty()) {
+    LOG_INFO("No non-faulting instructions found.");
+    return;
+  }
   // write headerline
   std::string headerline("byte_representation;assembly_code;category;extension;isa_set");
   output_file << headerline << std::endl;
@@ -343,6 +347,7 @@ void Core::OutputNonFaultingInstructions(const std::string& output_filename) {
     line += instruction.extension;
     line += ";";
     line += instruction.isa_set;
+    std::cout<<line<<std::endl;
     output_file << line << std::endl;
   }
   output_file.close();
@@ -358,6 +363,7 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {
     x86Instruction measurement_sequence = code_generator_.CreateInstructionFromIndex(inst_idx);
     int64_t result;
+    //std::cout<<measurement_sequence.byte_representation.size()<<std::endl;
     LOG_INFO("testing instruction " + measurement_sequence.assembly_code);
     int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,

@@ -24,6 +24,7 @@
 
 namespace osiris {
 
+
 using InstructionIndexSequence = std::vector<size_t>;
 
 /// The key component of Osiris.

@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS =  -Wall -Wextra -pedantic -DARM -march=armv8-a -mtune=cortex-a72 -g -DDEBUGMODE=1 -ggdb -fsanitize=address -std=c++17 -fdiagnostics-color=always
+CXX_FLAGS =  -Wall -Wextra -pedantic -O0 -g -DARM -march=armv8-a -mtune=cortex-a72 -mcpu=cortex-a72 -march=armv8-a -g -DDEBUGMODE=1 -ggdb -fsanitize=address -std=c++17 -fdiagnostics-color=always
 
