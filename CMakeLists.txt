@@ -33,7 +33,11 @@ message(STATUS "Configuring for ARMv8-A architecture")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARM -march=armv8-a -mtune=cortex-a72")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DDEBUGMODE=0")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=cortex-a72 -march=armv8-a")
+
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUGMODE=1 -ggdb -fsanitize=address")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 
 # 设置 OpenSSL 和 Capstone 的路径
 set(OPENSSL_ROOT_DIR /usr/aarch64-linux-gnu)

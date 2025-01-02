@@ -363,7 +363,7 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {
     x86Instruction measurement_sequence = code_generator_.CreateInstructionFromIndex(inst_idx);
     int64_t result;
-    //std::cout<<measurement_sequence.byte_representation.size()<<std::endl;
+    std::cout<<measurement_sequence.byte_representation.size()<<std::endl;
     LOG_INFO("testing instruction " + measurement_sequence.assembly_code);
     int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,

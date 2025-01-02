@@ -83,7 +83,7 @@ def parse_operands(instrNode):
             # 默认使用第一个寄存器
             registers = operandNode.text.split(',')
             default_value = operandNode.attrib.get('default', None)
-            reg_value = default_value if default_value else "X15"  # 默认值处理
+            reg_value = default_value if default_value else "X24"  # 默认值处理
             operands.append(reg_value)
 
         elif operandType == 'enum':
