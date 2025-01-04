@@ -18,7 +18,10 @@
 
 #include <vector>
 #include <array>  // 添加这行
-
+#include <fcntl.h>  // for open()
+#include <unistd.h> // for close()
+#include <cstdlib>  // for std::exit()
+#include <iostream> // for std::perror()
 #include "code_generator.h"
 
 namespace osiris {
@@ -34,6 +37,11 @@ class Executor {
  public:
   Executor();
   ~Executor();
+
+
+
+    static int open_ic_iallu_device();  // 声明打开设备的函数
+    static  int ic_iallu_fd_;
 
   /// run with and without reset sequence and return the timing difference in cycles_difference
   /// \param trigger_sequence trigger sequence to test

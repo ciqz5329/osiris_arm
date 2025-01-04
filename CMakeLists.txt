@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(osiris)
 
+# 指定编译器
+set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER /usr/bin/aarch64-linux-gnu-g++)
+
 # 设置C++标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -47,7 +51,6 @@ set(CAPSTONE_LIB_PATH "/usr/aarch64-linux-gnu/lib")
 # 查找 OpenSSL 和 Capstone 库
 find_package(OpenSSL REQUIRED)
 find_library(CAPSTONE_LIB NAMES capstone HINTS ${CAPSTONE_LIB_PATH} REQUIRED)
-
 
 # 添加可执行文件 osiris_arm
 add_executable(osiris_arm ${SOURCE_FILES})

@@ -12,6 +12,11 @@
 // See the License for the specific language governing permissions and
 //     limitations under the License.
 
+#define _GNU_SOURCE
+#include <iostream>
+#include <sched.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #include <getopt.h>
 
@@ -259,6 +264,18 @@ CommandLineArguments ParseArguments(int argc, char** argv) {
 }
 
 int main(int argc, char* argv[]) {
+  cpu_set_t set;
+
+  CPU_ZERO(&set);
+  CPU_SET(0, &set);
+  if (sched_setaffinity(0, sizeof(set), &set) == -1) {
+    perror("sched_setaffinity");
+    return 1;
+  }
+
+  printf("Program is running on CPU 0\n");
+  // 将程序绑定到CPU 0
+
   if (DEBUGMODE==1) {
     LOG_WARNING("Started in DEBUGMODE");
     osiris::SetLogLevel(osiris::DEBUG);
@@ -337,11 +354,10 @@ int main(int argc, char* argv[]) {
   if (command_line_arguments.cleanup) {
     LOG_INFO(" === Starting Cleanup Stage ===");
     osiris::Core osiris_core(kInstructionFile);
-    asm volatile ("dsb sy");  // 执行数据同步屏障
-    asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("dmb sy");
-
-    asm volatile("nop");
+    asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
+    asm volatile ("isb": : : "memory");     // 执行指令同步屏障
+    asm volatile("dmb sy": : : "memory");
+    asm volatile("nop": : : "memory");
     osiris_core.OutputNonFaultingInstructions(kInstructionFileCleaned);
     osiris_core.PrintFaultStatistics();
     exit(0);

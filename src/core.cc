@@ -30,6 +30,10 @@
 namespace osiris {
 
 Core::Core(const std::string& instructions_filename) :
+
+
+
+
     code_generator_(CodeGenerator(instructions_filename)),
     executor_(Executor()) {
   iterations_no_ = 10;
@@ -322,6 +326,11 @@ void Core::FormatTriggerPairOutput(const std::string& output_folder,
 }
 
 void Core::OutputNonFaultingInstructions(const std::string& output_filename) {
+  asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
+  asm volatile ("isb": : : "memory");     // 执行指令同步屏障
+  asm volatile("dmb sy": : : "memory");
+  asm volatile("nop": : : "memory");
+
   std::vector<size_t> non_faulting_instructions = FindNonFaultingInstructions();
   LOG_INFO("found " + std::to_string(non_faulting_instructions.size())
                + " non faulting instructions");
@@ -356,22 +365,27 @@ void Core::OutputNonFaultingInstructions(const std::string& output_filename) {
 }
 
 std::vector<size_t> Core::FindNonFaultingInstructions() {
-  auto func_ptr = &osiris::CodeGenerator::CreateInstructionFromIndex;
+  //auto func_ptr = &osiris::CodeGenerator::CreateInstructionFromIndex;
   // 输出成员函数址
   //printf("Address of CreateInstructionFromIndex: %p\n", (void*)func_ptr);
   std::vector<size_t> non_faulting_instruction_indexes;
   byte_array empty_sequence;
-  asm volatile ("dsb sy");  // 执行数据同步屏障
-  asm volatile ("isb");     // 执行指令同步屏障
-  asm volatile("dmb sy");
-  asm volatile("nop");
+  asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
+  asm volatile ("isb": : : "memory");     // 执行指令同步屏障
+  asm volatile("dmb sy": : : "memory");
+  asm volatile("nop": : : "memory");
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {
     x86Instruction measurement_sequence = code_generator_.CreateInstructionFromIndex(inst_idx);
     std::cout<<measurement_sequence.assembly_code<<std::endl;
     int64_t result;
     std::cout<<"byte_representation.size()="<<measurement_sequence.byte_representation.size()<<std::endl;
     LOG_INFO("testing instruction " + measurement_sequence.assembly_code);
+
     //sleep(1);
+    asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
+    asm volatile ("isb": : : "memory");     // 执行指令同步屏障
+    asm volatile("dmb sy": : : "memory");
+    asm volatile("nop": : : "memory");
     volatile int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
