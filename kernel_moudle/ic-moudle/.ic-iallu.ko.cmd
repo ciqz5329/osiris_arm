@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/perf_event_open_test/kernel-init/ic-iallu.ko := ld -r -EL  -maarch64elf -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T scripts/module.lds -o /home/acmachines/perf_event_open_test/kernel-init/ic-iallu.ko /home/acmachines/perf_event_open_test/kernel-init/ic-iallu.o /home/acmachines/perf_event_open_test/kernel-init/ic-iallu.mod.o

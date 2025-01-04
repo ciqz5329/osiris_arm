@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/perf_event_open_test/kernel-init/ic-iallu.mod := printf '%s\n'   ic-iallu.o | awk '!x[$$0]++ { print("/home/acmachines/perf_event_open_test/kernel-init/"$$0) }' > /home/acmachines/perf_event_open_test/kernel-init/ic-iallu.mod

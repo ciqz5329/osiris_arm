@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/perf_event_open_test/kernel-init/modules.order := {   echo /home/acmachines/perf_event_open_test/kernel-init/ic-iallu.o; :; } > /home/acmachines/perf_event_open_test/kernel-init/modules.order

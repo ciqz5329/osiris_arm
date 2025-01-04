@@ -1,0 +1,1 @@
+savedcmd_/home/acmachines/perf_event_open_test/kernel-init/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/acmachines/perf_event_open_test/kernel-init/Module.symvers -T /home/acmachines/perf_event_open_test/kernel-init/modules.order -i Module.symvers -e 
