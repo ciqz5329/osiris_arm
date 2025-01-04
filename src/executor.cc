@@ -1066,6 +1066,12 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
   asm volatile ("isb": : : "memory");     // 执行指令同步屏障
   asm volatile("dmb sy": : : "memory");
   asm volatile("nop": : : "memory");
+  if (write(ic_iallu_fd_ , "trigger", 7) < 0) {
+    LOG_ERROR("Failed to execute ic iallu instruction at TestTriggerSequencea at ExecuteTestrun" );
+  }else
+  {
+    LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
+  }
 
   // get timing with trigger sequence
   for (int i = 0; i < no_testruns; i++) {
@@ -1300,7 +1306,6 @@ int Executor::ExecuteTestrun(int codepage_no, uint64_t* cycles_elapsed) {
   asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
   asm volatile ("isb": : : "memory");     // 执行指令同步屏障
   asm volatile("dmb sy": : : "memory");
-
   asm volatile("nop": : : "memory");
   return ExecuteCodePage(execution_code_pages_[codepage_no], cycles_elapsed);
 }
@@ -1668,20 +1673,15 @@ __attribute__((no_sanitize("address")))
     // jump to codepage
     // 更新函数指针
     //flush_instruction_cache(codepage, sizeof(kPagesize));
-
-    // // 使用内存屏障确保更新完成
-    // __asm__ volatile("ic iallu" ::: "memory");
-    // __asm__ volatile("isb" ::: "memory"); // 确保所有缓存一致性
-
     asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
     asm volatile ("isb": : : "memory");     // 执行指令同步屏障
     asm volatile("dmb sy": : : "memory");
     asm volatile("nop": : : "memory");
     if (write(ic_iallu_fd_, "trigger", 7) < 0) {
-      LOG_ERROR("Failed to execute ic iallu instruction");
+      LOG_ERROR("Failed to execute ic iallu instruction at in codepage");
     }else
     {
-      LOG_INFO("execute ic iallu instruction");
+      LOG_INFO("execute ic iallu instruction at in codepage");
     }
     //std::cout<<"start to execute codepage"<<std::endl;
     volatile uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
@@ -1693,10 +1693,10 @@ __attribute__((no_sanitize("address")))
     asm volatile("dmb sy": : : "memory");
     asm volatile("nop": : : "memory");
     if (write(ic_iallu_fd_, "trigger", 7) < 0) {
-      LOG_ERROR("Failed to execute ic iallu instruction");
+      LOG_ERROR("Failed to execute ic iallu instruction at out codepage");
     }else
     {
-      LOG_INFO("execute ic iallu instruction");
+      LOG_INFO("execute ic iallu instruction at out codepage");
     }
     *cycles_elapsed = cycle_diff;
    // std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;

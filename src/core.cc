@@ -386,6 +386,12 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
     asm volatile ("isb": : : "memory");     // 执行指令同步屏障
     asm volatile("dmb sy": : : "memory");
     asm volatile("nop": : : "memory");
+    if (write(executor_.ic_iallu_fd_ , "trigger", 7) < 0) {
+      LOG_ERROR("Failed to execute ic iallu instruction at TestTriggerSequence" );
+    }else
+    {
+      LOG_INFO("execute ic iallu instruction at TestTriggerSequence");
+    }
     volatile int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,

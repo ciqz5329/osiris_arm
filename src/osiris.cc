@@ -354,6 +354,7 @@ int main(int argc, char* argv[]) {
   if (command_line_arguments.cleanup) {
     LOG_INFO(" === Starting Cleanup Stage ===");
     osiris::Core osiris_core(kInstructionFile);
+
     asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
     asm volatile ("isb": : : "memory");     // 执行指令同步屏障
     asm volatile("dmb sy": : : "memory");
