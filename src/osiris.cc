@@ -337,6 +337,11 @@ int main(int argc, char* argv[]) {
   if (command_line_arguments.cleanup) {
     LOG_INFO(" === Starting Cleanup Stage ===");
     osiris::Core osiris_core(kInstructionFile);
+    asm volatile ("dsb sy");  // 执行数据同步屏障
+    asm volatile ("isb");     // 执行指令同步屏障
+    asm volatile("dmb sy");
+
+    asm volatile("nop");
     osiris_core.OutputNonFaultingInstructions(kInstructionFileCleaned);
     osiris_core.PrintFaultStatistics();
     exit(0);
@@ -364,6 +369,7 @@ int main(int argc, char* argv[]) {
         command_line_arguments.speculation_trigger,
         50);
   } else {
+    //默认情况下，非cleanup，我们只需要这个分支
     LOG_INFO("Searching with trigger sequence == measurement sequence");
     osiris_core.FindAndOutputTriggerpairsWithTriggerEqualsMeasurement(
         kOutputFolderTriggerEqualsMeasurement,

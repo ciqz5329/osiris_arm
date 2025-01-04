@@ -998,8 +998,11 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
                                   int64_t* cycles_difference) {
   // disabled for performance reasons (on 2020-09-03 by Osiris dev)
   // can be enabled again without losing too much performance
-  std::cout<<"size="<<trigger_sequence.size()<<std::endl;
-  byte_array nop_sequence = CreateSequenceOfNOPs(trigger_sequence.size());
+  //std::cout<<"size="<<trigger_sequence.size()<<std::endl;
+  assert(trigger_sequence.size() <=200);
+  byte_array nop_sequence ={
+    std::byte{0x1F}, std::byte{0x20}, std::byte{0x03}, std::byte{0xD5}
+  }; ;// = CreateSequenceOfNOPs(trigger_sequence.size());
 
   // vectors are preallocated and just get cleared on everyrun for performance
   results_trigger.clear();
@@ -1025,6 +1028,8 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
 
 
   }
+  asm volatile ("dsb sy");  // 执行数据同步屏障
+  asm volatile ("isb");     // 执行指令同步屏障
 
   // get timing with trigger sequence
   for (int i = 0; i < no_testruns; i++) {
@@ -1032,13 +1037,9 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
     uint64_t cycles_elapsed_trigger ;
     //__sync_synchronize();
     //std::cout<<&cycles_elapsed_trigger<<std::endl;
+    volatile int error = ExecuteTestrun(0, &cycles_elapsed_trigger);
     asm volatile ("dsb sy");  // 执行数据同步屏障
     asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
-    int error = ExecuteTestrun(0, &cycles_elapsed_trigger);
-    asm volatile ("dsb sy");  // 执行数据同步屏障
-    asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
     if (error) {
       // abort
       *cycles_difference = -1;
@@ -1057,14 +1058,10 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
   for (int i = 0; i < no_testruns; i++) {
     // get timing without trigger sequence
     uint64_t cycles_elapsed_notrigger ;
+    asm volatile ("dsb sy");  // 执行数据同步屏障
+    asm volatile ("isb");     // 执行指令同步屏障
+    volatile int error = ExecuteTestrun(1, &cycles_elapsed_notrigger);
 
-    asm volatile ("dsb sy");  // 执行数据同步屏障
-    asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
-    int error = ExecuteTestrun(1, &cycles_elapsed_notrigger);
-    asm volatile ("dsb sy");  // 执行数据同步屏障
-    asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
     if (error) {
       // abort
       *cycles_difference = -1;
@@ -1122,17 +1119,17 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
   InitializeCodePage(codepage_no);
 
   // prolog
-  AddProlog(codepage_no);
-  AddSerializeInstructionToCodePage(codepage_no);
+  //AddProlog(codepage_no);
+  //AddSerializeInstructionToCodePage(codepage_no);
 
   // first sequence
   // if we need more we also have to increase the guardian stack space
 
    assert(first_sequence_executions_amount <= 100);
    for (int i = 0; i < first_sequence_executions_amount; i++) {
-     AddInstructionToCodePage(codepage_no, first_sequence);
+     //AddInstructionToCodePage(codepage_no, first_sequence);
    }
-  AddSerializeInstructionToCodePage(codepage_no);
+  //AddSerializeInstructionToCodePage(codepage_no);
 
   // // second sequence
   AddInstructionToCodePage(codepage_no, second_sequence);
@@ -1145,7 +1142,7 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
 
   // return timing result and epilog
   MakeTimerResultReturnValue(codepage_no);
-  AddEpilog(codepage_no);
+  //AddEpilog(codepage_no);
 
   // make sure that we do not exceed page boundaries
   assert(code_pages_last_written_index_[codepage_no] < kPagesize);
@@ -1252,7 +1249,9 @@ int Executor::ExecuteTestrun(int codepage_no, uint64_t* cycles_elapsed) {
   assert(execution_code_pages_[codepage_no] != nullptr);
   asm volatile ("dsb sy");  // 执行数据同步屏障
   asm volatile ("isb");     // 执行指令同步屏障
-  asm volatile("SVC #0");
+  asm volatile("dmb sy");
+
+  asm volatile("nop");
   return ExecuteCodePage(execution_code_pages_[codepage_no], cycles_elapsed);
 }
 
@@ -1301,8 +1300,10 @@ void Executor::AddEpilog(int codepage_no) {
 
         AddInstructionToCodePage(codepage_no, INST_DSB_SY, sizeof(INST_DSB_SY) - 1);
         AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY) - 1);
-        constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
-        AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0) - 1);
+        //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
+        //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0) - 1);
+        constexpr char INST_NOP[] = "\x1f\x20\x03\xd5"; // ISB SY 0xD503201F
+        //AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP) - 1);
         //AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
 
 
@@ -1328,19 +1329,19 @@ void Executor::AddEpilog(int codepage_no) {
         constexpr char INST_LDP_X29_30[] = "\xFD\x7B\xC1\xA8"; // fd 7b c1 a8
 
         AddInstructionToCodePage(codepage_no, INST_SP_X29, sizeof(INST_SP_X29) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q15, sizeof(INST_LDR_Q15) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q14, sizeof(INST_LDR_Q14) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q13, sizeof(INST_LDR_Q13) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q12, sizeof(INST_LDR_Q12) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q11, sizeof(INST_LDR_Q11) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q10, sizeof(INST_LDR_Q10) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q9, sizeof(INST_LDR_Q9) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDR_Q8, sizeof(INST_LDR_Q8) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDP_X27_X28, sizeof(INST_LDP_X27_X28) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDP_X25_X26, sizeof(INST_LDP_X25_X26) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDP_X23_X24, sizeof(INST_LDP_X23_X24) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDP_X21_X22, sizeof(INST_LDP_X21_X22) - 1);
-        AddInstructionToCodePage(codepage_no, INST_LDP_X19_X20, sizeof(INST_LDP_X19_X20) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q15, sizeof(INST_LDR_Q15) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q14, sizeof(INST_LDR_Q14) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q13, sizeof(INST_LDR_Q13) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q12, sizeof(INST_LDR_Q12) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q11, sizeof(INST_LDR_Q11) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q10, sizeof(INST_LDR_Q10) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q9, sizeof(INST_LDR_Q9) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDR_Q8, sizeof(INST_LDR_Q8) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDP_X27_X28, sizeof(INST_LDP_X27_X28) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDP_X25_X26, sizeof(INST_LDP_X25_X26) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDP_X23_X24, sizeof(INST_LDP_X23_X24) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDP_X21_X22, sizeof(INST_LDP_X21_X22) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_LDP_X19_X20, sizeof(INST_LDP_X19_X20) - 1);
         AddInstructionToCodePage(codepage_no, INST_LDP_X29_30, sizeof(INST_LDP_X29_30) - 1);
 
         constexpr char INST_RET[] = "\xC0\x03\x5F\xD6"; // ret
@@ -1348,6 +1349,7 @@ void Executor::AddEpilog(int codepage_no) {
 }
 
  void Executor::AddProlog(int codepage_no) {
+  //dmb bf 3f 03 d5
         constexpr char INST_STP_X29_X30[] = "\xfd\x7B\xBF\xA9"; //fd 7b bf a9
         constexpr char INST_MOV_X29_SP[] = "\xFd\x03\x00\x91"; // fd 03 00 91
 
@@ -1368,38 +1370,43 @@ void Executor::AddEpilog(int codepage_no) {
 
         //constexpr char INST_SUB_SP_1000[] = "\xff\x07\x40\xd1"; // ff 23 00 d1
         AddInstructionToCodePage(codepage_no, INST_STP_X29_X30, sizeof(INST_STP_X29_X30) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STP_X19_X20, sizeof(INST_STP_X19_X20) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STP_X21_X22, sizeof(INST_STP_X21_X22) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STP_X23_X24, sizeof(INST_STP_X23_X24) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STP_X25_X26, sizeof(INST_STP_X25_X26) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STP_X27_X28, sizeof(INST_STP_X27_X28) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q8, sizeof(INST_STR_Q8) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q9, sizeof(INST_STR_Q9) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q10, sizeof(INST_STR_Q10) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q11, sizeof(INST_STR_Q11) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q12, sizeof(INST_STR_Q12) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q13, sizeof(INST_STR_Q13) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q14, sizeof(INST_STR_Q14) - 1);
-        AddInstructionToCodePage(codepage_no, INST_STR_Q15, sizeof(INST_STR_Q15) - 1);
-        AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
-        //AddInstructionToCodePage(codepage_no, INST_SUB_SP_1000, sizeof(INST_SUB_SP_1000) - 1);
-        //默认OP寄存器 X15,X16
-        constexpr char INST_MOV_X25_0[] = "\x19\x00\x80\xd2"; // 0f 00 80 d2
-        constexpr char INST_MOV_X24_0[] = "\x18\x00\x80\xd2"; // 10 00 80 d2
-        AddInstructionToCodePage(codepage_no, INST_MOV_X25_0, sizeof(INST_MOV_X25_0) - 1);
-        AddInstructionToCodePage(codepage_no, INST_MOV_X24_0, sizeof(INST_MOV_X24_0) - 1);
+        //AddInstructionToCodePage(codepage_no, INST_STP_X19_X20, sizeof(INST_STP_X19_X20) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STP_X21_X22, sizeof(INST_STP_X21_X22) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STP_X23_X24, sizeof(INST_STP_X23_X24) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STP_X25_X26, sizeof(INST_STP_X25_X26) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STP_X27_X28, sizeof(INST_STP_X27_X28) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q8, sizeof(INST_STR_Q8) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q9, sizeof(INST_STR_Q9) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q10, sizeof(INST_STR_Q10) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q11, sizeof(INST_STR_Q11) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q12, sizeof(INST_STR_Q12) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q13, sizeof(INST_STR_Q13) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q14, sizeof(INST_STR_Q14) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_STR_Q15, sizeof(INST_STR_Q15) - 1);
+         AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
+        // //AddInstructionToCodePage(codepage_no, INST_SUB_SP_1000, sizeof(INST_SUB_SP_1000) - 1);
+        // //默认OP寄存器 X15,X16
+        // constexpr char INST_MOV_X25_0[] = "\x19\x00\x80\xd2"; // 0f 00 80 d2
+        // constexpr char INST_MOV_X24_0[] = "\x18\x00\x80\xd2"; // 10 00 80 d2
+        // AddInstructionToCodePage(codepage_no, INST_MOV_X25_0, sizeof(INST_MOV_X25_0) - 1);
+        // AddInstructionToCodePage(codepage_no, INST_MOV_X24_0, sizeof(INST_MOV_X24_0) - 1);
     }
 
 void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   // insert CPUID to serialize instruction stream
   constexpr char INST_DSB_SY[] = "\x9f\x3f\x03\xd5"; // DSB SY
   constexpr char INST_ISB_SY[] = "\xdf\x3f\x03\xd5"; // ISB SY
-  constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
+  constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";
+  //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
+  //bf 3f 03 d5
   //01 00 00 d4
   //constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";
   AddInstructionToCodePage(codepage_no, INST_DSB_SY, sizeof(INST_DSB_SY)-1);
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
-  AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  constexpr char INST_NOP[] = "\x1f\x20\x03\xd5"; // ISB SY 0xD503201F
+  //AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP)-1);
 
 }
 
@@ -1420,8 +1427,10 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   // 添加 ARM 指令到代码页，每条指令长度为 4 字节
   AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
-  constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
-  AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
+  //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  constexpr char INST_NOP[] = "\x1f\x20\x03\xd5";  // ISB SY 0xD503201F
+  AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP)-1);
   //AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_MOV_X27_0, sizeof(INST_MOV_X27_0)-1);
   AddInstructionToCodePage(codepage_no, INST_MRS_X27_PMCCNTR_EL0, sizeof(INST_MRS_X27_PMCCNTR_EL0)-1);
@@ -1432,6 +1441,8 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   constexpr char INST_MOV_X0_15[] = "\xe0\x03\x0f\xaa";  // MOV X0, X15, e0 03 0f aa
   assert(code_pages_last_written_index_[codepage_no] + sizeof(INST_MOV_X0_15)-1 < kPagesize);
   AddInstructionToCodePage(codepage_no, INST_MOV_X0_15, sizeof(INST_MOV_X0_15) -1 );
+  constexpr char INST_RET[] = "\xC0\x03\x5F\xD6"; // ret
+  AddInstructionToCodePage(codepage_no, INST_RET, sizeof(INST_RET) - 1);
 
 }
 
@@ -1453,8 +1464,10 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 
   AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
-  constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
-  AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
+  //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
+  constexpr char INST_NOP[] = "\x1f\x20\x03\xd5"; // ISB SY 0xD503201F
+  AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP)-1);
   //AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   // MRS X0, PMCCNTR_EL0
 }
@@ -1611,23 +1624,25 @@ __attribute__((no_sanitize("address")))
 
     asm volatile ("dsb sy");  // 执行数据同步屏障
     asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
+    asm volatile("dmb sy");
+    asm volatile("nop");
     std::cout<<"start to execute codepage"<<std::endl;
-    uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
+    volatile uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
+    std::cout<<"finish to execute codepage"<<std::endl;
     //codepage  = codepage1;
     // set return argument
     asm volatile ("dsb sy");  // 执行数据同步屏障
     asm volatile ("isb");     // 执行指令同步屏障
-    asm volatile("SVC #0");
+    asm volatile("dmb sy");
+
+    asm volatile("nop");
     *cycles_elapsed = cycle_diff;
    // std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;
-
 #if DEBUGMODE == 1
     // unregister signal handler (if not in debugmode we do this in constructor/destructor as
     // this has a huge impact on the runtime)
     UnregisterFaultHandler<signals_to_handle.size()>(signals_to_handle);
 #endif
-
     return 0;
   } else {
     //ScanCodePage(codepage, kPagesize);
@@ -1642,10 +1657,12 @@ __attribute__((no_sanitize("address")))
 
     sigset_t signal_set;
     sigemptyset(&signal_set);
+    std::cout<<"error in execute codepage"<<std::endl;
     for (int sig : signals_to_handle) {
       sigaddset(&signal_set, sig);
     }
     sigprocmask(SIG_UNBLOCK, &signal_set, nullptr);
+
 
 #if DEBUGMODE == 1
     // unregister signal handler (if not in debugmode we do this in constructor/destructor as

@@ -20,6 +20,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 #include "logger.h"
 #include "utils.h"
@@ -85,6 +86,7 @@ CodeGenerator::CodeGenerator(const std::string& instructions_filename) {
     instruction_list_.push_back(instruction);
     instruction_idx++;
   }
+  std::cout<<"file read finish"<<std::endl;
 }
 
   //生成指令UID

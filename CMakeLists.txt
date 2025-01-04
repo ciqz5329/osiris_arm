@@ -28,6 +28,7 @@ set(SOURCE_FILES
 
 # 针对 ARM 平台的配置
 message(STATUS "Configuring for ARMv8-A architecture")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
 # 设置编译器标志
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DARM -march=armv8-a -mtune=cortex-a72")

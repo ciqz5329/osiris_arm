@@ -22,6 +22,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 
 #include "code_generator.h"
 #include "logger.h"
@@ -360,12 +361,18 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
   //printf("Address of CreateInstructionFromIndex: %p\n", (void*)func_ptr);
   std::vector<size_t> non_faulting_instruction_indexes;
   byte_array empty_sequence;
+  asm volatile ("dsb sy");  // 执行数据同步屏障
+  asm volatile ("isb");     // 执行指令同步屏障
+  asm volatile("dmb sy");
+  asm volatile("nop");
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {
     x86Instruction measurement_sequence = code_generator_.CreateInstructionFromIndex(inst_idx);
+    std::cout<<measurement_sequence.assembly_code<<std::endl;
     int64_t result;
-    std::cout<<measurement_sequence.byte_representation.size()<<std::endl;
+    std::cout<<"byte_representation.size()="<<measurement_sequence.byte_representation.size()<<std::endl;
     LOG_INFO("testing instruction " + measurement_sequence.assembly_code);
-    int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
+    //sleep(1);
+    volatile int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
                                               false,
