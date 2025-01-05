@@ -376,9 +376,9 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
   asm volatile("nop": : : "memory");
   for (size_t inst_idx = 0; inst_idx < code_generator_.GetNumberOfInstructions(); inst_idx++) {
     x86Instruction measurement_sequence = code_generator_.CreateInstructionFromIndex(inst_idx);
-    std::cout<<measurement_sequence.assembly_code<<std::endl;
+    //std::cout<<measurement_sequence.assembly_code<<std::endl;
     int64_t result;
-    std::cout<<"byte_representation.size()="<<measurement_sequence.byte_representation.size()<<std::endl;
+    //std::cout<<"byte_representation.size()="<<measurement_sequence.byte_representation.size()<<std::endl;
     LOG_INFO("testing instruction " + measurement_sequence.assembly_code);
 
     //sleep(1);
@@ -388,10 +388,11 @@ std::vector<size_t> Core::FindNonFaultingInstructions() {
     asm volatile("nop": : : "memory");
     if (write(executor_.ic_iallu_fd_ , "trigger", 7) < 0) {
       LOG_ERROR("Failed to execute ic iallu instruction at TestTriggerSequence" );
-    }else
-    {
-      LOG_INFO("execute ic iallu instruction at TestTriggerSequence");
     }
+    // else
+    // {
+    //   LOG_INFO("execute ic iallu instruction at TestTriggerSequence");
+    // }
     volatile int error = executor_.TestTriggerSequence(measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,
                                               measurement_sequence.byte_representation,

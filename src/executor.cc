@@ -1029,7 +1029,7 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
   // disabled for performance reasons (on 2020-09-03 by Osiris dev)
   // can be enabled again without losing too much performance
   //std::cout<<"size="<<trigger_sequence.size()<<std::endl;
-  std::cout<<"byte_representation.size()="<<trigger_sequence.size()<<std::endl;
+  //std::cout<<"byte_representation.size()="<<trigger_sequence.size()<<std::endl;
   assert(trigger_sequence.size() <=200);
   byte_array nop_sequence ={
     std::byte{0x1F}, std::byte{0x20}, std::byte{0x03}, std::byte{0xD5}
@@ -1062,13 +1062,20 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
 
 
   }
+  asm volatile(
+    "bl trigger_ic_iallu"  // 调用 trigger_ic_iallu 函数
+    :
+    :
+    : "x0", "x1", "x2", "x8", "x19", "memory"
+);
   asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
   asm volatile ("isb": : : "memory");     // 执行指令同步屏障
   asm volatile("dmb sy": : : "memory");
   asm volatile("nop": : : "memory");
   if (write(ic_iallu_fd_ , "trigger", 7) < 0) {
     LOG_ERROR("Failed to execute ic iallu instruction at TestTriggerSequencea at ExecuteTestrun" );
-  }else
+  }
+  else
   {
     LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
   }
@@ -1183,7 +1190,7 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
 
    assert(first_sequence_executions_amount <= 100);
    for (int i = 0; i < first_sequence_executions_amount; i++) {
-     //AddInstructionToCodePage(codepage_no, first_sequence);
+     AddInstructionToCodePage(codepage_no, first_sequence);
    }
   //AddSerializeInstructionToCodePage(codepage_no);
 
@@ -1452,6 +1459,8 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   constexpr char INST_DSB_SY[] = "\x9f\x3f\x03\xd5"; // DSB SY
   constexpr char INST_ISB_SY[] = "\xdf\x3f\x03\xd5"; // ISB SY
   constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";
+  //void (*func_ptr)() = trigger_ic_iallu;
+ // std::cout << "trigger_ic_iallu adr= " << reinterpret_cast<void*>(func_ptr) << std::endl;
   //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
   //bf 3f 03 d5
   //01 00 00 d4
@@ -1459,9 +1468,13 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_DSB_SY, sizeof(INST_DSB_SY)-1);
   AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+  // constexpr char INST_IC_FUN[] = "\x81\xdb\x00\x94";
+  // AddInstructionToCodePage(codepage_no, INST_IC_FUN, sizeof(INST_IC_FUN)-1);
   //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
   constexpr char INST_NOP[] = "\x1f\x20\x03\xd5"; // ISB SY 0xD503201F
   AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP)-1);
+
+
 
 }
 
@@ -1494,6 +1507,8 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
 }
 
   void Executor::MakeTimerResultReturnValue(int codepage_no) {
+  // constexpr char INST_IC_FUN[] = "\x81\xdb\x00\x94";
+  // AddInstructionToCodePage(codepage_no, INST_IC_FUN, sizeof(INST_IC_FUN)-1);
   constexpr char INST_MOV_X0_15[] = "\xe0\x03\x0f\xaa";  // MOV X0, X15, e0 03 0f aa
   assert(code_pages_last_written_index_[codepage_no] + sizeof(INST_MOV_X0_15)-1 < kPagesize);
   AddInstructionToCodePage(codepage_no, INST_MOV_X0_15, sizeof(INST_MOV_X0_15) -1 );
@@ -1699,6 +1714,7 @@ __attribute__((no_sanitize("address")))
       LOG_INFO("execute ic iallu instruction at out codepage");
     }
     *cycles_elapsed = cycle_diff;
+    std::cout<<"cycles_elapsed:"<<*cycles_elapsed<<std::endl;
    // std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;
 #if DEBUGMODE == 1
     // unregister signal handler (if not in debugmode we do this in constructor/destructor as
