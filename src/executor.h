@@ -26,6 +26,17 @@
 
 namespace osiris {
 
+
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
+        void trigger_ic_iallu();
+
+#ifdef __cplusplus
+    }
+#endif
+
 constexpr size_t kPagesize = 4096;
 
 
@@ -204,6 +215,7 @@ class Executor {
   /// acts as read/write memory for instructions
   ///
   std::array<void*, 2> execution_data_pages_;
+
 
   ///
   /// rwx page where we generate and execute code

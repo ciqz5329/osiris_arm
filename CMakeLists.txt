@@ -28,6 +28,7 @@ set(SOURCE_FILES
         src/logger.cc src/logger.h
         src/utils.cc src/utils.h
         src/filter.cc src/filter.h
+        src/ic_iallu_trigger.s  # 添加汇编文件
 )
 
 # 针对 ARM 平台的配置
@@ -43,6 +44,10 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUGMODE=1 -ggdb -fsaniti
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+
+# 设置汇编文件的编译规则
+enable_language(ASM)  # 启用汇编语言支持
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -march=armv8-a")  # 设置汇编标志
 
 # 设置 OpenSSL 和 Capstone 的路径
 set(OPENSSL_ROOT_DIR /usr/aarch64-linux-gnu)
