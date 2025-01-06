@@ -1465,10 +1465,10 @@ void  Executor::arm_v8_timing_init(void) {
          AddInstructionToCodePage(codepage_no, INST_MOV_X29_SP, sizeof(INST_MOV_X29_SP) - 1);
          AddInstructionToCodePage(codepage_no, INST_SUB_SP_1000, sizeof(INST_SUB_SP_1000) - 1);
         // //默认OP寄存器 X15,X16
-        constexpr char INST_MOV_X25_0[] = "\x19\x00\x80\xd2"; // 0f 00 80 d2
-        constexpr char INST_MOV_X24_0[] = "\x18\x00\x80\xd2"; // 10 00 80 d2
-        //AddInstructionToCodePage(codepage_no, INST_MOV_X25_0, sizeof(INST_MOV_X25_0) - 1);
-        //AddInstructionToCodePage(codepage_no, INST_MOV_X24_0, sizeof(INST_MOV_X24_0) - 1);
+        constexpr char INST_MOV_X24_0[] = "\xf8\x66\xa2\xd2"; // f8 66 a2 d2
+        constexpr char INST_MOV_X25_0[] = "\xf9\x66\xa2\xd2"; // f9 66 a2 d2
+        AddInstructionToCodePage(codepage_no, INST_MOV_X25_0, sizeof(INST_MOV_X25_0) - 1);
+        AddInstructionToCodePage(codepage_no, INST_MOV_X24_0, sizeof(INST_MOV_X24_0) - 1);
     }
 
 void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
@@ -1726,6 +1726,12 @@ __attribute__((no_sanitize("address")))
     {
       LOG_INFO("execute ic iallu instruction at in codepage");
     }
+
+    // asm volatile(
+    //   "mov x24, #0x13370000\n"
+    //   "ldr x24,[x24]\n"
+    // );
+
     //std::cout<<"start to execute codepage"<<std::endl;
     volatile uint64_t cycle_diff = ((uint64_t(*)()) codepage)();
     //std::cout<<"finish to execute codepage"<<std::endl;
