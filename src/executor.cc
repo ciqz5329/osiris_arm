@@ -1192,15 +1192,15 @@ void Executor::CreateTestrunCode(int codepage_no, const byte_array& first_sequen
    for (int i = 0; i < first_sequence_executions_amount; i++) {
      AddInstructionToCodePage(codepage_no, first_sequence);
    }
-  //AddSerializeInstructionToCodePage(codepage_no);
+  AddSerializeInstructionToCodePage(codepage_no);
 
   // // second sequence
   AddInstructionToCodePage(codepage_no, second_sequence);
   AddSerializeInstructionToCodePage(codepage_no);
   //
   // // time measurement sequence
-   AddTimerStartToCodePage(codepage_no);
-   AddInstructionToCodePage(codepage_no, measurement_sequence);
+  AddTimerStartToCodePage(codepage_no);
+  AddInstructionToCodePage(codepage_no, measurement_sequence);
   AddTimerEndToCodePage(codepage_no);
 
   // return timing result and epilog
@@ -1488,22 +1488,28 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   constexpr char INST_DMB_SY[] = "\xbf\x3f\x03\xd5";              // DMB SY
   constexpr char INST_DSB[] = "\x9f\x3f\x03\xd5";    // DSB SY
   constexpr char INST_ISB_SY[] = "\xdF\x3f\x03\xd5";// ISB SY
-  constexpr char INST_MOV_X27_0[] = "\x1b\x00\x80\xd2";          // MOV X9, #0  09 00 80 d2
+  constexpr char INST_MOV_X27_PCMR_EL0[] = "\x1b\x9c\x3b\xd5";//1b 9c 3b d5
+  constexpr char INST_ORR_X27_OX7[] = "\x7b\x0b\x40\xb2";
+  constexpr char INST_MOV_PCMR_EL0_X27[] = "\x1b\x9c\x1b\xd5";
   constexpr char INST_MRS_X27_PMCCNTR_EL0[] = "\x1b\x9d\x3b\xd5"; // MRS X9, PMCCNTR_EL0 09 9d 3b d5
   constexpr char INST_MOV_X26_X27[] = "\xfa\x03\x1b\xaa";          // MOV X10, X9 ea 03 09 aa
 
   // 添加 ARM 指令到代码页，每条指令长度为 4 字节
-  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
-  AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
-  AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+
   //constexpr char INST_SVC_0[] = "\x01\x00\x00\xd4"; // ISB SY
   //AddInstructionToCodePage(codepage_no, INST_SVC_0, sizeof(INST_SVC_0)-1);
   constexpr char INST_NOP[] = "\x1f\x20\x03\xd5";  // ISB SY 0xD503201F
   AddInstructionToCodePage(codepage_no, INST_NOP, sizeof(INST_NOP)-1);
 
+  AddInstructionToCodePage(codepage_no, INST_MOV_X27_PCMR_EL0, sizeof(INST_MOV_X27_PCMR_EL0)-1);
+  AddInstructionToCodePage(codepage_no, INST_ORR_X27_OX7, sizeof(INST_ORR_X27_OX7)-1);
+  AddInstructionToCodePage(codepage_no, INST_MOV_PCMR_EL0_X27, sizeof(INST_MOV_PCMR_EL0_X27)-1);
   //AddInstructionToCodePage(codepage_no, INST_MOV_X27_0, sizeof(INST_MOV_X27_0)-1);
   AddInstructionToCodePage(codepage_no, INST_MRS_X27_PMCCNTR_EL0, sizeof(INST_MRS_X27_PMCCNTR_EL0)-1);
   AddInstructionToCodePage(codepage_no, INST_MOV_X26_X27, sizeof(INST_MOV_X26_X27)-1);
+  AddInstructionToCodePage(codepage_no, INST_DMB_SY, sizeof(INST_DMB_SY)-1);
+  AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
+  AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
 }
 
   void Executor::MakeTimerResultReturnValue(int codepage_no) {
@@ -1527,6 +1533,10 @@ void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
   constexpr char INST_MRS_X27_PMCCNTR_EL0[] = "\x1b\x9d\x3b\xd5"; // MRS X9, PMCCNTR_EL0 09 9d 3b d5
   constexpr char INST_SUB_X15_X27_X26[] = "\x6f\x03\x1a\xcb";  // SUB X15, X9, X10 20 01 0a cb
   // 添加 ARM 指令到代码页，每条指令长度为 4 字节
+
+  AddInstructionToCodePage(codepage_no, INST_DSB, sizeof(INST_DSB)-1);
+  AddInstructionToCodePage(codepage_no, INST_ISB_SY, sizeof(INST_ISB_SY)-1);
+
 
   //AddInstructionToCodePage(codepage_no, INST_MOV_X27_0, sizeof(INST_MOV_X27_0)-1);                // MOV X0, #0
   AddInstructionToCodePage(codepage_no, INST_MRS_X27_PMCCNTR_EL0, sizeof(INST_MRS_X27_PMCCNTR_EL0)-1);                  // ISB SY
