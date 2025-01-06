@@ -525,4 +525,22 @@
         <operand idx="4" name="lsb" type="imm" width="64" range="0-31" ></operand>
     </instruction>
 
+    <instruction asm="DC" category="System" extension="ARMv8" iclass="DC" iform="DC_cache_maintenance" isa-set="A64">
+        <operand idx="1" name="dc_op" type="enum" description="Cache operation type">
+            <option value="000:0110:001">IVAC</option>
+            <option value="000:0110:010">ISW</option>
+            <option value="000:1110:010">CISW</option>
+            <option value="011:1010:001">CVAC</option>
+            <option value="011:1011:001">CVAU</option>
+            <option value="011:1110:001">CIVAC</option>
+            <option value="011:0100:001">ZVA</option>
+            <option value="011:0100:011">GVA</option>
+            <option value="011:1110:011">CIGVAC</option>
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="64">X0,X1,...,X31</operand>
+    </instruction>
+
+
+
+
 </root>

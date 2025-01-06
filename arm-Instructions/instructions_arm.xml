@@ -525,4 +525,40 @@
         <operand idx="4" name="lsb" type="imm" width="64" range="0-31" ></operand>
     </instruction>
 
+
+    <instruction asm="DC" category="System" extension="ARMv8" iclass="DC" iform="DC_cache_maintenance" isa-set="A64">
+        <operand idx="1" name="dc_op" type="enum" description="Cache operation type">
+            <option value="000:0110:001">IVAC</option>
+            <option value="000:0110:010">ISW</option>
+            <option value="000:1110:010">CISW</option>
+            <option value="011:1010:001">CVAC</option>
+            <option value="011:1011:001">CVAU</option>
+            <option value="011:1110:001">CIVAC</option>
+            <option value="011:0100:001">ZVA</option>
+            <option value="011:0100:011">GVA</option>
+            <option value="011:1110:011">CIGVAC</option>
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="64">X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="LDR" category="LoadStore" extension="ARMv8" iclass="LDR_register" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination register">
+            X0,X1,X2,...,X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0,X1,X2,...,X30,SP
+        </operand>
+        <operand idx="3" name="extend" type="enum" Optional="true" description="Index extend/shift specifier">
+            <option value="010">UXTW</option>
+            <option value="011">LSL</option>a
+            <option value="110">SXTW</option>
+            <option value="111">SXTX</option>
+        </operand>
+        <operand idx="4" name="amount" type="imm" width="2" Optional="true" description="Index shift amount">
+            <option value="0">#0</option>
+            <option value="1">#3</option>
+        </operand>
+    </instruction>
+
+
 </root>

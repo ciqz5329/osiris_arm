@@ -1,51 +1,219 @@
 byte_representation;assembly_code;category;extension;isa_set
-GAMYqw==;ADDS X24, X24, X24;DataProc;ARMv8;A64
-GAMYqw==;ADDS X24, X24, X24;DataProc;ARMv8;A64
-GAMAsQ==;ADDS X24, X24, #0;DataProc;ARMv8;A64
-GAMAkQ==;ADD X24, X24, #0;DataProc;ARMv8;A64
-GAMYiw==;ADD X24, X24, X24;DataProc;ARMv8;A64
-GAMYiw==;ADD X24, X24, X24;DataProc;ARMv8;A64
-GAMYug==;ADCS X24, X24, X24;DataProc;ARMv8;A64
-GH9Akg==;AND X24, X24, #0xFFFFFFFF;DataProc;ARMv8;A64
-GAMYmg==;ADC X24, X24, X24;DataProc;ARMv8;A64
+GAMYmg==;ADC x24, x24, x24;DataProc;ARMv8;A64
+GANAkQ==;ADD x24, x24, #0, LSL #12;DataProc;ARMv8;A64
+GAMAkQ==;ADD x24, x24, #0, LSL #0;DataProc;ARMv8;A64
+GAMYug==;ADCS x24, x24, x24;DataProc;ARMv8;A64
+GAMAsQ==;ADDS x24, x24, #0, LSL #0;DataProc;ARMv8;A64
+GAMYiw==;ADD x24, x24, x24;DataProc;ARMv8;A64
+GAMYqw==;ADDS x24, x24, x24;DataProc;ARMv8;A64
+GH9A8g==;ANDS x24, x24, #0xFFFFFFFF;DataProc;ARMv8;A64
+GANAsQ==;ADDS x24, x24, #0, LSL #12;DataProc;ARMv8;A64
 DwAAEA==;ADR X15, 0;DataProc;ARMv8;A64
-GH9A8g==;ANDS X24, X24, #0xFFFFFFFF;DataProc;ARMv8;A64
-GAMY6g==;ANDS X24, X24, X24;DataProc;ARMv8;A64
-GAM4ig==;BIC X24, X24, X24;Bitwise;FEAT_ASM;A64
-GAMYig==;AND X24, X24, X24;DataProc;ARMv8;A64
-GP9Akw==;ASR X24, X24, #0;DataProc;ARMv8;A64
-GANAsw==;BFXIL X24, X24, #0, 1;Bitfield;FEAT_ASMv8p2;A64
-GCvYmg==;ASR X24, X24, X24;DataProc;ARMv8;A64
-GCvYmg==;ASRV X24, X24, X24;DataProc;ARMv8;A64
-GANAsw==;BFM X24, X24, #0, #0;Bitfield;FEAT_ASMv8p2;A64
-GANAsw==;BFI X24, X24, #0, 1;Bitfield;FEAT_ASMv8p2;A64
-GAM46g==;BICS X24, X24, X24;Bitwise;FEAT_ASM;A64
-AAtA+g==;CCMP X24, #0, #0, EQ;DataProc;ARMv8;A64
-AAtAug==;CCMN X24, #0, #0, EQ;DataProc;ARMv8;A64
-AANYug==;CCMN X24, X24, #0, EQ;DataProc;ARMv8;A64
-AANY+g==;CCMP X24, X24, #0, EQ;DataProc;ARMv8;A64
+GH9Akg==;AND x24, x24, #0xFFFFFFFF;DataProc;ARMv8;A64
+GCvYmg==;ASR x24, x24, x24;DataProc;ARMv8;A64
+GANAsw==;BFI x24, x24, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+GP9Akw==;ASR x24, x24, #0;DataProc;ARMv8;A64
+GANAsw==;BFXIL x24, x24, #0, 1;Bitfield;FEAT_ASMv8p2;A64
+GANAsw==;BFM x24, x24, #0, #0;Bitfield;FEAT_ASMv8p2;A64
+GCvYmg==;ASRV x24, x24, x24;DataProc;ARMv8;A64
+AAtAug==;CCMN x24, #0, #0, EQ;DataProc;ARMv8;A64
+AAAg1A==;BRK #0;Control;FEAT_BTI;A64
+AFtAug==;CCMN x24, #0, #0, PL;DataProc;ARMv8;A64
+ADtAug==;CCMN x24, #0, #0, CC;DataProc;ARMv8;A64
+AEtAug==;CCMN x24, #0, #0, MI;DataProc;ARMv8;A64
+ACtAug==;CCMN x24, #0, #0, CS;DataProc;ARMv8;A64
+ABtAug==;CCMN x24, #0, #0, NE;DataProc;ARMv8;A64
+AItAug==;CCMN x24, #0, #0, HI;DataProc;ARMv8;A64
+AGtAug==;CCMN x24, #0, #0, VS;DataProc;ARMv8;A64
+AHtAug==;CCMN x24, #0, #0, VC;DataProc;ARMv8;A64
+AJtAug==;CCMN x24, #0, #0, LS;DataProc;ARMv8;A64
+AKtAug==;CCMN x24, #0, #0, GE;DataProc;ARMv8;A64
+AMtAug==;CCMN x24, #0, #0, GT;DataProc;ARMv8;A64
+ABNYug==;CCMN x24, x24, #0, NE;DataProc;ARMv8;A64
+AOtAug==;CCMN x24, #0, #0, AL;DataProc;ARMv8;A64
+AANYug==;CCMN x24, x24, #0, EQ;DataProc;ARMv8;A64
+ADNYug==;CCMN x24, x24, #0, CC;DataProc;ARMv8;A64
+ACNYug==;CCMN x24, x24, #0, CS;DataProc;ARMv8;A64
+ANtAug==;CCMN x24, #0, #0, LE;DataProc;ARMv8;A64
+ALtAug==;CCMN x24, #0, #0, LT;DataProc;ARMv8;A64
+AENYug==;CCMN x24, x24, #0, MI;DataProc;ARMv8;A64
+AFNYug==;CCMN x24, x24, #0, PL;DataProc;ARMv8;A64
+AGNYug==;CCMN x24, x24, #0, VS;DataProc;ARMv8;A64
+AINYug==;CCMN x24, x24, #0, HI;DataProc;ARMv8;A64
+AHNYug==;CCMN x24, x24, #0, VC;DataProc;ARMv8;A64
+AJNYug==;CCMN x24, x24, #0, LS;DataProc;ARMv8;A64
+ALNYug==;CCMN x24, x24, #0, LT;DataProc;ARMv8;A64
+AKNYug==;CCMN x24, x24, #0, GE;DataProc;ARMv8;A64
+ANNYug==;CCMN x24, x24, #0, LE;DataProc;ARMv8;A64
+AMNYug==;CCMN x24, x24, #0, GT;DataProc;ARMv8;A64
+AONYug==;CCMN x24, x24, #0, AL;DataProc;ARMv8;A64
+ABtA+g==;CCMP x24, #0, #0, NE;DataProc;ARMv8;A64
+ADtA+g==;CCMP x24, #0, #0, CC;DataProc;ARMv8;A64
+ACtA+g==;CCMP x24, #0, #0, CS;DataProc;ARMv8;A64
+AFtA+g==;CCMP x24, #0, #0, PL;DataProc;ARMv8;A64
+AAtA+g==;CCMP x24, #0, #0, EQ;DataProc;ARMv8;A64
+AEtA+g==;CCMP x24, #0, #0, MI;DataProc;ARMv8;A64
+AHtA+g==;CCMP x24, #0, #0, VC;DataProc;ARMv8;A64
+AGtA+g==;CCMP x24, #0, #0, VS;DataProc;ARMv8;A64
+AItA+g==;CCMP x24, #0, #0, HI;DataProc;ARMv8;A64
+AKtA+g==;CCMP x24, #0, #0, GE;DataProc;ARMv8;A64
+AOtA+g==;CCMP x24, #0, #0, AL;DataProc;ARMv8;A64
+AMtA+g==;CCMP x24, #0, #0, GT;DataProc;ARMv8;A64
+ALtA+g==;CCMP x24, #0, #0, LT;DataProc;ARMv8;A64
+AJtA+g==;CCMP x24, #0, #0, LS;DataProc;ARMv8;A64
+AANY+g==;CCMP x24, x24, #0, EQ;DataProc;ARMv8;A64
+ABNY+g==;CCMP x24, x24, #0, NE;DataProc;ARMv8;A64
+ANtA+g==;CCMP x24, #0, #0, LE;DataProc;ARMv8;A64
+ACNY+g==;CCMP x24, x24, #0, CS;DataProc;ARMv8;A64
+ADNY+g==;CCMP x24, x24, #0, CC;DataProc;ARMv8;A64
+AENY+g==;CCMP x24, x24, #0, MI;DataProc;ARMv8;A64
+AGNY+g==;CCMP x24, x24, #0, VS;DataProc;ARMv8;A64
+AFNY+g==;CCMP x24, x24, #0, PL;DataProc;ARMv8;A64
+AHNY+g==;CCMP x24, x24, #0, VC;DataProc;ARMv8;A64
+AJNY+g==;CCMP x24, x24, #0, LS;DataProc;ARMv8;A64
+AINY+g==;CCMP x24, x24, #0, HI;DataProc;ARMv8;A64
+AKNY+g==;CCMP x24, x24, #0, GE;DataProc;ARMv8;A64
+ALNY+g==;CCMP x24, x24, #0, LT;DataProc;ARMv8;A64
+AMNY+g==;CCMP x24, x24, #0, GT;DataProc;ARMv8;A64
+GAeYmg==;CINC x24, x24, NE;DataProc;ARMv8;A64
+GCeYmg==;CINC x24, x24, CC;DataProc;ARMv8;A64
+GFeYmg==;CINC x24, x24, MI;DataProc;ARMv8;A64
+ANNY+g==;CCMP x24, x24, #0, LE;DataProc;ARMv8;A64
+GBeYmg==;CINC x24, x24, EQ;DataProc;ARMv8;A64
+AONY+g==;CCMP x24, x24, #0, AL;DataProc;ARMv8;A64
+GDeYmg==;CINC x24, x24, CS;DataProc;ARMv8;A64
+GEeYmg==;CINC x24, x24, PL;DataProc;ARMv8;A64
+GGeYmg==;CINC x24, x24, VC;DataProc;ARMv8;A64
+GHeYmg==;CINC x24, x24, VS;DataProc;ARMv8;A64
+GJeYmg==;CINC x24, x24, HI;DataProc;ARMv8;A64
+GIeYmg==;CINC x24, x24, LS;DataProc;ARMv8;A64
+GKeYmg==;CINC x24, x24, LT;DataProc;ARMv8;A64
+GNeYmg==;CINC x24, x24, GT;DataProc;ARMv8;A64
+GLeYmg==;CINC x24, x24, GE;DataProc;ARMv8;A64
+GMeYmg==;CINC x24, x24, LE;DataProc;ARMv8;A64
+GAOY2g==;CINV x24, x24, NE;DataProc;ARMv8;A64
+GCOY2g==;CINV x24, x24, CC;DataProc;ARMv8;A64
+GFOY2g==;CINV x24, x24, MI;DataProc;ARMv8;A64
+GBOY2g==;CINV x24, x24, EQ;DataProc;ARMv8;A64
+GDOY2g==;CINV x24, x24, CS;DataProc;ARMv8;A64
+GHOY2g==;CINV x24, x24, VS;DataProc;ARMv8;A64
+GEOY2g==;CINV x24, x24, PL;DataProc;ARMv8;A64
+GIOY2g==;CINV x24, x24, LS;DataProc;ARMv8;A64
+GGOY2g==;CINV x24, x24, VC;DataProc;ARMv8;A64
+GJOY2g==;CINV x24, x24, HI;DataProc;ARMv8;A64
+GLOY2g==;CINV x24, x24, GE;DataProc;ARMv8;A64
+GKOY2g==;CINV x24, x24, LT;DataProc;ARMv8;A64
+GNOY2g==;CINV x24, x24, GT;DataProc;ARMv8;A64
 XzAD1Q==;CLREX #0;Memory;ARMv8;A64
-GBeYmg==;CINC X24, X24, EQ;DataProc;ARMv8;A64
-GBOY2g==;CINV X24, X24, EQ;DataProc;ARMv8;A64
-GBfA2g==;CLS X24, X24;Arithmetic;ARMv8;A64
-GBPA2g==;CLZ X24, X24;Bitwise;ARMv8;A64
-HwMY6w==;CMP X24, X24;DataProc;ARMv8;A64
-HwMYqw==;CMN X24, X24;DataProc;ARMv8;A64
-HwMY6w==;CMP X24, X24;DataProc;ARMv8;A64
-HwMAsQ==;CMN X24, #0;DataProc;ARMv8;A64
-HwMA8Q==;CMP X24, #0;DataProc;ARMv8;A64
-HwMYqw==;CMN X24, X24;DataProc;ARMv8;A64
-nyID1Q==;CSDB;DataProc;ARMv8.5;A64
-GBeY2g==;CNEG X24, X24, EQ;DataProc;ARMv8.5;A64
-GAOYmg==;CSEL X24, X24, X24, EQ;DataProc;ARMv8.5;A64
-+Befmg==;CSET X24, EQ;DataProc;ARMv8.5;A64
-+BOf2g==;CSETM X24, EQ;DataProc;ARMv8.5;A64
-GAeYmg==;CSINC X24, X24, X24, EQ;DataProc;ARMv8.5;A64
-vzAD1Q==;DMB #0;MemoryBarrier;ARMv8;A64
-GAeY2g==;CSNEG X24, X24, X24, EQ;DataProc;ARMv8.5;A64
-3yAD1Q==;DGH;Hint;ARMv8.5;A64
-nzAD1Q==;DSB #0;MemoryBarrier;ARMv8;A64
-GAM4yg==;EON X24, X24, X24;DataProc;ARMv8;A64
-GANA0g==;EOR X24, X24, #1;DataProc;ARMv8;A64
-GAPYkw==;EXTR X24, X24, X24, #0;DataProc;ARMv8;A64
-GAMYyg==;EOR X24, X24, X24;DataProc;ARMv8;A64
+GBfA2g==;CLS x24, x24;Arithmetic;ARMv8;A64
+GBPA2g==;CLZ x24, x24;Bitwise;ARMv8;A64
+GMOY2g==;CINV x24, x24, LE;DataProc;ARMv8;A64
+HwNAsQ==;CMN x24, #0, LSL #12;DataProc;ARMv8;A64
+HwMYqw==;CMN x24, x24;DataProc;ARMv8;A64
+HwMAsQ==;CMN x24, #0, LSL #0;DataProc;ARMv8;A64
+HwMA8Q==;CMP x24, #0, LSL #0;DataProc;ARMv8;A64
+HwMY6w==;CMP x24, x24;DataProc;ARMv8;A64
+HwNA8Q==;CMP x24, #0, LSL #12;DataProc;ARMv8;A64
+GAeY2g==;CNEG x24, x24, NE;DataProc;ARMv8.5;A64
+GCeY2g==;CNEG x24, x24, CC;DataProc;ARMv8.5;A64
+GBeY2g==;CNEG x24, x24, EQ;DataProc;ARMv8.5;A64
+GDeY2g==;CNEG x24, x24, CS;DataProc;ARMv8.5;A64
+GHeY2g==;CNEG x24, x24, VS;DataProc;ARMv8.5;A64
+GFeY2g==;CNEG x24, x24, MI;DataProc;ARMv8.5;A64
+GGeY2g==;CNEG x24, x24, VC;DataProc;ARMv8.5;A64
+GEeY2g==;CNEG x24, x24, PL;DataProc;ARMv8.5;A64
+GLeY2g==;CNEG x24, x24, GE;DataProc;ARMv8.5;A64
+GJeY2g==;CNEG x24, x24, HI;DataProc;ARMv8.5;A64
+GKeY2g==;CNEG x24, x24, LT;DataProc;ARMv8.5;A64
+GIeY2g==;CNEG x24, x24, LS;DataProc;ARMv8.5;A64
+GMeY2g==;CNEG x24, x24, LE;DataProc;ARMv8.5;A64
+GNeY2g==;CNEG x24, x24, GT;DataProc;ARMv8.5;A64
+nyID1Q==;CSDB ;DataProc;ARMv8.5;A64
+GAOYmg==;CSEL x24, x24, x24, EQ;DataProc;ARMv8.5;A64
+GCOYmg==;CSEL x24, x24, x24, CS;DataProc;ARMv8.5;A64
+GDOYmg==;CSEL x24, x24, x24, CC;DataProc;ARMv8.5;A64
+GEOYmg==;CSEL x24, x24, x24, MI;DataProc;ARMv8.5;A64
+GBOYmg==;CSEL x24, x24, x24, NE;DataProc;ARMv8.5;A64
+GGOYmg==;CSEL x24, x24, x24, VS;DataProc;ARMv8.5;A64
+GFOYmg==;CSEL x24, x24, x24, PL;DataProc;ARMv8.5;A64
+GHOYmg==;CSEL x24, x24, x24, VC;DataProc;ARMv8.5;A64
+GIOYmg==;CSEL x24, x24, x24, HI;DataProc;ARMv8.5;A64
+GJOYmg==;CSEL x24, x24, x24, LS;DataProc;ARMv8.5;A64
+GMOYmg==;CSEL x24, x24, x24, GT;DataProc;ARMv8.5;A64
+GLOYmg==;CSEL x24, x24, x24, LT;DataProc;ARMv8.5;A64
+GNOYmg==;CSEL x24, x24, x24, LE;DataProc;ARMv8.5;A64
+GKOYmg==;CSEL x24, x24, x24, GE;DataProc;ARMv8.5;A64
++Befmg==;CSET x24, EQ;DataProc;ARMv8.5;A64
+GOOYmg==;CSEL x24, x24, x24, AL;DataProc;ARMv8.5;A64
++Defmg==;CSET x24, CS;DataProc;ARMv8.5;A64
++Aefmg==;CSET x24, NE;DataProc;ARMv8.5;A64
++Cefmg==;CSET x24, CC;DataProc;ARMv8.5;A64
++Eefmg==;CSET x24, PL;DataProc;ARMv8.5;A64
++Fefmg==;CSET x24, MI;DataProc;ARMv8.5;A64
++Hefmg==;CSET x24, VS;DataProc;ARMv8.5;A64
++Gefmg==;CSET x24, VC;DataProc;ARMv8.5;A64
++Jefmg==;CSET x24, HI;DataProc;ARMv8.5;A64
++Iefmg==;CSET x24, LS;DataProc;ARMv8.5;A64
++Lefmg==;CSET x24, GE;DataProc;ARMv8.5;A64
++Kefmg==;CSET x24, LT;DataProc;ARMv8.5;A64
++Nefmg==;CSET x24, GT;DataProc;ARMv8.5;A64
++Mefmg==;CSET x24, LE;DataProc;ARMv8.5;A64
++AOf2g==;CSETM x24, NE;DataProc;ARMv8.5;A64
++DOf2g==;CSETM x24, CS;DataProc;ARMv8.5;A64
++FOf2g==;CSETM x24, MI;DataProc;ARMv8.5;A64
++COf2g==;CSETM x24, CC;DataProc;ARMv8.5;A64
++BOf2g==;CSETM x24, EQ;DataProc;ARMv8.5;A64
++HOf2g==;CSETM x24, VS;DataProc;ARMv8.5;A64
++EOf2g==;CSETM x24, PL;DataProc;ARMv8.5;A64
++GOf2g==;CSETM x24, VC;DataProc;ARMv8.5;A64
++JOf2g==;CSETM x24, HI;DataProc;ARMv8.5;A64
++LOf2g==;CSETM x24, GE;DataProc;ARMv8.5;A64
++IOf2g==;CSETM x24, LS;DataProc;ARMv8.5;A64
++KOf2g==;CSETM x24, LT;DataProc;ARMv8.5;A64
++NOf2g==;CSETM x24, GT;DataProc;ARMv8.5;A64
++MOf2g==;CSETM x24, LE;DataProc;ARMv8.5;A64
+GAeYmg==;CSINC x24, x24, x24, EQ;DataProc;ARMv8.5;A64
+GBeYmg==;CSINC x24, x24, x24, NE;DataProc;ARMv8.5;A64
+GCeYmg==;CSINC x24, x24, x24, CS;DataProc;ARMv8.5;A64
+GGeYmg==;CSINC x24, x24, x24, VS;DataProc;ARMv8.5;A64
+GDeYmg==;CSINC x24, x24, x24, CC;DataProc;ARMv8.5;A64
+GEeYmg==;CSINC x24, x24, x24, MI;DataProc;ARMv8.5;A64
+GIeYmg==;CSINC x24, x24, x24, HI;DataProc;ARMv8.5;A64
+GFeYmg==;CSINC x24, x24, x24, PL;DataProc;ARMv8.5;A64
+GHeYmg==;CSINC x24, x24, x24, VC;DataProc;ARMv8.5;A64
+GLeYmg==;CSINC x24, x24, x24, LT;DataProc;ARMv8.5;A64
+GJeYmg==;CSINC x24, x24, x24, LS;DataProc;ARMv8.5;A64
+GMeYmg==;CSINC x24, x24, x24, GT;DataProc;ARMv8.5;A64
+GNeYmg==;CSINC x24, x24, x24, LE;DataProc;ARMv8.5;A64
+GKeYmg==;CSINC x24, x24, x24, GE;DataProc;ARMv8.5;A64
+GOeYmg==;CSINC x24, x24, x24, AL;DataProc;ARMv8.5;A64
+GAeY2g==;CSNEG x24, x24, x24, EQ;DataProc;ARMv8.5;A64
+GCeY2g==;CSNEG x24, x24, x24, CS;DataProc;ARMv8.5;A64
+GDeY2g==;CSNEG x24, x24, x24, CC;DataProc;ARMv8.5;A64
+GBeY2g==;CSNEG x24, x24, x24, NE;DataProc;ARMv8.5;A64
+GEeY2g==;CSNEG x24, x24, x24, MI;DataProc;ARMv8.5;A64
+GFeY2g==;CSNEG x24, x24, x24, PL;DataProc;ARMv8.5;A64
+GHeY2g==;CSNEG x24, x24, x24, VC;DataProc;ARMv8.5;A64
+GGeY2g==;CSNEG x24, x24, x24, VS;DataProc;ARMv8.5;A64
+GJeY2g==;CSNEG x24, x24, x24, LS;DataProc;ARMv8.5;A64
+GIeY2g==;CSNEG x24, x24, x24, HI;DataProc;ARMv8.5;A64
+GKeY2g==;CSNEG x24, x24, x24, GE;DataProc;ARMv8.5;A64
+GLeY2g==;CSNEG x24, x24, x24, LT;DataProc;ARMv8.5;A64
+GMeY2g==;CSNEG x24, x24, x24, GT;DataProc;ARMv8.5;A64
+GNeY2g==;CSNEG x24, x24, x24, LE;DataProc;ARMv8.5;A64
+GOeY2g==;CSNEG x24, x24, x24, AL;DataProc;ARMv8.5;A64
+AwCg1A==;DCPS3 #0;Control;ARMv8.5;A64
+AgCg1A==;DCPS2 #0;Control;ARMv8.5;A64
+AQCg1A==;DCPS1 #0;Control;ARMv8.5;A64
+3yAD1Q==;DGH ;Hint;ARMv8.5;A64
+4AO/1g==;DRPS ;Debug;ARMv8;A64
+GANA0g==;EOR x24, x24, #1;DataProc;ARMv8;A64
+GAPYkw==;EXTR x24, x24, x24, #0;DataProc;ARMv8;A64
+WHYI1Q==;DC ISW, x24;System;ARMv8;A64
+OHYI1Q==;DC IVAC, x24;System;ARMv8;A64
+WH4I1Q==;DC CISW, x24;System;ARMv8;A64
+OHoL1Q==;DC CVAC, x24;System;ARMv8;A64
+OHsL1Q==;DC CVAU, x24;System;ARMv8;A64
+OH4L1Q==;DC CIVAC, x24;System;ARMv8;A64
+OHQL1Q==;DC ZVA, x24;System;ARMv8;A64
+OANA+Q==;LDR x24, [X25];LoadStore;ARMv8;A64

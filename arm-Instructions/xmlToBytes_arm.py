@@ -4,6 +4,7 @@ from multiprocessing import Process, Queue
 import base64
 import os
 from pwn import *
+from itertools import product
 
 THREAD_COUNT = min(10, os.cpu_count() or 1)
 
@@ -68,8 +69,8 @@ def worker_func(input_queue, output_queue):
 
 def parse_operands(instrNode):
     """
-    解析 <instruction> 节点下的 <operand> 子节点，并组合成完整的汇编指令文本。
-    操作数的数量不固定，按需动态拼接所有操作数。
+    解析 <instruction> 节点下的 <operand> 子节点，并组合成所有可能的汇编指令文本。
+    支持动态生成所有枚举值的组合。
     """
     asm_code = instrNode.attrib['asm']
     operands = []
@@ -80,49 +81,43 @@ def parse_operands(instrNode):
         operandName = operandNode.attrib['name']
 
         if operandType == 'reg':
-            # 默认使用第一个寄存器
+            # 提取寄存器列表
             registers = operandNode.text.split(',')
-            default_value = operandNode.attrib.get('default', None)
-            reg_value = default_value if default_value else "X24"  # 默认值处理
-            operands.append(reg_value)
+            default_value = operandNode.attrib.get('default', "x24")  # 默认值为x24
+            if operandNode.attrib.get("Optional", "") == "[]":  # 如果属性 Optional 明确指定为 "[]"
+                default_value = f"[{default_value.upper()}]"   # 使用大写 X24 并加上 []
+            operands.append([default_value])  # 单个寄存器用列表包装
 
-        elif operandType == 'enum':
-            # 针对移位类型的简单映射
-            operandOptional = operandNode.attrib.get('Optional', '')
-            if (operandName == 'shift' or operandName=='extend')and operandOptional == 'true':
-                continue
+        elif operandType == 'enum' and operandName != 'extend':
+            # 提取所有枚举值
             options = operandNode.findall('option')
-            if options:
-                value = options[0].attrib.get('value', '')
-                if value in ['00', '01', '10']:
-                    shift_map = {'00': 'LSL', '01': 'LSR', '10': 'ASR'}
-                    operands.append(shift_map.get(value, 'LSL'))
-        elif operandType == 'imm':
-            operandOptional = operandNode.attrib.get('Optional', '')
+            enum_values = [option.text for option in options]  # 提取标签内容（如 IVAC）
+            operands.append(enum_values)
 
-            if (operandName == 'amount' or operandName=='shift') and operandOptional == 'true':
-                continue
-            # 获取 default 节点的默认值
-            default_value = operandNode.attrib.get('default', None)
-
-            # 如果没有提供立即数或立即数不合法，使用默认值
-            imm_value = default_value if default_value else "#0"  # 默认值处理
-            operands.append(imm_value)
+        elif operandType == 'imm' and operandName != 'amount':
+        # 提取立即数默认值
+            default_value = operandNode.attrib.get('default', '#0')  # 如果没有指定默认值，默认为 #0
+            operands.append([default_value])  # 将默认值包装成列表并添加到操作数列表
 
         elif operandType == 'label':
-            # 处理标签操作数，默认使用default属性值
+            # 提取标签，默认值
             default_value = operandNode.attrib.get('default', 'Program Label Address')
-            operands.append(default_value)
+            operands.append([default_value])
 
         elif operandType == 'cond':
-            default_value = operandNode.attrib.get('default', 'EQ')
-            operands.append(default_value)
+            # 条件码所有可能值
+            cond_codes = ['EQ', 'NE', 'CS', 'CC', 'MI', 'PL', 'VS', 'VC', 'HI', 'LS', 'GE', 'LT', 'GT', 'LE', 'AL']
+            operands.append(cond_codes)
 
 
-    # 拼接所有操作数，不限制数量
-    final_asm = f"{asm_code} {', '.join(operands)}".strip()
 
-    return final_asm
+    # 生成所有可能的操作数组合
+    all_combinations = list(product(*operands))
+
+    # 拼接指令文本
+    assembled_instructions = [f"{asm_code} {', '.join(combo)}" for combo in all_combinations]
+
+    return assembled_instructions
 
 
 def main():
@@ -143,15 +138,17 @@ def main():
 
     assembly_instructions = []
     for instrNode in root.iter('instruction'):
-        asm_code = parse_operands(instrNode)
-        print(f"Processing instruction: {asm_code}")
+        asm_code_list = parse_operands(instrNode)  # 返回的是 asm_code 数组
+        print(f"Processing instruction: {instrNode.attrib['asm']} with {len(asm_code_list)} combinations.")
 
         category = instrNode.attrib['category']
         extension = instrNode.attrib['extension']
         isa_set = instrNode.attrib['isa-set']
 
-        assembly_instruction = AssemblyInstruction(asm_code, category, extension, isa_set)
-        assembly_instructions.append(assembly_instruction)
+        # 遍历所有指令组合
+        for asm_code in asm_code_list:
+            assembly_instruction = AssemblyInstruction(asm_code, category, extension, isa_set)
+            assembly_instructions.append(assembly_instruction)
 
     # 创建多进程队列
     input_queue = Queue()
