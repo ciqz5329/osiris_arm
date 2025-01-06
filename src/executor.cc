@@ -1410,6 +1410,23 @@ void Executor::AddEpilog(int codepage_no) {
         AddInstructionToCodePage(codepage_no, INST_RET, sizeof(INST_RET) - 1);
 }
 
+void  Executor::arm_v8_timing_init(void) {
+  uint32_t value = 0;
+
+  /* Enable Performance Counter */
+  asm volatile("MRS %0, PMCR_EL0" : "=r" (value));
+  value |= ARMV8_PMCR_E; /* Enable */
+  value |= ARMV8_PMCR_C; /* Cycle counter reset */
+  value |= ARMV8_PMCR_P; /* Reset all counters */
+  value &=(~ARMV8_PMCR_D);
+  asm volatile("MSR PMCR_EL0, %0" : : "r" (value));
+
+  // /* Enable cycle counter register */
+  // asm volatile("MRS %0, PMCNTENSET_EL0" : "=r" (value));
+  // value |= ARMV8_PMCNTENSET_EL0_EN;
+  // asm volatile("MSR PMCNTENSET_EL0, %0" : : "r" (value));
+}
+
  void Executor::AddProlog(int codepage_no) {
   //dmb bf 3f 03 d5
         constexpr char INST_STP_X29_X30[] = "\xfd\x7B\xBF\xA9"; //fd 7b bf a9
@@ -1698,6 +1715,7 @@ __attribute__((no_sanitize("address")))
     // jump to codepage
     // 更新函数指针
     //flush_instruction_cache(codepage, sizeof(kPagesize));
+    arm_v8_timing_init();
     asm volatile ("dsb sy": : : "memory");  // 执行数据同步屏障
     asm volatile ("isb": : : "memory");     // 执行指令同步屏障
     asm volatile("dmb sy": : : "memory");

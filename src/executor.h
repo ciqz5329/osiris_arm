@@ -16,6 +16,17 @@
 #ifndef OSIRIS_SRC_EXECUTOR_H_
 #define OSIRIS_SRC_EXECUTOR_H_
 
+#define ARMV8_PMCR_E            (1 << 0) /* Enable all counters */
+#define ARMV8_PMCR_P            (1 << 1) /* Reset all counters */
+#define ARMV8_PMCR_C            (1 << 2) /* Cycle counter reset */
+#define ARMV8_PMCR_D            (1 << 3) /* CCNT counts every 64th cycle */
+
+#define ARMV8_PMUSERENR_EN      (1 << 0) /* EL0 access enable */
+#define ARMV8_PMUSERENR_CR      (1 << 2) /* Cycle counter read enable */
+#define ARMV8_PMUSERENR_ER      (1 << 3) /* Event counter read enable */
+
+#define ARMV8_PMCNTENSET_EL0_EN (1 << 31) /* Performance Monitors Count Enable Set register */
+
 #include <vector>
 #include <array>  // 添加这行
 #include <fcntl.h>  // for open()
@@ -183,6 +194,7 @@ class Executor {
   /// Adds Epilog to the codepage (i.e. restores registers and stack)
   /// \param codepage_no code page to use
   void AddEpilog(int codepage_no);
+  static void arm_v8_timing_init();
 
   /// adds instruction bytes to codepage
   /// \param codepage_no code page to use
