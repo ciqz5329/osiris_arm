@@ -1077,7 +1077,7 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
   }
   else
   {
-    //LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
+    LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
   }
 
   // get timing with trigger sequence
@@ -1728,7 +1728,7 @@ __attribute__((no_sanitize("address")))
       LOG_ERROR("Failed to execute ic iallu instruction at in codepage");
     }else
     {
-      //LOG_INFO("execute ic iallu instruction at in codepage");
+      LOG_INFO("execute ic iallu instruction at in codepage");
     }
 
     // asm volatile(
@@ -1749,10 +1749,10 @@ __attribute__((no_sanitize("address")))
       LOG_ERROR("Failed to execute ic iallu instruction at out codepage");
     }else
     {
-      //LOG_INFO("execute ic iallu instruction at out codepage");
+      LOG_INFO("execute ic iallu instruction at out codepage");
     }
     *cycles_elapsed = cycle_diff;
-    //std::cout<<"cycles_elapsed:"<<*cycles_elapsed<<std::endl;
+    std::cout<<"cycles_elapsed:"<<*cycles_elapsed<<std::endl;
    // std::cout<<"in cycles_elapsed"<<*cycles_elapsed<<std::endl;
 #if DEBUGMODE == 1
     // unregister signal handler (if not in debugmode we do this in constructor/destructor as
