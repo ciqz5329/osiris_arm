@@ -1077,7 +1077,7 @@ int Executor::TestTriggerSequence(const byte_array& trigger_sequence,
   }
   else
   {
-    LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
+    //LOG_INFO("execute ic iallu instruction at TestTriggerSequence at ExecuteTestrun");
   }
 
   // get timing with trigger sequence
@@ -1467,8 +1467,12 @@ void  Executor::arm_v8_timing_init(void) {
         // //默认OP寄存器 X15,X16
         constexpr char INST_MOV_X24_0[] = "\xf8\x66\xa2\xd2"; // f8 66 a2 d2
         constexpr char INST_MOV_X25_0[] = "\xf9\x66\xa2\xd2"; // f9 66 a2 d2
+        constexpr char INST_MOV_X26_0[] = "\xfa\x66\xa2\xd2"; // f9 66 a2 d2
+        constexpr char INST_MOV_X27_0[] = "\xfB\x66\xa2\xd2"; // f9 66 a2 d2
         AddInstructionToCodePage(codepage_no, INST_MOV_X25_0, sizeof(INST_MOV_X25_0) - 1);
         AddInstructionToCodePage(codepage_no, INST_MOV_X24_0, sizeof(INST_MOV_X24_0) - 1);
+      AddInstructionToCodePage(codepage_no, INST_MOV_X26_0, sizeof(INST_MOV_X26_0) - 1);
+      AddInstructionToCodePage(codepage_no, INST_MOV_X27_0, sizeof(INST_MOV_X27_0) - 1);
     }
 
 void Executor::AddSerializeInstructionToCodePage(int codepage_no) {
@@ -1724,7 +1728,7 @@ __attribute__((no_sanitize("address")))
       LOG_ERROR("Failed to execute ic iallu instruction at in codepage");
     }else
     {
-      LOG_INFO("execute ic iallu instruction at in codepage");
+      //LOG_INFO("execute ic iallu instruction at in codepage");
     }
 
     // asm volatile(
@@ -1745,7 +1749,7 @@ __attribute__((no_sanitize("address")))
       LOG_ERROR("Failed to execute ic iallu instruction at out codepage");
     }else
     {
-      LOG_INFO("execute ic iallu instruction at out codepage");
+      //LOG_INFO("execute ic iallu instruction at out codepage");
     }
     *cycles_elapsed = cycle_diff;
     std::cout<<"cycles_elapsed:"<<*cycles_elapsed<<std::endl;
