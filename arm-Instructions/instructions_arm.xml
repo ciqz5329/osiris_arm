@@ -541,6 +541,469 @@
         <operand idx="2" name="Xt" type="reg" width="64">X0,X1,...,X31</operand>
     </instruction>
 
+
+
+    <instruction asm="GMI" category="Integer" extension="FEAT_MTE" iclass="GMI" iform="GMI" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" default="X25">X0, X1, ..., X31, SP</operand>
+        <operand idx="3" name="Xm" type="reg" width="64" default="X25">X0, X1, ..., X31</operand>
+    </instruction>
+
+
+    <instruction asm="IC" category="System" extension="ARMv8" iclass="IC" iform="SYS" isa-set="A64">
+        <operand idx="1" name="ic_op" type="enum" description="IC operation type">
+            <option value="000:0001:000">IALLUIS</option>
+            <option value="000:0101:000">IALLU</option>
+            <option value="011:0101:001" >IVAU ,X25</option>
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="64" Optional="true" default="XZR">
+            X0, X1, ..., X31, XZR
+        </operand>
+    </instruction>
+
+<!--    <instruction asm="IRG" category="DataProc" extension="FEAT_MTE" iclass="IRG" iform="IRG" isa-set="A64">-->
+<!--        <operand idx="1" name="Xd|SP" type="reg" width="64" description="Destination register or stack pointer">-->
+<!--            X0, X1, ..., X30, SP-->
+<!--        </operand>-->
+<!--        <operand idx="2" name="Xn|SP" type="reg" width="64" description="First source register or stack pointer">-->
+<!--            X0, X1, ..., X30, SP-->
+<!--        </operand>-->
+<!--        <operand idx="3" name="Xm" type="reg" width="64" Optional="true" default="XZR" description="Optional second source register">-->
+<!--            X0, X1, ..., X31, XZR-->
+<!--        </operand>-->
+<!--    </instruction>-->
+
+    <instruction asm="ISB" category="System" extension="ARMv8" iclass="ISB" iform="ISB" isa-set="A64">
+        <operand idx="1" name="option" type="enum" Optional="true" default="SY" description="Barrier operation option">
+            <option value="1111">SY</option>
+        </operand>
+<!--        <operand idx="2" name="imm" type="imm" width="4" range="0-15" Optional="true" default="#15">-->
+<!--            #0, #1, #2, ..., #15-->
+<!--        </operand>-->
+    </instruction>
+
+<!--    <instruction asm="LD64B" category="Memory" extension="FEAT_LS64" iclass="LD64B" iform="LD64B_atomic_load" isa-set="A64">-->
+<!--        <operand idx="1" name="Xt" type="reg" width="64"  description="First general-purpose register to be loaded" default="X16" >-->
+<!--            X0, X1, ..., X30, XZR-->
+<!--        </operand>-->
+<!--        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">-->
+<!--            X0, X1, ..., X30, SP-->
+<!--        </operand>-->
+<!--    </instruction>-->
+
+<!--    <instruction asm="LD64B" category="Memory" extension="FEAT_LS64" iclass="LD64B" iform="LD64B_atomic_load" isa-set="A64">-->
+<!--        <operand idx="1" name="Xt" type="reg" width="64" description="First general-purpose register to be loaded" default="X16">-->
+<!--            X0, X1, ..., X30, XZR-->
+<!--        </operand>-->
+<!--        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">-->
+<!--            X0, X1, ..., X30, SP-->
+<!--        </operand>-->
+<!--    </instruction>-->
+
+    <instruction asm="LDAPRB" category="LoadStore" extension="FEAT_LRCPC" iclass="LDAPRB" iform="LDAPRB" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+<!--        <operand idx="3" name="imm" type="imm" width="1" range="0" Optional="true" default="#0" description="Optional zero offset">-->
+<!--            #0-->
+<!--        </operand>-->
+    </instruction>
+
+    <instruction asm="LDAPRH" category="LoadStore" extension="FEAT_LRCPC" iclass="LDAPRH" iform="LDAPRH" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+<!--        <operand idx="3" name="offset" type="imm" width="32" Optional="true" description="Offset value">-->
+<!--            #0-->
+<!--        </operand>-->
+
+    </instruction>
+
+
+    <instruction asm="LDAPUR" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPUR" iform="LDAPUR" isa-set="A64">
+        <operand idx="1" name="Wt|Xt" type="reg" width="32,64" description="Destination register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+<!--        <operand idx="3" name="simm" type="imm" width="9" range="-256-255" Optional="true" description="Signed immediate offset">-->
+<!--            #0-->
+<!--        </operand>-->
+    </instruction>
+
+
+    <instruction asm="LDAPURB" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPURB" iform="LDAPURB" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+<!--        <operand idx="3" name="simm" type="imm" width="9" Optional="true" description="Signed immediate offset">-->
+<!--            #-256 to #255-->
+<!--        </operand>-->
+    </instruction>
+
+    <instruction asm="LDAPURH" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPURH" iform="LDAPURH" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDAPURSB" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPURSB" iform="LDAPURSB" isa-set="A64">
+        <operand idx="1" name="Wt|Xt" type="reg" width="32,64" description="Destination register" default="W24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="LDAPURSH" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPURSH" iform="LDAPURSH" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination register" default="W24" >
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDAPURSW" category="LoadStore" extension="FEAT_LRCPC2" iclass="LDAPURSW" iform="LDAPURSW" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+
+    <instruction asm="LDAR" category="LoadStore" extension="ARMv8" iclass="LDAR" iform="LDAR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="LDARB" category="LoadStore" extension="ARMv8" iclass="LDARB" iform="LDARB" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+
+    <instruction asm="LDARH" category="LoadStore" extension="ARMv8" iclass="LDARH" iform="LDARH" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDAXP" category="LoadStore" extension="ARMv8" iclass="LDAXP" iform="LDAXP" isa-set="A64">
+        <operand idx="1" name="Rt1" type="reg" width="32,64" description="First destination register" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rt2" type="reg" width="32,64" description="Second destination register" default="x25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDAXR" category="LoadStore" extension="ARMv8" iclass="LDAXR" iform="LDAXR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination register" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDAXR" category="LoadStore" extension="ARMv8" iclass="LDAXR" iform="LDAXR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination register" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="LDAXRH" category="LoadStore" extension="ARMv8" iclass="LDAXRH" iform="LDAXRH" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLR" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRA" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRL" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRAL" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDCLR" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRAB" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="w24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="w25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRALB" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="w24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="w25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLRLB" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="w24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="w25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDCLR" category="Atomic" extension="FEAT_LSE" iclass="LDCLR" iform="LDCLR" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="32,64" description="Source register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="32,64" description="Destination register" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+
+    </instruction>
+
+    <instruction asm="LDEOR" category="Atomic" extension="FEAT_LSE" iclass="LDEOR" iform="LDEOR" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Source register holding the data value for XOR operation" default="X24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="32" description="Destination register to load the value from memory" default="X25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDEORB" category="Atomic" extension="FEAT_LSE" iclass="LDEORB" iform="LDEORB" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Source register holding the data value for XOR operation" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="32" description="Destination register to load the value from memory" default="w25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDEORH" category="Atomic" extension="FEAT_LSE" iclass="LDEORH" iform="LDEORH" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Source register holding the data value for XOR operation" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="32" description="Destination register to load the value from memory" default="W25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDG" category="LoadStore" extension="FEAT_MTE" iclass="LDG" iform="LDG" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination general-purpose register" default="X24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDLAR" category="LoadStore" extension="FEAT_LOR" iclass="LDLAR" iform="LDLAR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination general-purpose register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDLARB" category="LoadStore" extension="FEAT_LOR" iclass="LDLARB" iform="LDLARB" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination 32-bit general-purpose register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDLARH" category="LoadStore" extension="FEAT_LOR" iclass="LDLARH" iform="LDLARH" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination 32-bit general-purpose register" default="W24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDNP" category="LoadStore" extension="FEAT_LSNP" iclass="LDNP" iform="LDNP" isa-set="A64">
+        <operand idx="1" name="Rt1" type="reg" width="32,64" description="First destination general-purpose register"  default="W24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rt2" type="reg" width="32,64" description="Second destination general-purpose register" default="W25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDP" category="LoadStore" extension="FEAT_LDP" iclass="LDP" isa-set="A64">
+        <!-- 通用操作数 -->
+        <operand idx="1" name="Rt1" type="reg" width="32,64" description="First destination general-purpose register" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rt2" type="reg" width="32,64" description="Second destination general-purpose register" default="x25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+        <!-- 立即数偏移 -->
+    </instruction>
+
+
+    <instruction asm="LDPSW" category="LoadStore" extension="FEAT_LDPSW" iclass="LDPSW" isa-set="A64">
+        <!-- 通用操作数 -->
+        <operand idx="1" name="Xt1" type="reg" width="64" description="First destination general-purpose register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt2" type="reg" width="64" description="Second destination general-purpose register" default="x25">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDR" category="LoadStore" extension="FEAT_LDR" iclass="LDR" isa-set="A64">
+        <!-- 通用操作数 -->
+        <operand idx="1" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register" default="X24">
+            W0-W30, X0-X30, WZR, XZR
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25,#0">
+            X0-X30, SP
+        </operand>
+        <!-- 偏移量 -->
+    </instruction>
+
     <instruction asm="LDR" category="LoadStore" extension="ARMv8" iclass="LDR_register" isa-set="A64">
         <operand idx="1" name="Xt" type="reg" width="64" description="Destination register">
             X0,X1,X2,...,X31
@@ -558,6 +1021,657 @@
             <option value="0">#0</option>
             <option value="1">#3</option>
         </operand>
+    </instruction>
+
+    <instruction asm="LDRAA" category="LoadStore" extension="FEAT_PAuth" iclass="LDR_auth" isa-set="A64">
+        <!-- 操作数定义 -->
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination 64-bit general-purpose register" default="X24">
+            X0-X30, XZR
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25,#0">
+            X0-X30, SP
+        </operand>
+
+
+    </instruction>
+
+    <instruction asm="LDRAB" category="LoadStore" extension="FEAT_PAuth" iclass="LDR_auth" isa-set="A64">
+        <!-- 操作数定义 -->
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination 64-bit general-purpose register" default="X24">
+            X0-X30, XZR
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" default="X25,#0">
+            X0-X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDRB" category="LoadStore" extension="Base" iclass="LDRB_reg" isa-set="A64">
+        <!-- 操作数定义 -->
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination 32-bit general-purpose register" default="W24">
+            W0-W30, WZR
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer"  Optional="[]" default="X25,#0">
+            X0-X30, SP
+
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDRH" category="LoadStore" extension="Base" iclass="LDRH_imm" isa-set="A64">
+            <operand idx="1" name="Wt" type="reg" width="32" description="Destination 32-bit general-purpose register" default="w24">
+                W0-W30, WZR
+            </operand>
+            <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="x25" Optional="[]">
+                X0-X30, SP
+            </operand>
+            <operand idx="3" name="simm" type="imm" width="9" description="Signed immediate byte offset in range -256 to 255" default="#0" />
+    </instruction>
+
+
+    <instruction asm="LDRH" category="LoadStore" extension="Base" iclass="LDRH_reg" isa-set="A64">
+        <!-- Operand definitions -->
+        <operand idx="1" name="Wt" type="reg" width="32" description="Destination 32-bit general-purpose register" default="w24">
+            W0-W30, WZR
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="x25" is_enum="true" Optional="[]">
+            <option value="010">X24,w25,UXTW</option>
+            <option value="010">X24,X25,LSL #0</option>
+            <option value="010">x24,w25,SXTW</option>
+            <option value="010">x24,x25,SXTX</option>
+
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDRSB" category="LoadStore" extension="Base" iclass="LDRSB_imm" isa-set="A64">
+        <!-- Operand definitions -->
+        <operand idx="1" name="Wt|Xt" type="reg" description="Destination 32-bit or 64-bit general-purpose register" default="X24">
+            W0-W30, WZR (32-bit), X0-X30, XZR (64-bit)
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer"  Optional="[]" is_enum="true">
+            X0-X30, SP
+            <option value="010">X25</option>
+            <option value="010">X25, #0</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="LDRSB " category="LoadStore" extension="Base" iclass="LDRSB_imm" isa-set="A64">
+        <!-- Operand definitions -->
+        <operand idx="1" name="Wt|Xt" type="reg" description="Destination 32-bit or 64-bit general-purpose register">
+            W0-W30, WZR (32-bit), X0-X30, XZR (64-bit)
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="x25" is_enum="true" Optional="[]">
+            X0-X30, SP
+            <option value="010">X24,w25,UXTW</option>
+            <option value="010">X24,X25,LSL #0</option>
+            <option value="010">x24,w25,SXTW</option>
+            <option value="010">x24,x25,SXTX</option>
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDRSH" category="LoadStore" extension="Base" iclass="LDRSH_imm" isa-set="A64">
+        <!-- Operand definitions -->
+        <operand idx="1" name="Wt|Xt" type="reg" description="Destination 32-bit or 64-bit general-purpose register" default="X24">
+            W0-W30, WZR (32-bit), X0-X30, XZR (64-bit)
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" is_enum="true">
+            X0-X30, SP
+            <option value="010">[X25], #0</option>
+            <option value="010"> [X25, #0]!</option>
+            <option value="010">[X25, #0] </option>
+        </operand>
+    </instruction>
+
+    <instruction asm="LDRSH" category="LoadStore" extension="ARMv8" iclass="LDRSH" iform="LDRSH_register" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" description="Destination general-purpose register" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]" is_enum="true">
+            X0, X1, ..., X30, SP
+            <option value="010">X24,w25,UXTW</option>
+            <option value="010">X24,X25,LSL #0</option>
+            <option value="010">x24,w25,SXTW</option>
+            <option value="010">x24,x25,SXTX</option>
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="LDRSW" category="LoadStore" extension="FEAT_LOR" iclass="LDRSW" isa-set="A64">
+        <!-- Post-index format -->
+
+            <operand idx="1" name="Xt" type="reg" width="64" description="Destination general-purpose register" default="X24">
+                X0, X1, ..., X31
+            </operand>
+            <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" is_enum="true">
+                X0, X1, ..., X30, SP
+                <option value="010">[X25], #0</option>
+                <option value="010"> [X25, #0]!</option>
+                <option value="010">[X25, #0] </option>
+            </operand>
+    </instruction>
+
+    <instruction asm="LDRSW" category="LoadStore" extension="Base" iclass="LDRSW_literal" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" description="Destination general-purpose register" default="X24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" is_enum="true">
+            X0, X1, ..., X30, SP
+            <option value="010">X24,w25,UXTW</option>
+            <option value="010">X24,X25,LSL #0</option>
+            <option value="010">x24,w25,SXTW</option>
+            <option value="010">x24,x25,SXTX</option>
+        </operand>
+    </instruction>
+
+
+
+    <instruction asm="LDSET" category="Atomic" extension="FEAT_LSE" iclass="LDSET" isa-set="A64">
+        <operand idx="1" name="Ws|Xs" type="reg" width="32,64" description="Source general-purpose register holding the data value" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register to be loaded" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDSETA" category="Atomic" extension="FEAT_LSE" iclass="LDSETA" isa-set="A64">
+        <operand idx="1" name="Ws|Xs" type="reg" width="32,64" description="Source general-purpose register holding the data value" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register to be loaded" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDSETAL" category="Atomic" extension="FEAT_LSE" iclass="LDSETAL" isa-set="A64">
+        <operand idx="1" name="Ws|Xs" type="reg" width="32,64" description="Source general-purpose register holding the data value" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register to be loaded" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDSETL" category="Atomic" extension="FEAT_LSE" iclass="LDSETL" isa-set="A64">
+        <operand idx="1" name="Ws|Xs" type="reg" width="32,64" description="Source general-purpose register holding the data value" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register to be loaded" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDSET" category="Atomic" extension="FEAT_LSE" iclass="LDSET" isa-set="A64">
+        <operand idx="1" name="Ws|Xs" type="reg" width="32,64" description="Source general-purpose register holding the data value" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wt|Xt" type="reg" width="32,64" description="Destination general-purpose register to be loaded" default="X26">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xn|SP" type="reg" width="64" description="Base register or stack pointer"  default="X25" Optional="[]">
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDTR" category="LoadStore" extension="FEAT_MTE2" iclass="LDTR" iform="LDTR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="Destination general-purpose register for 64-bit or 32-bit data" default="X24">
+            W0, W1, ..., W31 for 32-bit load, X0, X1, ..., X31 for 64-bit load
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="Base register or stack pointer" is_enum="true" Optional="[]">
+            X0, X1, ..., X30, SP
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25 </option>
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDTRB" category="LoadStore" extension="FEAT_MTE2" iclass="LDTRB" iform="LDTRB" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="Destination general-purpose register for byte data (32-bit register)" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="Base register or stack pointer" Optional="[]" is_enum="true">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDTRH" category="LoadStore" extension="ARMv8" iclass="LDTRH" iform="LDTRH_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="The 32-bit general-purpose register to which the result is transferred" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDTRSB" category="LoadStore" extension="ARMv8" iclass="LDTRSB" iform="LDTRSB_reg" isa-set="A64">
+
+        <operand idx="1" name="Rt" type="reg" width="64" description="The general-purpose register to which the result is transferred (for 64-bit registers)" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The base register or stack pointer, used to calculate the memory address" is_enum="true" Optional="[]">
+        <option value="010">X25 ,#0</option>
+        <option value="010">X25</option>
+        X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDTRSH" category="LoadStore" extension="ARMv8" iclass="LDTRSH" iform="LDTRSH_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="The register to which the result is transferred, either 32-bit or 64-bit" default="w24">
+            W0, W1, ..., W31 (for 32-bit), X0, X1, ..., X31 (for 64-bit)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDTRSW" category="LoadStore" extension="ARMv8" iclass="LDTRSW" iform="LDTRSW_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to which the result is transferred (64-bit register)" default="x24">
+            Xt (X0, X1, ..., X31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDUMAX" category="Atomic" extension="FEAT_LSE" iclass="LDUMAX" iform="LDUMAX_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to be loaded with the value from memory and returned to the destination register" default="x24">
+            Xt (X0, X1, ..., X31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" default="x25">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="3" name="Rs" type="reg" width="64" description="The 64-bit register holding the data value to be compared with the value from memory" default="x25" Optional="[]">
+            Xt (X0, X1, ..., X31)
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="LDUR" category="LoadStore" extension="ARMv8" iclass="LDUR" iform="LDUR_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to which the result is transferred (64-bit register)" default="X24">
+            Xt (X0, X1, ..., X31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDURB" category="LoadStore" extension="ARMv8" iclass="LDURB" iform="LDURB_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="The 32-bit register to which the result is transferred (32-bit register)" default="w24">
+            Wt (W0, W1, ..., W31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDURH" category="LoadStore" extension="ARMv8" iclass="LDURH" iform="LDURH_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="The 32-bit register to which the result is transferred (32-bit register)" default="w24">
+            Wt (W0, W1, ..., W31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer"  is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDURSB" category="LoadStore" extension="ARMv8" iclass="LDURSB" iform="LDURSB_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to which the result is transferred. It can be a 32-bit or 64-bit register depending on the instruction variant"
+        default="X24"
+        >
+            Xt (X0, X1, ..., X31) or Wt (W0, W1, ..., W31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+
+    <instruction asm="LDURSH" category="LoadStore" extension="ARMv8" iclass="LDURSH" iform="LDURSH_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to which the result is transferred. It can be a 32-bit or 64-bit register depending on the instruction variant" default="x24">
+            Xt (X0, X1, ..., X31) or Wt (W0, W1, ..., W31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="LDURSW" category="LoadStore" extension="ARMv8" iclass="LDURSW" iform="LDURSW_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" description="The register to which the result is transferred. It is a 64-bit general-purpose register" default="x24">
+            Xt (X0, X1, ..., X31)
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="The 64-bit base register or stack pointer used to calculate the address" is_enum="true" Optional="[]">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0, X1, ..., X30, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="LDXP" category="Load/Store" extension="ARMv8" iclass="LDXP" iform="LDXP" isa-set="A64">
+        <operand idx="1" name="xt1" type="reg" width="32" description="64-bit first general-purpose register to be transferred" default="x24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="xt2" type="reg" width="32" description="64-bit second general-purpose register to be transferred" default="x25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="64-bit base register or stack pointer" default="x25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="LDXR" category="LoadStore" extension="ARMv8" iclass="LDXR" iform="LDXR_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25" Optional="[]">X0,X1,...,X31,SP </operand>
+    </instruction>
+
+
+    <instruction asm="LDXRB" category="LoadStore" extension="ARMv8" iclass="LDXRB" iform="LDXRB_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" default="w24">W0,W1,...,W31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25" Optional="[]">X0,X1,...,X31,SP </operand>
+    </instruction>
+
+    <instruction asm="LDXRH" category="LoadStore" extension="ARMv8" iclass="LDXRH" iform="LDXRH_reg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" default="w24">W0,W1,...,W31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" Optional="[]" is_enum="true">X0, X1, ..., X30, SP
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25 </option>
+        </operand>
+    </instruction>
+
+    <instruction asm="LSL" category="DataProc" extension="ARMv8" iclass="LSL" iform="LSL_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25,#1">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="LSL" category="DataProc" extension="ARMv8" iclass="LSL" iform="LSL_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="LSLV" category="DataProc" extension="ARMv8" iclass="LSLV" iform="LSLV_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="LSR" category="DataProc" extension="ARMv8" iclass="LSR" iform="LSR_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="x25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="shift" type="imm" Optional="false" default="#0">0-31 for 32-bit, 0-63 for 64-bit</operand>
+    </instruction>
+
+    <instruction asm="LSR" category="DataProc" extension="ARMv8" iclass="LSR" iform="LSR_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="x25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="shift" type="imm" Optional="false" default="#0">0-31 for 32-bit, 0-63 for 64-bit</operand>
+    </instruction>
+
+    <instruction asm="LSRV" category="DataProc" extension="ARMv8" iclass="LSRV" iform="LSRV_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="MADD" category="DataProc" extension="ARMv8" iclass="MADD" iform="MADD_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="Ra" type="reg" width="32,64" default="X27">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="MNEG" category="DataProc" extension="ARMv8" iclass="MNEG" iform="MNEG_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="MOV" category="DataProc" extension="ARMv8" iclass="MOV" iform="MOV_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="imm" type="imm" width="32,64" default="#0">bitmask</operand>
+    </instruction>
+
+    <instruction asm="MOV" category="DataProc" extension="ARMv8" iclass="MOV" iform="MOV_inverted_wide_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="w24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="imm" type="imm" width="16" default="#0">bitwise inverted 16-bit immediate</operand>
+    </instruction>
+
+    <instruction asm="MOV" category="DataProc" extension="ARMv8" iclass="MOV" iform="MOV_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="MOV" category="DataProc" extension="ARMv8" iclass="MOV" iform="MOV_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" default="SP">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="MOVK" category="DataProc" extension="ARMv8" iclass="MOVK" iform="MOVK_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="imm16" type="imm" width="16" default="#1 ,LSL #16">0-65535
+        </operand>
+    </instruction>
+
+    <instruction asm="MOVN" category="DataProc" extension="ARMv8" iclass="MOVN" iform="MOVN_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="imm" type="imm" width="16" default="#1 ,LSL #16">0,1,...,65535</operand>
+    </instruction>
+
+    <instruction asm="MOVZ" category="DataProc" extension="ARMv8" iclass="MOVZ" iform="MOVZ_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="imm" type="imm" width="16" default="#1 ,LSL #16">0,1,...,65535</operand>
+    </instruction>
+
+    <instruction asm="MRS" category="DataProc" extension="ARMv8" iclass="MRS" iform="MRS_systemreg" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="systemreg" type="reg" width="32" default="CNTFRQ_EL0">NZCV, SCTLR_EL1, ...</operand>
+    </instruction>
+
+    <instruction asm="MSUB" category="DataProc" extension="ARMv8" iclass="MSUB" iform="MSUB_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="4" name="Ra" type="reg" width="32,64" default="X27">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="MUL" category="DataProc" extension="ARMv8" iclass="MUL" iform="MUL_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X26">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="MVN" category="DataProc" extension="ARMv8" iclass="MVN" iform="MVN_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" is_enum="true" >
+            W0, W1, ..., W31, X0, X1, ..., X31
+            <option value="00">X25</option>
+            <option value="00">X25,LSL #1</option>
+            <option value="01">X25 ,LSR #1</option>
+            <option value="10">X25,ASR #1</option>
+            <option value="11">X25,ROR #1</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="NEG" category="DataProc" extension="ARMv8" iclass="NEG" iform="NEG_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" is_enum="true" >
+            W0, W1, ..., W31, X0, X1, ..., X31
+            <option value="00">X25</option>
+            <option value="00">X25,LSL #1</option>
+            <option value="01">X25 ,LSR #1</option>
+            <option value="10">X25,ASR #1</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="NEGS" category="DataProc" extension="ARMv8" iclass="NEGS" iform="SUBS_shifted_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" is_enum="true" >
+            W0, W1, ..., W31, X0, X1, ..., X31
+            <option value="00">X25</option>
+            <option value="00">X25,LSL #1</option>
+            <option value="01">X25 ,LSR #1</option>
+            <option value="10">X25,ASR #1</option>
+        </operand>
+    </instruction>
+
+    <instruction asm="NGC" category="DataProc" extension="ARMv8" iclass="NGC" iform="SBC" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" default="X25">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+
+    </instruction>
+
+    <instruction asm="NGCS" category="DataProc" extension="ARMv8" iclass="NGCS" iform="SBCS" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rm" type="reg" width="32,64" default="X25">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+    </instruction>
+
+    <instruction asm="NOP" category="SystemHint" extension="ARMv8" iclass="NOP" isa-set="A64">
+    </instruction>
+
+    <instruction asm="ORN" category="DataProc" extension="ARMv8" iclass="ORN_shifted_reg" iform="ORN_shifted_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="shift" type="enum" Optional="amount">
+            <option value="00">LSL </option>
+            <option value="01">LSR </option>
+            <option value="10">ASR </option>
+            <option value="11">ROR </option>
+        </operand>
+    </instruction>
+
+    <instruction asm="ORR" category="DataProc" extension="ARMv8" iclass="ORR_immediate" iform="ORR_immediate" isa-set="A64">
+        <operand idx="1" name="Rd|WSP" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="imm" type="imm" width="32" range="0-31" default="#0xFFFF">imms:immr</operand>
+    </instruction>
+
+
+    <instruction asm="ORR" category="DataProc" extension="ARMv8" iclass="ORR_shifted_register" iform="ORR_shifted_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="4" name="shift" type="enum" Optional="amount">
+            <option value="00">LSL </option>
+            <option value="01">LSR </option>
+            <option value="10">ASR </option>
+            <option value="11">ROR </option>
+        </operand>
+    </instruction>
+
+    <instruction asm="PACDA" category="Security" extension="FEAT_PAuth" iclass="PACDA" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25">X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="PACDZA" category="Security" extension="FEAT_PAuth" iclass="PACDZA" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="PACDB" category="Security" extension="FEAT_PAuth" iclass="PACDB" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25">X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="PACDZB" category="Security" extension="FEAT_PAuth" iclass="PACDZB" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="PRFM" category="Memory" extension="FEAT_MTE2" iclass="PRFM" isa-set="A64">
+
+
+        <operand idx="1" name="prfop" type="enum" Optional="amount" prefix = "true">
+            <option>PLDL1KEEP</option>
+            <option>PLIL1KEEP</option>
+            <option>PSTL1KEEP</option>
+            <option>PLDL1KEEP</option>
+            <option>PLIL1STRM</option>
+            <option>PSTL1STRM</option>
+
+            <option>PLDL2KEEP</option>
+            <option>PLIL2KEEP</option>
+            <option>PSTL2KEEP</option>
+            <option>PLDL2KEEP</option>
+            <option>PLIL2STRM</option>
+            <option>PSTL2STRM</option>
+
+            <option>PLDL3KEEP</option>
+            <option>PLIL3KEEP</option>
+            <option>PSTL3KEEP</option>
+            <option>PLDL3KEEP</option>
+            <option>PLIL3STRM</option>
+            <option>PSTL3STRM</option>
+        </operand>
+
+
+
+
+        <operand idx="2" name="Rt" type="reg" width="64" Optional="[]" is_enum="true">
+            <option value="010">X25 ,#0</option>
+            <option value="010">X25</option>
+            X0,X1,...,X31</operand>
+
+
     </instruction>
 
 

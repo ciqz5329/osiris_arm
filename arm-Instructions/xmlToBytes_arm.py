@@ -81,17 +81,37 @@ def parse_operands(instrNode):
         operandName = operandNode.attrib['name']
 
         if operandType == 'reg':
-            # 提取寄存器列表
-            registers = operandNode.text.split(',')
-            default_value = operandNode.attrib.get('default', "x24")  # 默认值为x24
-            if operandNode.attrib.get("Optional", "") == "[]":  # 如果属性 Optional 明确指定为 "[]"
-                default_value = f"[{default_value.upper()}]"   # 使用大写 X24 并加上 []
-            operands.append([default_value])  # 单个寄存器用列表包装
+            # 检查是否存在 is_enum 属性
+            if operandNode.attrib.get("is_enum", "") == "true":
+                default_value = operandNode.attrib.get('default', "").upper()  # 默认值 X24
+                options = operandNode.findall('option')  # 提取 <option> 子节点
+                if operandNode.attrib.get("Optional", "") == "[]":
+                    # 生成带默认值的枚举项列表
+                    enum_values = [f"[ {option.text}  ]" for option in options]
+                else:
+                    # 仅生成枚举项列表
+                    enum_values = [option.text for option in options]
+                operands.append(enum_values)
+            else:
+                # 处理非枚举寄存器
+                registers = operandNode.text.split(',')
+                default_value = operandNode.attrib.get('default', "x24").upper()  # 默认值 X24
+                if operandNode.attrib.get("Optional", "") == "[]":
+                    # 如果是可选项，加 []
+                    default_value = f"[{default_value}]"
+                operands.append([default_value])
+
 
         elif operandType == 'enum' and operandName != 'extend':
             # 提取所有枚举值
             options = operandNode.findall('option')
-            enum_values = [option.text for option in options]  # 提取标签内容（如 IVAC）
+            if operandNode.attrib.get("Optional", "") == "amount":
+                if operandNode.attrib.get("prefix", "") == "true":
+                    enum_values = [option.text for option in options]
+                else:
+                    enum_values = [option.text+"#0" for option in options]  # 提取标签内容（如 IVAC）
+            else:
+                enum_values = []  # 如果没有 options，初始化为空列表
             operands.append(enum_values)
 
         elif operandType == 'imm' and operandName != 'amount':
