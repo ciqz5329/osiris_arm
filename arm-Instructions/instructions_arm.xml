@@ -1663,16 +1663,779 @@
             <option>PSTL3STRM</option>
         </operand>
 
-
-
-
         <operand idx="2" name="Rt" type="reg" width="64" Optional="[]" is_enum="true">
             <option value="010">X25 ,#0</option>
             <option value="010">X25</option>
             X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="PSB CSYNC" category="System" extension="FEAT_SPE" iclass="PSB" isa-set="A64">
+    </instruction>
+
+    <instruction asm="PSB CSYNC" category="System" extension="FEAT_SPE" iclass="PSB" isa-set="A64">
+    </instruction>
+
+    <instruction asm="RBIT" category="Data Processing" extension="FEAT_Bitmanip" iclass="RBIT" isa-set="A64">
+        <operand idx="1" name="Xd" type="register" width="64" default="X24">
+            <description>64-bit destination register for RBIT operation.</description>
+        </operand>
+        <operand idx="2" name="Xn" type="register" width="64" default="X25">
+            <description>64-bit source register for RBIT operation.</description>
+        </operand>
+    </instruction>
+
+    <instruction asm="REV" category="DataProc" extension="ARMv8" iclass="REV" iform="REV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="wx5">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="REV16" category="DataProc" extension="ARMv8" iclass="REV" iform="REV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="x25">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="REV32" category="DataProc" extension="ARMv8" iclass="REV" iform="REV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="x25">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="REV64" category="DataProc" extension="ARMv8" iclass="REV" iform="REV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="x24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="x25">W0,W1,...,W31,X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="RMIF" category="DataProc" extension="ARMv8" iclass="RMIF" iform="RMIF" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="64">X0,X1,...,X31</operand>
+        <operand idx="2" name="shift" type="imm" width="6" default="#8,0b1010">0 to 63</operand>
+
+    </instruction>
+
+    <instruction asm="ROR" category="DataProc" extension="ARMv8" iclass="ROR" iform="ROR" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="x25">X0,X1,...,X31</operand>
+        <operand idx="3" name="shift" type="imm" width="6" default="#0">0 to 63</operand>
+
+    </instruction>
+
+    <instruction asm="ROR" category="DataProc" extension="ARMv8" iclass="ROR" iform="ROR" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25"> X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="64" default="X26"> X0,X1,...,X31</operand>
+    </instruction>
+
+    <instruction asm="RORV" category="DataProc" extension="ARMv8" iclass="RORV" iform="RORV" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25"> X0,X1,...,X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="64" default="X26"> X0,X1,...,X31</operand>
+    </instruction>
+
+
+    <instruction asm="SB" category="Barrier" extension="ARMv8" iclass="SB" iform="SB" isa-set="A64">
+    </instruction>
+
+    <instruction asm="SBC" category="Arithmetic" extension="ARMv8" iclass="SBC" iform="SBC" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" default="X24">Rd</operand>
+        <operand idx="2" name="Rn" type="reg" width="32" default="x24">Rn</operand>
+        <operand idx="3" name="Rm" type="reg" width="32" default="x25">Rm</operand>
+    </instruction>
+
+
+    <instruction asm="SBCS" category="DataProc" extension="ARMv8" iclass="SBCS" iform="SBCS_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" default="X24">Rd</operand>
+        <operand idx="2" name="Rn" type="reg" width="32" default="x24">Rn</operand>
+        <operand idx="3" name="Rm" type="reg" width="32" default="x25">Rm</operand>
+    </instruction>
+
+    <instruction asm="SBFIZ" category="DataProc" extension="ARMv8" iclass="SBFIZ" iform="SBFIZ_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="lsb" type="imm" width="6" range="0-31" default="#16">#0,#1,...,#31</operand>
+        <operand idx="4" name="width" type="imm" width="6" range="1-32" default="#16">#1,#2,...,#32</operand>
+    </instruction>
+
+    <instruction asm="SBFM" category="DataProc" extension="ARMv8" iclass="SBFM" iform="SBFM_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="immr" type="imm" width="6" range="0-31" default="#16">#0,#1,...,#31</operand>
+        <operand idx="4" name="imms" type="imm" width="6" range="0-31" default="#16">#0,#1,...,#31</operand>
+    </instruction>
+
+    <instruction asm="SBFX" category="DataProc" extension="ARMv8" iclass="SBFM" iform="SBFM_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X25">W0,W1,...,W31,X0,X1,...,X31</operand>
+        <operand idx="3" name="immr" type="imm" width="6" range="0-31" default="#16">#0,#1,...,#31</operand>
+        <operand idx="4" name="imms" type="imm" width="6" range="0-31" default="#16">#0,#1,...,#31</operand>
+    </instruction>
+
+    <instruction asm="SDIV" category="DataProc" extension="ARMv8" iclass="SDIV" iform="SDIV_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32,64" default="X24">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32,64" default="X24">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32,64" default="X25">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+    </instruction>
+
+
+    <instruction asm="SETF8" category="DataProc" extension="ARMv8" iclass="SETF" iform="SETF8_reg" isa-set="A64">
+        <operand idx="1" name="Rn" type="reg" width="32" default="w24">W0, W1, ..., W31</operand>\
+    </instruction>
+
+
+
+    <instruction asm="SMADDL" category="DataProc" extension="ARMv8" iclass="SMADDL" iform="SMADDL_reg" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Wn" type="reg" width="32" default="w24">W0, W1, ..., W31</operand>
+        <operand idx="3" name="Wm" type="reg" width="32" default="w25">W0, W1, ..., W31</operand>
+        <operand idx="4" name="Xa" type="reg" width="64" default="X26">X0, X1, ..., X31</operand>
+    </instruction>
+
+
+    <instruction asm="SMC" category="System" extension="ARMv8" iclass="SMC" iform="SMC_imm" isa-set="A64">
+        <operand idx="1" name="imm" type="imm" width="16" range="0-65535"/>
+    </instruction>
+
+    <instruction asm="SMNEGL" category="DataProc" extension="ARMv8" iclass="SMNEGL" iform="SMNEGL_reg" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">X0,X1,...,X31</operand>
+        <operand idx="2" name="Wn" type="reg" width="32" default="w24">W0,W1,...,W31</operand>
+        <operand idx="3" name="Wm" type="reg" width="32" default="w25">W0,W1,...,W31</operand>
+    </instruction>
+
+    <instruction asm="SMSTART" category="System" extension="FEAT_SME" iclass="SMSTART" iform="SMSTART_immediate" isa-set="A64">
+        <operand idx="1" name="option" type="enum" width="2" Optional="amount" prefix="true">
+            <option value="00">SM</option>
+            <option value="01">ZA</option>
+            00, 01, 10, 11</operand>
+    </instruction>
+
+
+    <instruction asm="SMSUBL" category="DataProc" extension="ARMv8" iclass="SMSUBL" iform="SMSUBL_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="32" default="w24">W0, W1, ..., W31</operand>
+        <operand idx="3" name="Rm" type="reg" width="32" default="w25">W0, W1, ..., W31</operand>
+        <operand idx="4" name="Ra" type="reg" width="64" default="X26">X0, X1, ..., X31</operand>
+    </instruction>
+
+
+    <instruction asm="SMULH" category="DataProc" extension="ARMv8" iclass="SMULH" iform="SMULH" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" default="X24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xm" type="reg" width="64" default="X25">
+            X0, X1, ..., X31
+        </operand>
+    </instruction>
+
+    <instruction asm="SMULL" category="DataProc" extension="ARMv8" iclass="SMULL" iform="SMULL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" default="X24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="32" default="w25">
+            W0, W1, ..., W31
+        </operand>
+    </instruction>
+
+
+    <instruction asm="SSBB" category="MemoryBarrier" extension="ARMv8" iclass="SSBB" iform="SSBB" isa-set="A64">
+    </instruction>
+
+    <instruction asm="ST2G" category="Memory" extension="ARMv8" iclass="ST2G" iform="ST2G_post_index" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" default="X24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" is_enum="true">
+            <option>[x25,#0]!</option>
+            <option>[x25,#0]</option>
+            <option>[x25],#0</option>
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="ST64B" category="Memory" extension="ARMv8" iclass="ST64B" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" default="X18">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STADD" category="Atomic" extension="ARMv8" iclass="STADD" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" default="X24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STGP" category="Store" extension="ARMv8" iclass="STG" isa-set="A64">
+        <operand idx="1" name="Xt|SP" type="reg" width="64" default="X24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="STLLR" category="Store" extension="ARMv8" iclass="STLLR" isa-set="A64">
+        <operand idx="1" name="Xt|SP" type="reg" width="64" default="X24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Xn|SP" type="reg" width="64" default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STLXP" category="Store" extension="ARMv8" iclass="STLXP" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" default="w26">
+            General-purpose register to store the status result of the store exclusive operation.
+        </operand>
+        <operand idx="2" name="Xt1" type="reg" width="64" default="X24">
+            First 64-bit general-purpose register to be transferred.
+        </operand>
+        <operand idx="3" name="Xt2" type="reg" width="64" default="X25">
+            Second 64-bit general-purpose register to be transferred.
+        </operand>
+        <operand idx="4" name="Wt1" type="reg" width="32" default="X25" Optional="[]">
+            First 32-bit general-purpose register to be transferred (used for 32-bit version).
+        </operand>
+    </instruction>
+
+    <instruction asm="STLXR" category="Memory" extension="ARMv8" iclass="STLXR" iform="STLXR_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="32-bit general-purpose register for the store exclusive status result" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rt" type="reg" width="32,64" description="The register to store the data, either 32-bit or 64-bit" default="x24">
+            W0, W1, ..., W31 (for 32-bit), X0, X1, ..., X31 (for 64-bit)
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="The base register or stack pointer" default="x25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STLXRB" category="Memory" extension="ARMv8" iclass="STLXRB" iform="STLXRB_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="32-bit general-purpose register for the store exclusive status result" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rt" type="reg" width="32" description="32-bit register to store the data" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="STLLRB" category="Memory" extension="ARMv8" iclass="STLLRB" iform="STLLRB_reg" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="32-bit general-purpose register for data transfer" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="Base register or stack pointer" default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STNP" category="DataProc" extension="ARMv8" iclass="STNP" iform="STNP" isa-set="A64">
+        <operand idx="1" name="Xt1" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Xt2" type="reg" width="64" default="X26">X0, X1, ..., X31</operand>
+        <operand idx="3" name="Rn" type="reg" width="64" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+
+            X0, X1, ..., X31, SP</operand>
+
+    </instruction>
+
+
+
+    <instruction asm="STP" category="DataProc" extension="ARMv8" iclass="STP" iform="STP" isa-set="A64">
+        <operand idx="1" name="Xt1" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Xt2" type="reg" width="64" default="X26">X0, X1, ..., X31</operand>
+        <operand idx="3" name="Rn" type="reg" width="64" default="X25" is_enum="true">
+            <option>[x25],#0</option>
+            <option>[x25,#0]</option>
+            <option>[x25,#0]!</option>
+            X0, X1, ..., X31, SP</operand>
+    </instruction>
+
+    <instruction asm="STR" category="DataProc" extension="ARMv8" iclass="STP" iform="STP" isa-set="A64">
+        <operand idx="1" name="Xt1" type="reg" width="64" default="X24">X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" default="X25" is_enum="true">
+            <option>[x25],#0</option>
+            <option>[x25,#0]</option>
+            <option>[x25,#0]!</option>
+            X0, X1, ..., X31, SP</operand>
+    </instruction>
+
+    <instruction asm="STRB" category="DataProc" extension="ARMv8" iclass="STRB" iform="STRB_immediate" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="Register to store value from" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="Base register or stack pointer" is_enum="true">
+            <option>[x25],#0</option>
+            <option>[x25,#0]</option>
+            <option>[x25,#0]!</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STRH" category="DataProc" extension="ARMv8" iclass="STRH" iform="STRH_immediate" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="Register to store value from" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="64" description="Base register or stack pointer" is_enum="true">
+            <option>[x25],#0</option>
+            <option>[x25,#0]</option>
+            <option>[x25,#0]!</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STSET" category="Atomic" extension="ARMv8" iclass="STSET" iform="LDSET" isa-set="A64" >
+        <operand idx="1" name="Ws" type="reg" width="32" description="32-bit general-purpose register holding the data value to be operated on with the contents of the memory location. Encoded in the Rs field."
+        default="X24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="64-bit general-purpose base register or stack pointer. Encoded in the Rn field." default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STTR" category="Store" extension="ARMv8" iclass="STTR" iform="STTR" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" description="32-bit general-purpose register to be transferred, encoded in the Rt field." default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="64-bit general-purpose base register or stack pointer, encoded in the Rn field." is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="STTRB" category="Store" extension="ARMv8" iclass="STTRB" iform="STTRB" isa-set="A64">
+        <operand idx="1" name="Wt" type="reg" width="32" description="32-bit general-purpose register to be transferred, encoded in the Rt field." default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="64-bit general-purpose base register or stack pointer, encoded in the Rn field." is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STUMAX" category="Atomic" extension="ARMv8" iclass="STUMAX" iform="STUMAX" isa-set="A64">
+        <operand idx="1" name="Xs" type="reg" width="64" description="64-bit general-purpose register holding the data value to be operated on with the contents of the memory location, encoded in the Rs field." default="w24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn|SP" type="reg" width="64" description="64-bit general-purpose base register or stack pointer, encoded in the Rn field." default="X25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STUR" category="DataProc" extension="ARMv8" iclass="STUR" iform="STUR_mem" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32,64" default="x24">W0, W1, ..., W31, X0, X1, ..., X31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="STURB" category="DataProc" extension="ARMv8" iclass="STURB" iform="STURB_mem" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" default="w24">W0, W1, ..., W31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64"  is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STURH" category="DataProc" extension="ARMv8" iclass="STURH" iform="STURH_mem" isa-set="A64">
+        <operand idx="1" name="Rt" type="reg" width="32" default="w24">W0, W1, ..., W31</operand>
+        <operand idx="2" name="Rn" type="reg" width="64" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STXP" category="DataProc" extension="ARMv8" iclass="STXP" iform="STXP_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Status register for store exclusive result (0 or 1)" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xt1" type="reg" width="64" description="First register to be transferred (for 64-bit stores)" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xt1" type="reg" width="64" description="First register to be transferred (for 64-bit stores)" default="x25">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Xt2" type="reg" width="64" description="Second register to be transferred (for 64-bit stores)" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
 
 
     </instruction>
+
+
+    <instruction asm="STXR" category="DataProc" extension="ARMv8" iclass="STXR" iform="STXR_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Status register for store exclusive result (0 or 1)" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xt" type="reg" width="64" description="64-bit register to be transferred (for 64-bit stores)" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="Base register or stack pointer (for address calculation)"  is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+
+    <instruction asm="STXRB" category="DataProc" extension="ARMv8" iclass="STXRB" iform="STXRB_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Status register for store exclusive result (0 or 1)" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="32" description="32-bit register to be transferred (for store operations)" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="Base register or stack pointer (for address calculation)" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="STXRH" category="DataProc" extension="ARMv8" iclass="STXRH" iform="STXRH_reg" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="32" description="Status register for store exclusive result (0 or 1)" default="w26">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="32" description="32-bit register to be transferred (for store operations)" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="Base register or stack pointer (for address calculation)" is_enum="true">
+            <option>[x25,#0]</option>
+            <option>[x25]</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="STZ2G" category="DataProc" extension="ARMv8" iclass="STZ2G" iform="STZ2G_reg" isa-set="A64">
+        <operand idx="1" name="Xt" type="reg" width="64" description="The 64-bit general-purpose register containing the value to be transferred, which can also be the Stack Pointer (SP)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="The base register or Stack Pointer (SP) used to calculate the address" is_enum="true">
+            <option>[x25],#0</option>
+            <option>[x25,#0]</option>
+            <option>[x25,#0]!</option>
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="SUB" category="DataProc" extension="ARMv8" iclass="SUB_extended" iform="SUB_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" description="The 32-bit destination register, which holds the result of the subtraction operation (or the Stack Pointer (WSP) in case of a 32-bit operation)" default="x24">
+            W0, W1, ..., W31, WSP
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32" description="The 32-bit source register or Stack Pointer (WSP) that will be subtracted from" default="X2">
+            W0, W1, ..., W31, WSP
+        </operand>
+        <operand idx="3" name="Rm" type="reg" width="32" description="The 32-bit second source register that will be extended and subtracted from the value in Rn" default="x25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="4" name="extend" type="enum" Optional="true">
+            <option value="000">UXTB</option>
+            <option value="001">UXTH</option>
+            <option value="010">UXTW</option>
+            <option value="011">UXTX</option>
+            <option value="100">SXTB</option>
+            <option value="101">SXTH</option>
+            <option value="110">SXTW</option>
+            <option value="111">SXTX</option>
+        </operand>
+
+    </instruction>
+
+    <instruction asm="SUBG" category="DataProc" extension="ARMv8" iclass="SUBG" iform="SUBG_tag" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="The 64-bit destination general-purpose register or Stack Pointer (SP) to hold the result" default="x24">
+            X0, X1, ..., X30, SP
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="The 64-bit source general-purpose register or Stack Pointer (SP) used in the subtraction operation" is_enum="true">
+            <option>x25,#0,#0</option>
+            X0, X1, ..., X30, SP
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="SUBS" category="DataProc" extension="ARMv8" iclass="SUBS_extended_reg" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" description="Destination register for the result (32-bit for sf == 0, 64-bit for sf == 1)" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32" description="First source register or stack pointer (32-bit for sf == 0, 64-bit for sf == 1)" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="3" name="Rm" type="reg" width="32" description="Second source register (32-bit for sf == 0, 64-bit for sf == 1)" default="x25">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="SUBS" category="DataProc" extension="ARMv8" iclass="SUBS_immediate" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" description="Destination register for the result (32-bit for sf == 0, 64-bit for sf == 1)" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32" description="Source register or stack pointer (32-bit for sf == 0, 64-bit for sf == 1)" is_enum="true">
+            <option>x25,#0,LSL #0</option>
+            W0, W1, ..., W31, X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+    <instruction asm="SUBS" category="DataProc" extension="ARMv8" iclass="SUBS_shifted_register" isa-set="A64">
+        <operand idx="1" name="Rd" type="reg" width="32" description="Destination register for the result (32-bit for sf == 0, 64-bit for sf == 1)" default="X24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Rn" type="reg" width="32" description="First source register (32-bit for sf == 0, 64-bit for sf == 1)" default="x24">
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+        <operand idx="3" name="Rm" type="reg" width="32" description="Second source register (32-bit for sf == 0, 64-bit for sf == 1)" is_enum="true">
+            <option>x25,LSL #0</option>
+            <option>x25,LSR #0</option>
+            <option>x25,ASR #0</option>
+            W0, W1, ..., W31, X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="SWP" category="LoadStore" extension="ARMv8" iclass="SWP" isa-set="A64">
+        <operand idx="1" name="Ws" type="reg" width="64" description="General-purpose register to be stored " default="x24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Wt" type="reg" width="64" description="General-purpose register to be loaded " default="x25">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Rn" type="reg" width="64" description="Base register or stack pointer" default="x25" Optional="[]">
+            X0, X1, ..., X31, SP
+        </operand>
+
+    </instruction>
+
+    <instruction asm="SXTB" category="DataProcessing" extension="ARMv8" iclass="SBFM" isa-set="A64">
+
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" default="w25">
+            X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="SXTH" category="DataProcessing" extension="ARMv8" iclass="SBFM" isa-set="A64">
+
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" default="w25">
+            X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="SXTW" category="DataProcessing" extension="ARMv8" iclass="SBFM" isa-set="A64">
+
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" default="w25">
+            X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="TST" category="DataProc" extension="ARMv8" iclass="TST_immediate" iform="TST_immediate" isa-set="A64">
+        <operand idx="1" name="Wn" type="reg" width="32" description="32-bit general-purpose source register" default="x24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" default="#0xFF">
+            X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="TST" category="DataProc" extension="ARMv8" iclass="TST_shifted_register" iform="TST_shifted_register" isa-set="A64">
+        <operand idx="1" name="Xm" type="reg" width="64" description="64-bit general-purpose source register (shifted)" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" is_enum="true">
+            <option>x25,LSL #0</option>
+            <option>x25,LSR #0</option>
+            <option>x25,ASR #0</option>
+            <option>x25,ROR #0</option>
+            X0, X1, ..., X31
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="UBFIZ" category="DataProc" extension="ARMv8" iclass="UBFIZ" iform="UBFIZ" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" is_enum="true">
+            <option>x25,#8, #16  </option>
+            X0, X1, ..., X31
+        </operand>
+    </instruction>
+
+    <instruction asm="UBFM" category="DataProc" extension="ARMv8" iclass="UBFIZ" iform="UBFIZ" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" is_enum="true">
+            <option>x25,#8, #24  </option>
+            X0, X1, ..., X31
+        </operand>
+    </instruction>
+
+    <instruction asm="UBFX" category="DataProc" extension="ARMv8" iclass="UBFIZ" iform="UBFIZ" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="64-bit general-purpose destination register" default="x24">
+            X0, X1, ..., X31
+        </operand>
+        <operand idx="2" name="Xn" type="reg" width="64" description="64-bit general-purpose source register" is_enum="true">
+            <option>x25,#8, #24  </option>
+            X0, X1, ..., X31
+        </operand>
+    </instruction>
+
+
+    <instruction asm="UMADDL" category="DataProc" extension="ARMv8" iclass="UMADDL" iform="UMADDL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="Destination register (64-bit)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="First source register holding the multiplicand" default="w23">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="32" description="Second source register holding the multiplier" default="w24">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="4" name="Xa" type="reg" width="64" description="Third source register holding the addend" default="x25">
+            X0, X1, ..., X31, SP
+        </operand>
+    </instruction>
+
+
+    <instruction asm="UMNEGL" category="DataProc" extension="ARMv8" iclass="UMADDL" iform="UMADDL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="Destination register (64-bit)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="First source register holding the multiplicand" default="w23">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="32" description="Second source register holding the multiplier" default="w24">
+            W0, W1, ..., W31
+        </operand>
+
+    </instruction>
+
+
+    <instruction asm="UMNEGL" category="DataProc" extension="ARMv8" iclass="UMADDL" iform="UMADDL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="Destination register (64-bit)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="First source register holding the multiplicand" default="w23">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="32" description="Second source register holding the multiplier" default="w24">
+            W0, W1, ..., W31
+        </operand>
+
+    </instruction>
+
+
+
+    <instruction asm="UMULH" category="DataProc" extension="ARMv8" iclass="UMADDL" iform="UMADDL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="Destination register (64-bit)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="64" description="First source register holding the multiplicand" default="x23">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="64" description="Second source register holding the multiplier" default="x24">
+            W0, W1, ..., W31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="UMULL" category="DataProc" extension="ARMv8" iclass="UMADDL" iform="UMADDL" isa-set="A64">
+        <operand idx="1" name="Xd" type="reg" width="64" description="Destination register (64-bit)" default="x24">
+            X0, X1, ..., X31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="First source register holding the multiplicand" default="w23">
+            W0, W1, ..., W31
+        </operand>
+        <operand idx="3" name="Wm" type="reg" width="32" description="Second source register holding the multiplier" default="w24">
+            W0, W1, ..., W31
+        </operand>
+
+    </instruction>
+
+    <instruction asm="UXTB" category="DataProc" extension="ARMv8" iclass="UXTB" iform="UXTB" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32" description="Destination register (32-bit)" default="w24">
+            W0, W1, ..., W31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="Source register (32-bit)" default="w25">
+            W0, W1, ..., W31
+        </operand>
+    </instruction>
+
+    <instruction asm="UXTH" category="DataProc" extension="ARMv8" iclass="UXTB" iform="UXTB" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32" description="Destination register (32-bit)" default="w24">
+            W0, W1, ..., W31, SP
+        </operand>
+        <operand idx="2" name="Wn" type="reg" width="32" description="Source register (32-bit)" default="w25">
+            W0, W1, ..., W31
+        </operand>
+    </instruction>
+
+    <instruction asm="XAFLAG" category="System" extension="FEAT_FlagM2" iclass="XAFLAG" iform="XAFLAG" isa-set="A64">
+    </instruction>
+
+
+    <instruction asm="XPACD" category="Integer" extension="FEAT_PAuth" iclass="XPACD" iform="XPACD" isa-set="A64">
+        <operand idx="1" name="Wd" type="reg" width="32" description="Destination register (32-bit)" default="x24">
+            W0, W1, ..., W31, SP
+        </operand>
+    </instruction>
+
+
 
 
 </root>
